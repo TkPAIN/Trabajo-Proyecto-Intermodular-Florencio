@@ -563,7 +563,7 @@ function verificarLogro() {
                 setTimeout(() => confetti({ particleCount: 200, spread: 100 }), 200);
             }
             setTimeout(() => { logro.style.display = 'none'; }, 5000);
-            mostrarToast('🏆 ¡LOGRO DESBLOQUEADO! "El que calló al profe"', 'exito');
+            mostrarToast('🏆 ¡LOGRO DESBLOQUEADO! "¿Que te parece profe?"', 'Todo un éxito, ¿a que si?');
         }
     }
 }

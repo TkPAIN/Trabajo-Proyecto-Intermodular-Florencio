@@ -57,45 +57,38 @@ window.addEventListener('resize', () => {
     createParticles();
 });
 
-// ========== CURSOR PERSONALIZADO (anillo + punto con glow) ==========
+// ========== CURSOR KARA CLAN (punto azul + anillo azul) ==========
 const cursor = document.querySelector('.cursor');
 const cursorDot = document.querySelector('.cursor-dot');
 
-function updateCursorPosition(e) {
+function updateCursor(e) {
     if (cursor && cursorDot) {
         cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
         cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     }
 }
 
-document.addEventListener('mousemove', updateCursorPosition);
+document.addEventListener('mousemove', updateCursor);
 
-// ========== EFECTO HOVER (agranda el anillo y aumenta glow) ==========
-const interactiveElements = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit, .scroll-down');
+// Hover: agranda el anillo
+const interactive = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit, .scroll-down, input, select, textarea');
 
-interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        if (cursor) cursor.classList.add('hover');
-    });
-    el.addEventListener('mouseleave', () => {
-        if (cursor) cursor.classList.remove('hover');
-    });
+interactive.forEach(el => {
+    el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+    el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
 });
 
-// ========== EFECTO RIPPLE / GLARE AL HACER CLIC ==========
+// Ripple de clic (glare)
 document.addEventListener('click', (e) => {
     const ripple = document.createElement('div');
     ripple.classList.add('ripple-effect');
     ripple.style.left = e.clientX + 'px';
     ripple.style.top = e.clientY + 'px';
     document.body.appendChild(ripple);
-    
-    setTimeout(() => {
-        ripple.remove();
-    }, 500);
+    setTimeout(() => ripple.remove(), 450);
 });
 
-// ========== ESCONDER CURSOR CUANDO SALE DE LA VENTANA ==========
+// Ocultar cursor al salir de la ventana
 document.addEventListener('mouseleave', () => {
     if (cursor) cursor.style.opacity = '0';
     if (cursorDot) cursorDot.style.opacity = '0';

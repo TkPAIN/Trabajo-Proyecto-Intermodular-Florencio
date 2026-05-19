@@ -274,19 +274,77 @@ if (pdfBtn) {
     });
 }
 
-// ========== CONFETI AL CONTRATAR (¡AHORA SÍ FUNCIONA!) ==========
-const contratarBtns = document.querySelectorAll('.contratar-btn');
-contratarBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const plan = btn.getAttribute('data-plan') || 'seleccionado';
-        // Confeti masivo
-        if (typeof canvasConfetti === 'function') {
-            canvasConfetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
-            canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.3 }, startVelocity: 15 });
-            canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.7 }, startVelocity: 15 });
+// ========== CONFETI AL CONTRATAR (VERSIÓN CORREGIDA Y MEJORADA) ==========
+// Función de confeti que funciona incluso si la librería falla
+function lanzarConfetiMasivo() {
+    console.log("🎉 Lanzando confeti...");
+    
+    // Verificar si canvas-confetti está disponible
+    if (typeof confetti === 'function') {
+        // Confeti masivo por si la función se llama confetti
+        confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.3 }, startVelocity: 15 });
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.7 }, startVelocity: 15 });
+    } 
+    else if (typeof canvasConfetti === 'function') {
+        // Versión alternativa si se llama canvasConfetti
+        canvasConfetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.3 }, startVelocity: 15 });
+        canvasConfetti({ particleCount: 100, spread: 70, origin: { y: 0.7, x: 0.7 }, startVelocity: 15 });
+    }
+    else {
+        // Si no hay librería, creamos confeti manual con JavaScript puro
+        console.log("Creando confeti manual...");
+        for (let i = 0; i < 150; i++) {
+            const confetto = document.createElement('div');
+            confetto.style.position = 'fixed';
+            confetto.style.width = Math.random() * 10 + 5 + 'px';
+            confetto.style.height = Math.random() * 10 + 5 + 'px';
+            confetto.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            confetto.style.borderRadius = Math.random() > 0.5 ? '50%' : '0%';
+            confetto.style.left = Math.random() * window.innerWidth + 'px';
+            confetto.style.top = '-20px';
+            confetto.style.zIndex = '10000';
+            confetto.style.pointerEvents = 'none';
+            confetto.style.opacity = '0.8';
+            document.body.appendChild(confetto);
+            
+            const animation = confetto.animate([
+                { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                { transform: `translate(${Math.random() * 200 - 100}px, ${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 2000 + 1000,
+                easing: 'cubic-bezier(0.2, 0.9, 0.4, 1)'
+            });
+            
+            animation.onfinish = () => confetto.remove();
         }
-        alert(`🎉 ¡Gracias por tu interés en el plan ${plan}! Un asesor te contactará.`);
+    }
+}
+
+// Todos los botones de contratar
+const contratarBtns = document.querySelectorAll('.contratar-btn');
+console.log(`Encontrados ${contratarBtns.length} botones de contratar`);
+
+contratarBtns.forEach(btn => {
+    // Eliminar event listeners anteriores para evitar duplicados
+    const newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    
+    newBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const plan = newBtn.getAttribute('data-plan') || 'seleccionado';
+        console.log(`🎉 Contratando plan: ${plan}`);
+        
+        // LANZAR CONFETI INMEDIATAMENTE
+        lanzarConfetiMasivo();
+        
+        // Mostrar mensaje después de 100ms (para que no bloquee la animación)
+        setTimeout(() => {
+            alert(`🎉 ¡Gracias por tu interés en el plan ${plan}! Un asesor te contactará.`);
+        }, 100);
     });
 });
 

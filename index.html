@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="description" content="DocuPro - Consultoría Ofimática de Élite. Automatización Excel, maquetación Word, gestión de archivo y formación para empresas.">
+    <meta name="keywords" content="consultoría ofimática, automatización excel, maquetación word, gestión documental">
+    <meta name="author" content="DocuPro">
     <title>DocuPro · Consultoría Ofimática de Élite 2026</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
@@ -11,20 +14,22 @@
 </head>
 <body>
 
-    <!-- CANVAS DE PARTÍCULAS -->
     <canvas id="particlesCanvas"></canvas>
 
-    <!-- CURSOR KARA CLAN (punto + anillo, ambos azules) -->
+    <!-- Cursor personalizado -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
+    <!-- Toggle modo oscuro/claro -->
+    <button id="themeToggle" class="theme-toggle"><i class="fas fa-sun"></i></button>
+
     <header class="hero">
-        <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="logo-area">
                 <h1 class="logo glow-text">DOCU<span>PRO</span></h1>
                 <p class="tagline">CONSULTORÍA OFIMÁTICA DE ÉLITE · 2026</p>
                 <div class="hero-badge">EXCELENCIA DOCUMENTAL · EDICIÓN 2026</div>
+                <div class="hero-typing" id="heroTyping"></div>
             </div>
             <div class="hero-desc">
                 <p>GESTIÓN DOCUMENTAL · AUTOMATIZACIÓN · ARCHIVO</p>
@@ -49,22 +54,56 @@
     </nav>
 
     <main>
+        <!-- SECCIÓN IDENTIDAD -->
         <section id="identidad" class="section">
             <div class="container">
                 <span class="section-tag">01 / Fundamentos</span>
-                <h2 class="reveal-text">Corazón del Negocio</h2>
+                <h2>Corazón del Negocio</h2>
                 <div class="cards-grid">
-                    <div class="card glass-card"><h3>Visión</h3><p>Liderar el sector<br>Ser referencia en consultoría ofimática avanzada en España, fijando el estándar de eficiencia documental.</p><div class="year-horizon">2026 · HORIZONTE</div></div>
+                    <div class="card glass-card"><h3>Visión</h3><p>Liderar el sector<br>Ser referencia en consultoría ofimática avanzada en España.</p><div class="year-horizon">2026 · HORIZONTE</div></div>
                     <div class="card glass-card"><h3>Misión</h3><p>Automatizar procesos<br>Transformamos la carga administrativa en procesos automatizados de alto rendimiento.</p></div>
                     <div class="card glass-card"><h3>Valores</h3><p>Rigor y confianza<br>Confidencialidad absoluta, precisión analítica y mejora técnica continua.</p></div>
                 </div>
             </div>
         </section>
 
+        <!-- CONTADORES ANIMADOS -->
+        <section class="section">
+            <div class="container">
+                <span class="section-tag">DOCUPRO EN NÚMEROS</span>
+                <h2>Impacto real medible</h2>
+                <div class="counters-grid">
+                    <div class="counter-card glass-card"><i class="fas fa-project-diagram"></i><div class="counter" data-target="250">0</div><p>Proyectos completados</p></div>
+                    <div class="counter-card glass-card"><i class="fas fa-smile"></i><div class="counter" data-target="98">0</div><p>% Satisfacción</p></div>
+                    <div class="counter-card glass-card"><i class="fas fa-clock"></i><div class="counter" data-target="45000">0</div><p>Horas ahorradas</p></div>
+                    <div class="counter-card glass-card"><i class="fas fa-users"></i><div class="counter" data-target="15">0</div><p>Asesores certificados</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALCULADORA DE AHORRO -->
+        <section class="section dark-bg">
+            <div class="container">
+                <span class="section-tag">SIMULADOR DE AHORRO</span>
+                <h2>¿Cuánto podrías ahorrar?</h2>
+                <div class="calculator glass-card">
+                    <label>Horas mensuales en tareas repetitivas: <span id="horasValue">40</span>h</label>
+                    <input type="range" id="horasSlider" min="10" max="200" value="40">
+                    <div class="resultado-ahorro">
+                        <p>📉 Con DocuPro ahorrarías:</p>
+                        <div class="ahorro-numero" id="ahorroNumero">0</div>
+                        <p>horas al mes <span id="ahorroPorcentaje">0</span>% menos de carga</p>
+                    </div>
+                    <button class="glow-btn" id="calcularBtn">Calcular mi ROI</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAQUETACIÓN WORD -->
         <section id="maquetacion" class="section">
             <div class="container">
                 <span class="section-tag">02 · Maquetación Avanzada Word</span>
-                <h2 class="reveal-text">FÓRMULA DE EFICIENCIA</h2>
+                <h2>FÓRMULA DE EFICIENCIA</h2>
                 <div class="formula-box glass-card">E = (Tmanual − Tauto) / Tmanual × 100 <span>Reducción del 85% en tiempos de maquetación editorial</span></div>
                 <div class="grid-4">
                     <div class="feature-card"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
@@ -75,149 +114,179 @@
             </div>
         </section>
 
-        <section id="excel" class="section">
+        <!-- EXCEL + GRÁFICO -->
+        <section id="excel" class="section dark-bg">
             <div class="container">
-                <span class="section-tag">EXCEL: GESTIÓN DE DATOS · MÓDULO 01</span>
-                <h2 class="reveal-text">DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
+                <span class="section-tag">EXCEL: GESTIÓN DE DATOS</span>
+                <h2>DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
                 <div class="excel-modules">
-                    <div class="module glass-card active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query — Transformación ETL masiva</p><span class="badge">90% reducción de error</span></div>
-                    <div class="module glass-card active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot — Relaciones entre bases de datos</p><span class="badge">360° visión integral</span></div>
-                    <div class="module glass-card active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA — Macros de generación de PDF</p><span class="badge">0 tareas repetitivas</span></div>
-                    <div class="module glass-card dev"><i class="fas fa-chart-line"></i><h3>A. PREDICTIVO</h3><p>Tablas Dinámicas & Solver — Optimización</p><span class="badge">+ROI recursos</span></div>
+                    <div class="module glass-card active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query — Transformación ETL</p><span class="badge">90% menos error</span></div>
+                    <div class="module glass-card active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot — Relaciones</p><span class="badge">360° visión</span></div>
+                    <div class="module glass-card active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA — Macros PDF</p><span class="badge">0 tareas repetitivas</span></div>
+                    <div class="module glass-card dev"><i class="fas fa-chart-line"></i><h3>PREDICTIVO</h3><p>Tablas Dinámicas + Solver</p><span class="badge">+ROI recursos</span></div>
                 </div>
                 <div class="productividad-compare glass-card">
-                    <h3>PRODUCTIVIDAD COMPARADA 2026</h3>
-                    <div class="chart-container">
-                        <canvas id="horasChart" width="400" height="300"></canvas>
-                    </div>
-                    <p class="insight">🔹 Ahorro de <strong>36 h/mes</strong> frente al benchmark sector (−60%). Datos auditados · BI RRHH</p>
+                    <h3>PRODUCTIVIDAD COMPARADA</h3>
+                    <div class="chart-container"><canvas id="horasChart"></canvas></div>
+                    <p class="insight">🔹 Ahorro de <strong>36 h/mes</strong> frente al benchmark sector (−60%)</p>
                 </div>
             </div>
         </section>
 
+        <!-- TESTIMONIOS + CLIENTES -->
+        <section class="section">
+            <div class="container">
+                <span class="section-tag">CASOS DE ÉXITO</span>
+                <h2>Lo que dicen nuestros clientes</h2>
+                <div class="testimonial glass-card">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente">
+                    <div><h4>Laura Martínez</h4><small>Directora de Operaciones · Grupo Fintech</small><p>"DocuPro redujo nuestras horas de reporting en un 73% en solo 2 semanas. Implementación impecable."</p></div>
+                </div>
+                <div class="client-logos">
+                    <span>🏦 Grupo Santander</span><span>📊 Indra</span><span>🏥 Quirón Salud</span><span>📈 Mapfre</span><span>🎓 IE Business School</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- VÍDEO DEMO -->
+        <section class="section dark-bg">
+            <div class="container">
+                <span class="section-tag">VER PARA CREER</span>
+                <h2>Demo interactiva</h2>
+                <div class="video-demo glass-card">
+                    <div class="video-placeholder">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Vídeo demostrativo · Antes/Después en automatización Excel</p>
+                        <small>(Demo interactiva - muestra real de proyecto)</small>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SISTEMAS ARCHIVO -->
         <section id="archivo" class="section">
             <div class="container">
                 <span class="section-tag">SISTEMAS DE CLASIFICACIÓN</span>
-                <h2 class="reveal-text">Cinco pilares para una arquitectura documental robusta</h2>
+                <h2>Arquitectura documental robusta</h2>
                 <div class="pilar-list">
-                    <div class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO 8601</small></div>
-                    <div class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA <small>Estructura multinivel</small></div>
-                    <div class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos y catalogación</small></div>
-                    <div class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos y control</small></div>
-                    <div class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Ciclo de vida y purga</small></div>
+                    <div class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO</small></div>
+                    <div class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA <small>Multinivel</small></div>
+                    <div class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos</small></div>
+                    <div class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos</small></div>
+                    <div class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Purga</small></div>
                 </div>
                 <div class="archivo-fisico glass-card">
                     <h3>GESTIÓN DE ARCHIVO FÍSICO</h3>
-                    <p>Implementamos sistemas de archivo físico con ordenación cronológica y temática, garantizando recuperación documental en <strong>menos de 120 segundos</strong>.</p>
+                    <p>Recuperación documental en <strong>menos de 120 segundos</strong>.</p>
                     <div class="qr-stats"><span>📦 Catalogación QR</span><span>💧 Anti-humedad</span><span>🗑️ Expurgo semestral</span></div>
-                    <div class="timer glow-text">⏱️ 120s <small>TIEMPO MÁX. DE RECUPERACIÓN</small></div>
+                    <div class="timer glow-text">⏱️ 120s <small>TIEMPO MÁXIMO</small></div>
                 </div>
             </div>
         </section>
 
-        <section id="ergonomia" class="section">
+        <!-- ERGONOMÍA -->
+        <section id="ergonomia" class="section dark-bg">
             <div class="container">
-                <span class="section-tag">SALUD Y ERGONOMÍA LABORAL</span>
-                <h2 class="reveal-text">Buenas prácticas para un entorno productivo y saludable</h2>
+                <span class="section-tag">SALUD LABORAL</span>
+                <h2>Buenas prácticas productivas</h2>
                 <div class="ergo-grid">
-                    <div class="ergo-card"><i class="fas fa-eye"></i><h4>Cuidado Visual</h4><p>Iluminación adecuada y regla 20-20-20</p></div>
-                    <div class="ergo-card"><i class="fas fa-chair"></i><h4>Postura</h4><p>Silla ergonómica, monitor altura ojos</p></div>
+                    <div class="ergo-card"><i class="fas fa-eye"></i><h4>Regla 20-20-20</h4><p>Descanso visual cada 20 minutos</p></div>
+                    <div class="ergo-card"><i class="fas fa-chair"></i><h4>Postura correcta</h4><p>Silla ergonómica + monitor altura ojos</p></div>
                     <div class="ergo-card"><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div>
                 </div>
             </div>
         </section>
 
+        <!-- METODOLOGÍA + MAPA -->
         <section id="metodologia" class="section">
             <div class="container">
-                <span class="section-tag">FLUJO DE TRABAJO CERTIFICADO</span>
-                <h2 class="reveal-text">Metodología en 5 fases · 100% trazable</h2>
-                <div class="iso glass-card">ISO 9001 CERTIFIED ✓ Calidad Auditada</div>
+                <span class="section-tag">METODOLOGÍA CERTIFICADA</span>
+                <h2>5 fases · 100% trazable · ISO 9001</h2>
                 <div class="fases">
-                    <div class="fase-card"><span>01</span> Auditoría<small>Análisis de ineficiencias</small></div>
-                    <div class="fase-card"><span>02</span> Diseño<small>Modelado técnico</small></div>
-                    <div class="fase-card"><span>03</span> Desarrollo<small>Construcción e integración</small></div>
-                    <div class="fase-card"><span>04</span> Formación<small>Capacitación completa</small></div>
-                    <div class="fase-card"><span>05</span> Soporte<small>Optimización continua</small></div>
+                    <div class="fase-card"><span>01</span> Auditoría<small>Análisis</small></div>
+                    <div class="fase-card"><span>02</span> Diseño<small>Modelado</small></div>
+                    <div class="fase-card"><span>03</span> Desarrollo<small>Construcción</small></div>
+                    <div class="fase-card"><span>04</span> Formación<small>Capacitación</small></div>
+                    <div class="fase-card"><span>05</span> Soporte<small>Optimización</small></div>
                 </div>
-                <div class="proyeccion glass-card">
-                    <h3>ADOPCIÓN IA EN PYME</h3>
-                    <div class="trend">2023 ⬆ 2024 ⬆ 2025: 78% adopción proyectada</div>
+                <div class="map-container glass-card">
+                    <h3>📍 Nuestras oficinas</h3>
+                    <iframe src="https://maps.google.com/maps?q=Madrid&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe>
+                    <p>Madrid · Barcelona · Consultoría remota global</p>
                 </div>
             </div>
         </section>
 
+        <!-- RANKING CLIENTES + CERTIFICADOS -->
+        <section class="section dark-bg">
+            <div class="container">
+                <span class="section-tag">RANKING DOCUPRO</span>
+                <h2>Clientes del mes</h2>
+                <div class="ranking">
+                    <div class="ranking-item"><span>🥇</span> Grupo Fintech X · Ahorro: 120h/mes</div>
+                    <div class="ranking-item"><span>🥈</span> Legal & Co · Ahorro: 89h/mes</div>
+                    <div class="ranking-item"><span>🥉</span> StartUp Scale · Ahorro: 67h/mes</div>
+                </div>
+                <div class="certificados">
+                    <span>🏅 Microsoft Partner</span>
+                    <span>📜 Excel Expert Certified</span>
+                    <span>✅ ISO 9001:2025</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PLANES -->
         <section id="tarifas" class="section">
             <div class="container">
-                <span class="section-tag">PLANES Y TARIFAS 2026</span>
-                <h2 class="reveal-text">Elige el nivel de excelencia ofimática</h2>
+                <span class="section-tag">PLANES 2026</span>
+                <h2>Elige tu nivel de excelencia</h2>
                 <div class="pricing">
-                    <div class="plan glass-card"><h3>BÁSICO</h3><div class="price">49€<small>pago único</small></div><ul><li>Maquetación Word hasta 10pág</li><li>Dashboard Excel estático</li><li>Auditoría archivo remoto</li></ul></div>
-                    <div class="plan featured glass-card"><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>Maquetación Word sin límite</li><li>Excel Dinámico (VBA)</li><li>Auditoría remota avanzada</li></ul><div class="recomendado">RECOMENDADO</div></div>
-                    <div class="plan glass-card"><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>Prioridad total</li><li>BI Avanzado</li><li>Presencial + mantenimiento</li></ul></div>
+                    <div class="plan glass-card"><h3>BÁSICO</h3><div class="price">49€<small>único</small></div><ul><li>Word hasta 10pág</li><li>Excel estático</li><li>Auditoría remota</li></ul></div>
+                    <div class="plan featured glass-card"><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>Word sin límite</li><li>Excel VBA</li><li>Soporte prioritario</li></ul><div class="recomendado">RECOMENDADO</div></div>
+                    <div class="plan glass-card"><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>BI Avanzado</li><li>Presencial</li><li>Mantenimiento</li></ul></div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto" class="section">
+        <!-- CONTACTO + PDF -->
+        <section id="contacto" class="section dark-bg">
             <div class="container">
-                <span class="section-tag">ASISTENCIA PREMIUM</span>
-                <h2 class="reveal-text">¿Hablamos de tu proyecto?</h2>
+                <span class="section-tag">¿HABLAMOS?</span>
+                <h2>Cuéntanos tu proyecto</h2>
                 <div class="contact-wrapper">
                     <div class="contact-form glass-card">
                         <h3>Formulario directo</h3>
                         <form id="leadForm">
                             <input type="text" placeholder="Nombre completo" id="nombre" required>
                             <input type="email" placeholder="Email corporativo" id="email" required>
-                            <input type="tel" placeholder="Teléfono (opcional)">
-                            <select id="interes">
-                                <option value="">¿Qué servicio necesitas?</option>
-                                <option>Automatización Excel</option>
-                                <option>Maquetación Word</option>
-                                <option>Gestión de archivo</option>
-                                <option>Consultoría completa</option>
-                            </select>
-                            <textarea rows="3" placeholder="Cuéntanos tu reto..."></textarea>
-                            <button type="submit" class="btn-submit glow-btn">📨 Enviar consulta</button>
+                            <select id="interes"><option>Automatización Excel</option><option>Maquetación Word</option><option>Gestión archivo</option><option>Consultoría completa</option></select>
+                            <textarea rows="2" placeholder="Cuéntanos tu reto..."></textarea>
+                            <button type="submit" class="glow-btn">📨 Enviar consulta</button>
                         </form>
-                        <div id="formMessage" class="form-message"></div>
+                        <div id="formMessage"></div>
+                        <button id="descargarPDF" class="glow-btn" style="margin-top:1rem; background:#2a5f8a;">📥 Caso de éxito (PDF)</button>
                     </div>
                     <div class="contact-info glass-card">
                         <h3>Contacto directo</h3>
-                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> contacto@docupro.es</p>
-                        <p><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +34 900 123 456</p>
-                        <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> +34 644 789 012</p>
-                        <p><i class="fas fa-clock"></i> <strong>Horario:</strong> L-V 9h-19h (respuesta < 2h)</p>
+                        <p><i class="fas fa-envelope"></i> contacto@docupro.es</p>
+                        <p><i class="fas fa-phone-alt"></i> +34 900 123 456</p>
+                        <p><i class="fab fa-whatsapp"></i> +34 644 789 012</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- CHAT FLOTANTE + FAB -->
     <div id="chatWidget" class="chat-widget glass-card">
-        <div class="chat-header" id="chatHeader">
-            <i class="fas fa-comment-dots"></i> Asistente DocuPro
-            <span class="chat-close" id="chatClose">×</span>
-        </div>
-        <div class="chat-body" id="chatBody">
-            <div class="chat-message bot">👋 ¡Hola! Soy tu asesor ofimático. ¿En qué puedo ayudarte?</div>
-            <div class="chat-options" id="chatOptions">
-                <button class="glass-btn" data-msg="Quiero saber precios">💰 Precios</button>
-                <button class="glass-btn" data-msg="Necesito automatizar Excel">📊 Automatización</button>
-                <button class="glass-btn" data-msg="Hablar con un asesor">🎧 Hablar con asesor</button>
-            </div>
-        </div>
-        <div class="chat-input-area">
-            <input type="text" id="chatInput" placeholder="Escribe tu consulta...">
-            <button id="chatSend" class="glow-btn">➤</button>
-        </div>
+        <div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close">×</span></div>
+        <div class="chat-body"><div class="chat-message bot">👋 ¿En qué puedo ayudarte?</div><div class="chat-options"><button data-msg="Precios">💰 Precios</button><button data-msg="Automatización Excel">📊 Excel</button><button data-msg="Hablar con asesor">🎧 Asesor</button></div></div>
+        <div class="chat-input-area"><input id="chatInput" placeholder="Escribe..."><button id="chatSend">➤</button></div>
     </div>
-    <button id="chatToggle" class="chat-toggle-btn glow-btn">
-        <i class="fas fa-headset"></i>
-    </button>
+    <button id="chatToggle" class="chat-toggle-btn glow-btn"><i class="fas fa-headset"></i></button>
+    <a href="#contacto" class="fab-btn glow-btn"><i class="fas fa-comment"></i></a>
 
-    <footer>
-        <div class="container">DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</div>
-    </footer>
+    <footer><div class="container">DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026 · © Todos los derechos reservados</div></footer>
 
     <script src="script.js"></script>
 </body>

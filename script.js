@@ -578,18 +578,35 @@ setInterval(() => {
     if (timer) timer.innerText = segundos;
 }, 1000);
 
-// ========== CONTADOR VISITAS ==========
+// ========== CONTADOR REAL CON CLOUDFLARE WORKER ==========
 async function loadVisitorCount() {
-    const counter = document.getElementById('visitorCounter');
-    if (!counter) return;
+    const counterElement = document.getElementById('visitorCounter');
+    if (!counterElement) return;
+    
     try {
+        // LLAMAMOS A TU WORKER REAL
+        const response = await fetch('https://docupro-contador.marcos238gn.workers.dev/api/counter');
+        const data = await response.json();
+        
+        if (data.ok && data.visits) {
+            // ÉXITO: Mostramos el contador REAL
+            counterElement.innerHTML = `<i class="fas fa-globe"></i> 🌍 ${data.visits.toLocaleString()} visitas globales (reales)`;
+            console.log(`✅ Contador real: ${data.visits} visitas`);
+        } else {
+            throw new Error('Respuesta inválida');
+        }
+    } catch (error) {
+        console.error('Error al conectar con Cloudflare:', error);
+        // FALLBACK: Si el worker no responde, usamos simulación
         let visits = localStorage.getItem('visits_docupro');
         if (!visits) visits = Math.floor(Math.random() * 8000) + 2000;
         visits = parseInt(visits) + 1;
         localStorage.setItem('visits_docupro', visits);
-        counter.innerHTML = `<i class="fas fa-globe"></i> 🌍 ${visits.toLocaleString()} visitas globales`;
-    } catch(e) { counter.innerHTML = `<i class="fas fa-globe"></i> 🌍 Contador activo`; }
+        counterElement.innerHTML = `<i class="fas fa-globe"></i> 🌍 ${visits.toLocaleString()} visitas (demo - modo offline)`;
+    }
 }
+
+// Cargar el contador cuando se abre la página
 loadVisitorCount();
 
 // ========== MODO NAVIDAD ==========

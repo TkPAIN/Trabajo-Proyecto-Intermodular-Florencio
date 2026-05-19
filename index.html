@@ -5,17 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>DocuPro · Consultoría Ofimática de Élite 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a2c2b8e5d3.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
+    <!-- CANVAS DE PARTÍCULAS (estilo Kara Clan) -->
+    <canvas id="particlesCanvas"></canvas>
+
+    <!-- CURSOR PERSONALIZADO -->
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
+
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="logo-area">
-                <h1 class="logo">DOCU<span>PRO</span></h1>
+                <h1 class="logo glow-text">DOCU<span>PRO</span></h1>
                 <p class="tagline">CONSULTORÍA OFIMÁTICA DE ÉLITE · 2026</p>
                 <div class="hero-badge">EXCELENCIA DOCUMENTAL · EDICIÓN 2026</div>
             </div>
@@ -28,7 +35,7 @@
         <div class="scroll-down">▼</div>
     </header>
 
-    <nav class="main-nav">
+    <nav class="main-nav glass">
         <ul class="nav-list container">
             <li><a href="#identidad">01 Identidad</a></li>
             <li><a href="#maquetacion">02 Maquetación</a></li>
@@ -46,26 +53,26 @@
         <section id="identidad" class="section">
             <div class="container">
                 <span class="section-tag">01 / Fundamentos</span>
-                <h2>Corazón del Negocio</h2>
+                <h2 class="reveal-text">Corazón del Negocio</h2>
                 <div class="cards-grid">
-                    <div class="card"><h3>Visión</h3><p>Liderar el sector<br>Ser referencia en consultoría ofimática avanzada en España, fijando el estándar de eficiencia documental.</p><div class="year-horizon">2026 · HORIZONTE</div></div>
-                    <div class="card"><h3>Misión</h3><p>Automatizar procesos<br>Transformamos la carga administrativa en procesos automatizados de alto rendimiento.</p></div>
-                    <div class="card"><h3>Valores</h3><p>Rigor y confianza<br>Confidencialidad absoluta, precisión analítica y mejora técnica continua.</p></div>
+                    <div class="card glass-card"><h3>Visión</h3><p>Liderar el sector<br>Ser referencia en consultoría ofimática avanzada en España, fijando el estándar de eficiencia documental.</p><div class="year-horizon">2026 · HORIZONTE</div></div>
+                    <div class="card glass-card"><h3>Misión</h3><p>Automatizar procesos<br>Transformamos la carga administrativa en procesos automatizados de alto rendimiento.</p></div>
+                    <div class="card glass-card"><h3>Valores</h3><p>Rigor y confianza<br>Confidencialidad absoluta, precisión analítica y mejora técnica continua.</p></div>
                 </div>
             </div>
         </section>
 
         <!-- MAQUETACIÓN WORD -->
-        <section id="maquetacion" class="section dark-bg">
+        <section id="maquetacion" class="section">
             <div class="container">
                 <span class="section-tag">02 · Maquetación Avanzada Word</span>
-                <h2>FÓRMULA DE EFICIENCIA</h2>
-                <div class="formula-box">E = (Tmanual − Tauto) / Tmanual × 100 <span>Reducción del 85% en tiempos de maquetación editorial</span></div>
+                <h2 class="reveal-text">FÓRMULA DE EFICIENCIA</h2>
+                <div class="formula-box glass-card">E = (Tmanual − Tauto) / Tmanual × 100 <span>Reducción del 85% en tiempos de maquetación editorial</span></div>
                 <div class="grid-4">
-                    <div><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
-                    <div><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
-                    <div><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices, tablas y control de cambios.</p></div>
-                    <div><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Selección de fuentes para máxima legibilidad.</p></div>
+                    <div class="feature-card"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
+                    <div class="feature-card"><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
+                    <div class="feature-card"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices, tablas y control de cambios.</p></div>
+                    <div class="feature-card"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Selección de fuentes para máxima legibilidad.</p></div>
                 </div>
             </div>
         </section>
@@ -74,14 +81,14 @@
         <section id="excel" class="section">
             <div class="container">
                 <span class="section-tag">EXCEL: GESTIÓN DE DATOS · MÓDULO 01</span>
-                <h2>DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
+                <h2 class="reveal-text">DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
                 <div class="excel-modules">
-                    <div class="module active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query — Transformación ETL masiva</p><span class="badge">90% reducción de error</span></div>
-                    <div class="module active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot — Relaciones entre bases de datos</p><span class="badge">360° visión integral</span></div>
-                    <div class="module active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA — Macros de generación de PDF</p><span class="badge">0 tareas repetitivas</span></div>
-                    <div class="module dev"><i class="fas fa-chart-line"></i><h3>A. PREDICTIVO</h3><p>Tablas Dinámicas & Solver — Optimización</p><span class="badge">+ROI recursos</span></div>
+                    <div class="module glass-card active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query — Transformación ETL masiva</p><span class="badge">90% reducción de error</span></div>
+                    <div class="module glass-card active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot — Relaciones entre bases de datos</p><span class="badge">360° visión integral</span></div>
+                    <div class="module glass-card active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA — Macros de generación de PDF</p><span class="badge">0 tareas repetitivas</span></div>
+                    <div class="module glass-card dev"><i class="fas fa-chart-line"></i><h3>A. PREDICTIVO</h3><p>Tablas Dinámicas & Solver — Optimización</p><span class="badge">+ROI recursos</span></div>
                 </div>
-                <div class="productividad-compare">
+                <div class="productividad-compare glass-card">
                     <h3>PRODUCTIVIDAD COMPARADA 2026</h3>
                     <div class="chart-container">
                         <canvas id="horasChart" width="400" height="300"></canvas>
@@ -92,22 +99,22 @@
         </section>
 
         <!-- PORTAFOLIO + ARCHIVO -->
-        <section id="archivo" class="section dark-bg">
+        <section id="archivo" class="section">
             <div class="container">
                 <span class="section-tag">SISTEMAS DE CLASIFICACIÓN</span>
-                <h2>Cinco pilares para una arquitectura documental robusta</h2>
+                <h2 class="reveal-text">Cinco pilares para una arquitectura documental robusta</h2>
                 <div class="pilar-list">
-                    <div><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO 8601</small></div>
-                    <div><i class="fas fa-sitemap"></i> JERARQUÍA <small>Estructura multinivel</small></div>
-                    <div><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos y catalogación</small></div>
-                    <div><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos y control</small></div>
-                    <div><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Ciclo de vida y purga</small></div>
+                    <div class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO 8601</small></div>
+                    <div class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA <small>Estructura multinivel</small></div>
+                    <div class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos y catalogación</small></div>
+                    <div class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos y control</small></div>
+                    <div class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Ciclo de vida y purga</small></div>
                 </div>
-                <div class="archivo-fisico">
+                <div class="archivo-fisico glass-card">
                     <h3>GESTIÓN DE ARCHIVO FÍSICO</h3>
                     <p>Implementamos sistemas de archivo físico con ordenación cronológica y temática, garantizando recuperación documental en <strong>menos de 120 segundos</strong>.</p>
                     <div class="qr-stats"><span>📦 Catalogación QR</span><span>💧 Anti-humedad</span><span>🗑️ Expurgo semestral</span></div>
-                    <div class="timer">⏱️ 120s <small>TIEMPO MÁX. DE RECUPERACIÓN</small></div>
+                    <div class="timer glow-text">⏱️ 120s <small>TIEMPO MÁX. DE RECUPERACIÓN</small></div>
                 </div>
             </div>
         </section>
@@ -116,29 +123,29 @@
         <section id="ergonomia" class="section">
             <div class="container">
                 <span class="section-tag">SALUD Y ERGONOMÍA LABORAL</span>
-                <h2>Buenas prácticas para un entorno productivo y saludable</h2>
+                <h2 class="reveal-text">Buenas prácticas para un entorno productivo y saludable</h2>
                 <div class="ergo-grid">
-                    <div><i class="fas fa-eye"></i><h4>Cuidado Visual</h4><p>Iluminación adecuada y regla 20-20-20</p></div>
-                    <div><i class="fas fa-chair"></i><h4>Postura</h4><p>Silla ergonómica, monitor altura ojos</p></div>
-                    <div><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div>
+                    <div class="ergo-card"><i class="fas fa-eye"></i><h4>Cuidado Visual</h4><p>Iluminación adecuada y regla 20-20-20</p></div>
+                    <div class="ergo-card"><i class="fas fa-chair"></i><h4>Postura</h4><p>Silla ergonómica, monitor altura ojos</p></div>
+                    <div class="ergo-card"><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div>
                 </div>
             </div>
         </section>
 
         <!-- METODOLOGÍA CERTIFICADA -->
-        <section id="metodologia" class="section dark-bg">
+        <section id="metodologia" class="section">
             <div class="container">
                 <span class="section-tag">FLUJO DE TRABAJO CERTIFICADO</span>
-                <h2>Metodología en 5 fases · 100% trazable</h2>
-                <div class="iso">ISO 9001 CERTIFIED ✓ Calidad Auditada</div>
+                <h2 class="reveal-text">Metodología en 5 fases · 100% trazable</h2>
+                <div class="iso glass-card">ISO 9001 CERTIFIED ✓ Calidad Auditada</div>
                 <div class="fases">
-                    <div><span>01</span> Auditoría<small>Análisis de ineficiencias</small></div>
-                    <div><span>02</span> Diseño<small>Modelado técnico</small></div>
-                    <div><span>03</span> Desarrollo<small>Construcción e integración</small></div>
-                    <div><span>04</span> Formación<small>Capacitación completa</small></div>
-                    <div><span>05</span> Soporte<small>Optimización continua</small></div>
+                    <div class="fase-card"><span>01</span> Auditoría<small>Análisis de ineficiencias</small></div>
+                    <div class="fase-card"><span>02</span> Diseño<small>Modelado técnico</small></div>
+                    <div class="fase-card"><span>03</span> Desarrollo<small>Construcción e integración</small></div>
+                    <div class="fase-card"><span>04</span> Formación<small>Capacitación completa</small></div>
+                    <div class="fase-card"><span>05</span> Soporte<small>Optimización continua</small></div>
                 </div>
-                <div class="proyeccion">
+                <div class="proyeccion glass-card">
                     <h3>ADOPCIÓN IA EN PYME</h3>
                     <div class="trend">2023 ⬆ 2024 ⬆ 2025: 78% adopción proyectada</div>
                 </div>
@@ -149,11 +156,11 @@
         <section id="tarifas" class="section">
             <div class="container">
                 <span class="section-tag">PLANES Y TARIFAS 2026</span>
-                <h2>Elige el nivel de excelencia ofimática</h2>
+                <h2 class="reveal-text">Elige el nivel de excelencia ofimática</h2>
                 <div class="pricing">
-                    <div class="plan"><h3>BÁSICO</h3><div class="price">49€<small>pago único</small></div><ul><li>Maquetación Word hasta 10pág</li><li>Dashboard Excel estático</li><li>Auditoría archivo remoto</li></ul></div>
-                    <div class="plan featured"><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>Maquetación Word sin límite</li><li>Excel Dinámico (VBA)</li><li>Auditoría remota avanzada</li></ul><div class="recomendado">RECOMENDADO</div></div>
-                    <div class="plan"><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>Prioridad total</li><li>BI Avanzado</li><li>Presencial + mantenimiento</li></ul></div>
+                    <div class="plan glass-card"><h3>BÁSICO</h3><div class="price">49€<small>pago único</small></div><ul><li>Maquetación Word hasta 10pág</li><li>Dashboard Excel estático</li><li>Auditoría archivo remoto</li></ul></div>
+                    <div class="plan featured glass-card"><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>Maquetación Word sin límite</li><li>Excel Dinámico (VBA)</li><li>Auditoría remota avanzada</li></ul><div class="recomendado">RECOMENDADO</div></div>
+                    <div class="plan glass-card"><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>Prioridad total</li><li>BI Avanzado</li><li>Presencial + mantenimiento</li></ul></div>
                 </div>
             </div>
         </section>
@@ -162,9 +169,9 @@
         <section id="contacto" class="section">
             <div class="container">
                 <span class="section-tag">ASISTENCIA PREMIUM</span>
-                <h2>¿Hablamos de tu proyecto?</h2>
+                <h2 class="reveal-text">¿Hablamos de tu proyecto?</h2>
                 <div class="contact-wrapper">
-                    <div class="contact-form">
+                    <div class="contact-form glass-card">
                         <h3>Formulario directo</h3>
                         <form id="leadForm">
                             <input type="text" placeholder="Nombre completo" id="nombre" required>
@@ -178,11 +185,11 @@
                                 <option>Consultoría completa</option>
                             </select>
                             <textarea rows="3" placeholder="Cuéntanos tu reto..."></textarea>
-                            <button type="submit" class="btn-submit">📨 Enviar consulta</button>
+                            <button type="submit" class="btn-submit glow-btn">📨 Enviar consulta</button>
                         </form>
                         <div id="formMessage" class="form-message"></div>
                     </div>
-                    <div class="contact-info">
+                    <div class="contact-info glass-card">
                         <h3>Contacto directo</h3>
                         <p><i class="fas fa-envelope"></i> <strong>Email:</strong> contacto@docupro.es</p>
                         <p><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +34 900 123 456</p>
@@ -194,8 +201,8 @@
         </section>
     </main>
 
-    <!-- CHAT FLOTANTE SIMULADO -->
-    <div id="chatWidget" class="chat-widget">
+    <!-- CHAT FLOTANTE GLASS -->
+    <div id="chatWidget" class="chat-widget glass-card">
         <div class="chat-header" id="chatHeader">
             <i class="fas fa-comment-dots"></i> Asistente DocuPro
             <span class="chat-close" id="chatClose">×</span>
@@ -203,17 +210,17 @@
         <div class="chat-body" id="chatBody">
             <div class="chat-message bot">👋 ¡Hola! Soy tu asesor ofimático. ¿En qué puedo ayudarte?</div>
             <div class="chat-options" id="chatOptions">
-                <button data-msg="Quiero saber precios">💰 Precios</button>
-                <button data-msg="Necesito automatizar Excel">📊 Automatización</button>
-                <button data-msg="Hablar con un asesor">🎧 Hablar con asesor</button>
+                <button class="glass-btn" data-msg="Quiero saber precios">💰 Precios</button>
+                <button class="glass-btn" data-msg="Necesito automatizar Excel">📊 Automatización</button>
+                <button class="glass-btn" data-msg="Hablar con un asesor">🎧 Hablar con asesor</button>
             </div>
         </div>
         <div class="chat-input-area">
             <input type="text" id="chatInput" placeholder="Escribe tu consulta...">
-            <button id="chatSend">➤</button>
+            <button id="chatSend" class="glow-btn">➤</button>
         </div>
     </div>
-    <button id="chatToggle" class="chat-toggle-btn">
+    <button id="chatToggle" class="chat-toggle-btn glow-btn">
         <i class="fas fa-headset"></i>
     </button>
 

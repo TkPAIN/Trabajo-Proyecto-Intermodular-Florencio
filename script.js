@@ -57,7 +57,32 @@ window.addEventListener('resize', () => {
     createParticles();
 });
 
-// ========== EFECTO RIPPLE AL HACER CLIC (glow azul) ==========
+// ========== CURSOR PERSONALIZADO (anillo + punto con glow) ==========
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+
+function updateCursorPosition(e) {
+    if (cursor && cursorDot) {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    }
+}
+
+document.addEventListener('mousemove', updateCursorPosition);
+
+// ========== EFECTO HOVER (agranda el anillo y aumenta glow) ==========
+const interactiveElements = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit, .scroll-down');
+
+interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        if (cursor) cursor.classList.add('hover');
+    });
+    el.addEventListener('mouseleave', () => {
+        if (cursor) cursor.classList.remove('hover');
+    });
+});
+
+// ========== EFECTO RIPPLE / GLARE AL HACER CLIC ==========
 document.addEventListener('click', (e) => {
     const ripple = document.createElement('div');
     ripple.classList.add('ripple-effect');
@@ -67,7 +92,18 @@ document.addEventListener('click', (e) => {
     
     setTimeout(() => {
         ripple.remove();
-    }, 400);
+    }, 500);
+});
+
+// ========== ESCONDER CURSOR CUANDO SALE DE LA VENTANA ==========
+document.addEventListener('mouseleave', () => {
+    if (cursor) cursor.style.opacity = '0';
+    if (cursorDot) cursorDot.style.opacity = '0';
+});
+
+document.addEventListener('mouseenter', () => {
+    if (cursor) cursor.style.opacity = '1';
+    if (cursorDot) cursorDot.style.opacity = '1';
 });
 
 // ========== CAMBIO DE GROSOR DE GLOW EN ELEMENTOS INTERACTIVOS ==========

@@ -509,3 +509,53 @@ document.querySelectorAll('.like-btn, .dislike-btn')?.forEach(btn => {
         }
     });
 });
+// ========== TABS ANTES / DESPUÉS ==========
+const tabBtns = document.querySelectorAll('.tab-btn');
+const casosContenidos = document.querySelectorAll('.caso-contenido');
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const caso = btn.getAttribute('data-caso');
+        
+        // Activar botón
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Activar contenido
+        casosContenidos.forEach(contenido => contenido.classList.remove('active'));
+        const casoActivo = document.getElementById(`caso-${caso}`);
+        if (casoActivo) casoActivo.classList.add('active');
+    });
+});
+
+// ========== BOTONES DE SIMULACIÓN (CONFETI + MENSAJE) ==========
+const simularBtns = document.querySelectorAll('.simular-btn');
+simularBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const simulacion = btn.getAttribute('data-simulacion');
+        let mensaje = '';
+        
+        switch(simulacion) {
+            case 'excel':
+                mensaje = '📊 SIMULACIÓN: Dashboard interactivo con Power Query y Power Pivot. Actualización en tiempo real con solo 2 clics.';
+                break;
+            case 'word':
+                mensaje = '📄 SIMULACIÓN: Plantilla inteligente con campos automáticos, índices dinámicos y control de cambios integrado.';
+                break;
+            case 'archivo':
+                mensaje = '🗂️ SIMULACIÓN: Sistema de archivo con nomenclatura ISO, etiquetas QR y recuperación en menos de 120 segundos.';
+                break;
+            default:
+                mensaje = '🎯 Demo interactiva disponible en la consultoría completa.';
+        }
+        
+        alert(mensaje);
+        
+        // Confeti al hacer clic en simular
+        if (typeof confetti === 'function') {
+            confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+        } else if (typeof canvasConfetti === 'function') {
+            canvasConfetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+        }
+    });
+});

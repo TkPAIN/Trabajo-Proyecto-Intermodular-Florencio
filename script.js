@@ -84,7 +84,7 @@ setInterval(()=>{segundos++;document.getElementById('timerSeconds').innerText=se
 
 // CONTADOR GLOBAL (simulación + integración Cloudflare)
 let visitCount=0;
-async function loadVisitorCount(){try{const response=await fetch('https://api.countapi.xyz/hit/docupro/visits');const data=await response.json();visitCount=data.value;document.getElementById('visitorCounter').innerHTML=`<i class="fas fa-globe"></i> ${visitCount.toLocaleString()} visitas globales`;}catch{let visits=localStorage.getItem('visits')||Math.floor(Math.random()*10000)+1000;visits++;localStorage.setItem('visits',visits);document.getElementById('visitorCounter').innerHTML=`<i class="fas fa-globe"></i> ${visits.toLocaleString()} visitas (demo)`;}}
+async function loadVisitorCount(){try{const response=await fetch('https://docupro-contador.marcos238gn.workers.dev/api/counter');const data=await response.json();visitCount=data.value;document.getElementById('visitorCounter').innerHTML=`<i class="fas fa-globe"></i> ${visitCount.toLocaleString()} visitas globales`;}catch{let visits=localStorage.getItem('visits')||Math.floor(Math.random()*10000)+1000;visits++;localStorage.setItem('visits',visits);document.getElementById('visitorCounter').innerHTML=`<i class="fas fa-globe"></i> ${visits.toLocaleString()} visitas (demo)`;}}
 loadVisitorCount();
 
 // MODO NAVIDAD OCULTO

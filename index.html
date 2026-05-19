@@ -6,34 +6,44 @@
     <title>DocuPro · Consultoría Ofimática de Élite 2026</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Font Awesome 6 (ICONOS) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
     <canvas id="particlesCanvas"></canvas>
 
-    <!-- Cursor personalizado -->
+    <!-- Cursor personalizado premium -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
+    <div class="cursor-trail" id="cursorTrail"></div>
 
-    <!-- Botones de control -->
+    <!-- Cubo 3D (Three.js) -->
+    <div id="threeContainer" class="three-container"></div>
+
+    <!-- Controles flotantes -->
     <div class="controls-top">
         <button id="themeToggle" class="control-btn" title="Modo claro/oscuro"><i class="fas fa-sun"></i></button>
-        <button id="presentationBtn" class="control-btn" title="Modo presentación (P)"><i class="fas fa-chalkboard-user"></i></button>
-        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa (F)"><i class="fas fa-expand"></i></button>
-        <button id="emergencyBtn" class="control-btn" title="Emergencia (ESC)"><i class="fas fa-shield-alt"></i></button>
+        <button id="presentationBtn" class="control-btn" title="Modo presentación"><i class="fas fa-chalkboard-user"></i></button>
+        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa"><i class="fas fa-expand"></i></button>
+        <button id="cursorStyleBtn" class="control-btn" title="Cambiar estilo cursor"><i class="fas fa-mouse-pointer"></i></button>
     </div>
 
-    <header class="hero">
+    <header class="hero asymmetrical-hero">
         <div class="container hero-content">
             <div class="logo-area">
-<div class="marvel-logo-container">
-    <h1 class="logo marvel-logo glow-text">DOCU<span>PRO</span></h1>
-    <canvas id="marvelCanvas" class="marvel-canvas"></canvas>
-</div>
+                <div class="marvel-logo-container">
+                    <h1 class="logo marvel-logo glow-text">DOCU<span>PRO</span></h1>
+                    <canvas id="marvelCanvas" class="marvel-canvas"></canvas>
+                </div>
+                <p class="tagline">CONSULTORÍA OFIMÁTICA DE ÉLITE · 2026</p>
+                <div class="hero-badge">EXCELENCIA DOCUMENTAL · EDICIÓN 2026</div>
+                <div class="hero-typing" id="heroTyping"></div>
+            </div>
             <div class="hero-desc">
                 <p><i class="fas fa-file-alt"></i> GESTIÓN DOCUMENTAL · <i class="fas fa-robot"></i> AUTOMATIZACIÓN · <i class="fas fa-archive"></i> ARCHIVO</p>
                 <small><i class="fas fa-lock"></i> DOCUMENTO CONFIDENCIAL — CLIENTES PREMIUM</small>
@@ -43,7 +53,7 @@
         <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
     </header>
 
-    <nav class="main-nav glass">
+    <nav class="main-nav glass-premium">
         <ul class="nav-list container">
             <li><a href="#identidad"><i class="fas fa-heart"></i> 01 Identidad</a></li>
             <li><a href="#maquetacion"><i class="fas fa-file-word"></i> 02 Maquetación</a></li>
@@ -57,29 +67,29 @@
     </nav>
 
     <main>
-        <!-- SECCIÓN IDENTIDAD -->
+        <!-- IDENTIDAD -->
         <section id="identidad" class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-gem"></i> 01 / Fundamentos</span>
-                <h2>Corazón del Negocio</h2>
+                <h2 class="reveal-text">Corazón del Negocio</h2>
                 <div class="cards-grid">
-                    <div class="card glass-card"><i class="fas fa-eye card-icon"></i><h3>Visión</h3><p>Liderar el sector.<br>Ser referencia en consultoría ofimática avanzada en España.</p></div>
-                    <div class="card glass-card"><i class="fas fa-bullseye card-icon"></i><h3>Misión</h3><p>Automatizar procesos.<br>Transformamos la carga administrativa en procesos automatizados.</p></div>
-                    <div class="card glass-card"><i class="fas fa-shield-alt card-icon"></i><h3>Valores</h3><p>Rigor y confianza.<br>Confidencialidad absoluta y mejora técnica continua.</p></div>
+                    <div class="card glass-premium magnetic-btn"><i class="fas fa-eye card-icon"></i><h3>Visión</h3><p>Liderar el sector.<br>Ser referencia en consultoría ofimática avanzada en España.</p></div>
+                    <div class="card glass-premium magnetic-btn"><i class="fas fa-bullseye card-icon"></i><h3>Misión</h3><p>Automatizar procesos.<br>Transformamos la carga administrativa en procesos automatizados.</p></div>
+                    <div class="card glass-premium magnetic-btn"><i class="fas fa-shield-alt card-icon"></i><h3>Valores</h3><p>Rigor y confianza.<br>Confidencialidad absoluta y mejora técnica continua.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTADORES ANIMADOS -->
+        <!-- CONTADORES -->
         <section class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-chart-simple"></i> DOCUPRO EN NÚMEROS</span>
-                <h2>Impacto real medible</h2>
+                <h2 class="reveal-text">Impacto real medible</h2>
                 <div class="counters-grid">
-                    <div class="counter-card glass-card"><i class="fas fa-project-diagram"></i><div class="counter" data-target="250">0</div><p><i class="fas fa-check-circle"></i> Proyectos completados</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-smile"></i><div class="counter" data-target="98">0</div><p><i class="fas fa-percent"></i> % Satisfacción</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-clock"></i><div class="counter" data-target="45000">0</div><p><i class="fas fa-hourglass-half"></i> Horas ahorradas</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-users"></i><div class="counter" data-target="15">0</div><p><i class="fas fa-certificate"></i> Asesores certificados</p></div>
+                    <div class="counter-card glass-premium"><i class="fas fa-project-diagram"></i><div class="counter" data-target="250">0</div><p><i class="fas fa-check-circle"></i> Proyectos completados</p></div>
+                    <div class="counter-card glass-premium"><i class="fas fa-smile"></i><div class="counter" data-target="98">0</div><p><i class="fas fa-percent"></i> % Satisfacción</p></div>
+                    <div class="counter-card glass-premium"><i class="fas fa-clock"></i><div class="counter" data-target="45000">0</div><p><i class="fas fa-hourglass-half"></i> Horas ahorradas</p></div>
+                    <div class="counter-card glass-premium"><i class="fas fa-users"></i><div class="counter" data-target="15">0</div><p><i class="fas fa-certificate"></i> Asesores certificados</p></div>
                 </div>
             </div>
         </section>
@@ -88,7 +98,7 @@
         <section class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-timeline"></i> NUESTRA EVOLUCIÓN</span>
-                <h2>Línea de tiempo DocuPro</h2>
+                <h2 class="reveal-text">Línea de tiempo DocuPro</h2>
                 <div class="timeline">
                     <div class="timeline-item"><div class="timeline-year">2023</div><div class="timeline-content"><i class="fas fa-chart-line"></i> Fundación · Primeros 50 clientes</div></div>
                     <div class="timeline-item"><div class="timeline-year">2024</div><div class="timeline-content"><i class="fas fa-microchip"></i> Implementación IA · +200 proyectos</div></div>
@@ -98,243 +108,104 @@
             </div>
         </section>
 
-        <!-- CALCULADORA DE AHORRO -->
+        <!-- CALCULADORA -->
         <section class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-calculator"></i> SIMULADOR DE AHORRO</span>
-                <h2>¿Cuánto podrías ahorrar?</h2>
-                <div class="calculator glass-card">
-                    <label><i class="fas fa-clock"></i> Horas mensuales en tareas repetitivas: <span id="horasValue">40</span>h</label>
+                <h2 class="reveal-text">¿Cuánto podrías ahorrar?</h2>
+                <div class="calculator glass-premium">
+                    <label><i class="fas fa-clock"></i> Horas mensuales: <span id="horasValue">40</span>h</label>
                     <input type="range" id="horasSlider" min="10" max="200" value="40">
                     <div class="resultado-ahorro">
                         <p><i class="fas fa-chart-line"></i> Con DocuPro ahorrarías:</p>
                         <div class="ahorro-numero" id="ahorroNumero">0</div>
-                        <p>horas al mes <span id="ahorroPorcentaje">0</span>% menos de carga</p>
+                        <p>horas al mes <span id="ahorroPorcentaje">0</span>% menos</p>
                     </div>
-                    <button class="glow-btn" id="calcularBtn"><i class="fas fa-chart-simple"></i> Calcular mi ROI</button>
+                    <button class="glow-btn magnetic-btn" id="calcularBtn"><i class="fas fa-chart-simple"></i> Calcular ROI</button>
                 </div>
             </div>
         </section>
 
-        <!-- MAQUETACIÓN WORD -->
+        <!-- MAQUETACIÓN -->
         <section id="maquetacion" class="section">
             <div class="container">
-                <span class="section-tag"><i class="fas fa-file-word"></i> 02 · Maquetación Avanzada Word</span>
-                <h2>FÓRMULA DE EFICIENCIA</h2>
-                <div class="formula-box glass-card">E = (Tmanual − Tauto) / Tmanual × 100 <span><i class="fas fa-chart-line"></i> Reducción del 85% en tiempos</span></div>
+                <span class="section-tag"><i class="fas fa-file-word"></i> 02 · Maquetación Avanzada</span>
+                <h2 class="reveal-text">FÓRMULA DE EFICIENCIA</h2>
+                <div class="formula-box glass-premium">E = (Tmanual − Tauto) / Tmanual × 100 <span><i class="fas fa-chart-line"></i> Reducción del 85%</span></div>
                 <div class="grid-4">
-                    <div class="feature-card"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
-                    <div class="feature-card"><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
-                    <div class="feature-card"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices y control de cambios.</p></div>
-                    <div class="feature-card"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Fuentes para máxima legibilidad.</p></div>
+                    <div class="feature-card glass-premium magnetic-btn"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
+                    <div class="feature-card glass-premium magnetic-btn"><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
+                    <div class="feature-card glass-premium magnetic-btn"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices y control de cambios.</p></div>
+                    <div class="feature-card glass-premium magnetic-btn"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Fuentes para máxima legibilidad.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- EXCEL + GRÁFICO -->
+        <!-- EXCEL -->
         <section id="excel" class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-table"></i> EXCEL: GESTIÓN DE DATOS</span>
-                <h2>DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
+                <h2 class="reveal-text">DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
                 <div class="excel-modules">
-                    <div class="module glass-card active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query — Transformación ETL</p><span class="badge"><i class="fas fa-check"></i> 90% menos error</span></div>
-                    <div class="module glass-card active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot — Relaciones</p><span class="badge"><i class="fas fa-chart-pie"></i> 360° visión</span></div>
-                    <div class="module glass-card active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA — Macros PDF</p><span class="badge"><i class="fas fa-infinity"></i> 0 tareas repetitivas</span></div>
-                    <div class="module glass-card dev"><i class="fas fa-chart-line"></i><h3>PREDICTIVO</h3><p>Tablas Dinámicas + Solver</p><span class="badge"><i class="fas fa-chart-line"></i> +ROI recursos</span></div>
+                    <div class="module glass-premium active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query · ETL</p><span class="badge"><i class="fas fa-check"></i> 90% menos error</span></div>
+                    <div class="module glass-premium active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot · Relaciones</p><span class="badge"><i class="fas fa-chart-pie"></i> 360° visión</span></div>
+                    <div class="module glass-premium active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA · Macros PDF</p><span class="badge"><i class="fas fa-infinity"></i> 0 repetitivas</span></div>
+                    <div class="module glass-premium dev"><i class="fas fa-chart-line"></i><h3>PREDICTIVO</h3><p>Tablas Dinámicas + Solver</p><span class="badge"><i class="fas fa-chart-line"></i> +ROI</span></div>
                 </div>
-                <div class="productividad-compare glass-card">
+                <div class="productividad-compare glass-premium">
                     <h3><i class="fas fa-chart-bar"></i> PRODUCTIVIDAD COMPARADA</h3>
                     <div class="chart-container"><canvas id="horasChart"></canvas></div>
-                    <p class="insight"><i class="fas fa-lightbulb"></i> Ahorro de <strong>36 h/mes</strong> frente al benchmark sector (−60%)</p>
+                    <p class="insight"><i class="fas fa-lightbulb"></i> Ahorro de <strong>36 h/mes</strong> (-60%)</p>
                 </div>
             </div>
         </section>
 
-        <!-- TESTIMONIOS + RANKING -->
+        <!-- TESTIMONIOS -->
         <section class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-star"></i> CASOS DE ÉXITO</span>
-                <h2>Lo que dicen nuestros clientes</h2>
-                <div class="testimonial glass-card">
+                <h2 class="reveal-text">Lo que dicen nuestros clientes</h2>
+                <div class="testimonial glass-premium">
                     <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente">
-                    <div><h4>Laura Martínez</h4><small><i class="fas fa-briefcase"></i> Directora de Operaciones · Grupo Fintech</small><p>"DocuPro redujo nuestras horas de reporting en un 73% en solo 2 semanas."</p></div>
+                    <div><h4>Laura Martínez</h4><small><i class="fas fa-briefcase"></i> Directora de Operaciones</small><p>"DocuPro redujo nuestras horas de reporting en un 73% en solo 2 semanas."</p></div>
                 </div>
-                <div class="ranking-paises">
+                <div class="ranking-paises glass-premium">
                     <h3><i class="fas fa-globe-americas"></i> Ranking de visitas por país</h3>
-                    <div id="countryRanking" class="country-list">🌍 Cargando datos...</div>
+                    <div id="countryRanking" class="country-list"></div>
                 </div>
             </div>
         </section>
 
-                <!-- ANTES / DESPUÉS - CASOS DE ÉXITO INTERACTIVOS -->
+        <!-- ANTES/DESPUÉS -->
         <section class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-chart-line"></i> ANTES / DESPUÉS</span>
-                <h2>Transformaciones reales <i class="fas fa-magic"></i></h2>
-                
-                <!-- Pestañas de casos -->
+                <h2 class="reveal-text">Transformaciones reales <i class="fas fa-magic"></i></h2>
                 <div class="casos-tabs">
                     <button class="tab-btn active" data-caso="excel"><i class="fas fa-table"></i> Excel</button>
                     <button class="tab-btn" data-caso="word"><i class="fas fa-file-word"></i> Word</button>
                     <button class="tab-btn" data-caso="archivo"><i class="fas fa-folder-open"></i> Archivo</button>
                 </div>
-
-                <!-- Caso EXCEL -->
                 <div class="caso-contenido active" id="caso-excel">
                     <div class="antes-despues-grid">
-                        <div class="antes-card glass-card">
-                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
-                            <h3><i class="fas fa-file-excel"></i> Gestión manual</h3>
-                            <ul class="problemas-lista">
-                                <li><i class="fas fa-times-circle"></i> 95 horas/mes en reportes</li>
-                                <li><i class="fas fa-times-circle"></i> Datos en 5 archivos diferentes</li>
-                                <li><i class="fas fa-times-circle"></i> Errores manuales frecuentes</li>
-                                <li><i class="fas fa-times-circle"></i> 0 automatización</li>
-                            </ul>
-                            <div class="metricas-antes">
-                                <span class="numero-grande">95h</span>
-                                <span class="etiqueta">/mes invertidas</span>
-                            </div>
-                        </div>
-                        <div class="flecha-transformacion">
-                            <i class="fas fa-arrow-right"></i>
-                            <span>→</span>
-                        </div>
-                        <div class="despues-card glass-card">
-                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
-                            <h3><i class="fas fa-chart-line"></i> Dashboard automatizado</h3>
-                            <ul class="soluciones-lista">
-                                <li><i class="fas fa-check-circle"></i> 24 horas/mes → <strong>-75%</strong></li>
-                                <li><i class="fas fa-check-circle"></i> Power Query + Power Pivot</li>
-                                <li><i class="fas fa-check-circle"></i> 0 errores · Validación automática</li>
-                                <li><i class="fas fa-check-circle"></i> Macros VBA para PDFs</li>
-                            </ul>
-                            <div class="metricas-despues">
-                                <span class="numero-grande">-71h</span>
-                                <span class="etiqueta">ahorro mensual</span>
-                            </div>
-                        </div>
+                        <div class="antes-card glass-premium"><div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div><h3><i class="fas fa-file-excel"></i> Gestión manual</h3><ul class="problemas-lista"><li><i class="fas fa-times-circle"></i> 95 horas/mes</li><li><i class="fas fa-times-circle"></i> 5 archivos diferentes</li><li><i class="fas fa-times-circle"></i> Errores frecuentes</li></ul><div class="metricas-antes"><span class="numero-grande">95h</span><span class="etiqueta">/mes</span></div></div>
+                        <div class="flecha-transformacion"><i class="fas fa-arrow-right"></i></div>
+                        <div class="despues-card glass-premium"><div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div><h3><i class="fas fa-chart-line"></i> Dashboard automatizado</h3><ul class="soluciones-lista"><li><i class="fas fa-check-circle"></i> 24h/mes → -75%</li><li><i class="fas fa-check-circle"></i> Power Query + Pivot</li><li><i class="fas fa-check-circle"></i> 0 errores</li></ul><div class="metricas-despues"><span class="numero-grande">-71h</span><span class="etiqueta">ahorro</span></div></div>
                     </div>
-                    <div class="simulacion-boton">
-                        <button class="simular-btn glow-btn" data-simulacion="excel"><i class="fas fa-chart-simple"></i> Ver simulación del dashboard</button>
-                    </div>
+                    <div class="simulacion-boton"><button class="simular-btn glow-btn magnetic-btn" data-simulacion="excel"><i class="fas fa-chart-simple"></i> Ver simulación</button></div>
                 </div>
-
-                <!-- Caso WORD -->
-                <div class="caso-contenido" id="caso-word">
-                    <div class="antes-despues-grid">
-                        <div class="antes-card glass-card">
-                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
-                            <h3><i class="fas fa-file-alt"></i> Documentación caótica</h3>
-                            <ul class="problemas-lista">
-                                <li><i class="fas fa-times-circle"></i> 40 horas en maquetación</li>
-                                <li><i class="fas fa-times-circle"></i> Índices manuales rotos</li>
-                                <li><i class="fas fa-times-circle"></i> Formatos inconsistentes</li>
-                                <li><i class="fas fa-times-circle"></i> Control de cambios desordenado</li>
-                            </ul>
-                            <div class="metricas-antes">
-                                <span class="numero-grande">40h</span>
-                                <span class="etiqueta">/documento largo</span>
-                            </div>
-                        </div>
-                        <div class="flecha-transformacion">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                        <div class="despues-card glass-card">
-                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
-                            <h3><i class="fas fa-magic"></i> Plantilla inteligente</h3>
-                            <ul class="soluciones-lista">
-                                <li><i class="fas fa-check-circle"></i> 6 horas/documento → <strong>-85%</strong></li>
-                                <li><i class="fas fa-check-circle"></i> Estilos jerárquicos automáticos</li>
-                                <li><i class="fas fa-check-circle"></i> Tablas e índices automatizados</li>
-                                <li><i class="fas fa-check-circle"></i> Campos y formularios dinámicos</li>
-                            </ul>
-                            <div class="metricas-despues">
-                                <span class="numero-grande">-34h</span>
-                                <span class="etiqueta">ahorro por documento</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="simulacion-boton">
-                        <button class="simular-btn glow-btn" data-simulacion="word"><i class="fas fa-file-word"></i> Ver plantilla inteligente</button>
-                    </div>
-                </div>
-
-                <!-- Caso ARCHIVO -->
-                <div class="caso-contenido" id="caso-archivo">
-                    <div class="antes-despues-grid">
-                        <div class="antes-card glass-card">
-                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
-                            <h3><i class="fas fa-folder-open"></i> Archivo desorganizado</h3>
-                            <ul class="problemas-lista">
-                                <li><i class="fas fa-times-circle"></i> 10 minutos/búsqueda</li>
-                                <li><i class="fas fa-times-circle"></i> Nombres inconsistentes</li>
-                                <li><i class="fas fa-times-circle"></i> Sin copias de seguridad</li>
-                                <li><i class="fas fa-times-circle"></i> Espacio físico desaprovechado</li>
-                            </ul>
-                            <div class="metricas-antes">
-                                <span class="numero-grande">10min</span>
-                                <span class="etiqueta">para encontrar un documento</span>
-                            </div>
-                        </div>
-                        <div class="flecha-transformacion">
-                            <i class="fas fa-arrow-right"></i>
-                        </div>
-                        <div class="despues-card glass-card">
-                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
-                            <h3><i class="fas fa-archive"></i> Arquitectura certificada</h3>
-                            <ul class="soluciones-lista">
-                                <li><i class="fas fa-check-circle"></i> 120 segundos máximo → <strong>-80%</strong></li>
-                                <li><i class="fas fa-check-circle"></i> Nomenclatura ISO 8601</li>
-                                <li><i class="fas fa-check-circle"></i> Sistema QR + metadatos</li>
-                                <li><i class="fas fa-check-circle"></i> Backup y purga semestral</li>
-                            </ul>
-                            <div class="metricas-despues">
-                                <span class="numero-grande">-8min</span>
-                                <span class="etiqueta">por búsqueda</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="simulacion-boton">
-                        <button class="simular-btn glow-btn" data-simulacion="archivo"><i class="fas fa-qrcode"></i> Ver sistema de clasificación</button>
-                    </div>
-                </div>
+                <div class="caso-contenido" id="caso-word"><div class="antes-despues-grid"><div class="antes-card glass-premium"><div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div><h3><i class="fas fa-file-alt"></i> Documentación caótica</h3><ul class="problemas-lista"><li><i class="fas fa-times-circle"></i> 40 horas/documento</li><li><i class="fas fa-times-circle"></i> Índices manuales</li><li><i class="fas fa-times-circle"></i> Formatos inconsistentes</li></ul><div class="metricas-antes"><span class="numero-grande">40h</span><span class="etiqueta">/documento</span></div></div><div class="flecha-transformacion"><i class="fas fa-arrow-right"></i></div><div class="despues-card glass-premium"><div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div><h3><i class="fas fa-magic"></i> Plantilla inteligente</h3><ul class="soluciones-lista"><li><i class="fas fa-check-circle"></i> 6h → -85%</li><li><i class="fas fa-check-circle"></i> Estilos automáticos</li><li><i class="fas fa-check-circle"></i> Índices dinámicos</li></ul><div class="metricas-despues"><span class="numero-grande">-34h</span><span class="etiqueta">ahorro</span></div></div></div><div class="simulacion-boton"><button class="simular-btn glow-btn magnetic-btn" data-simulacion="word"><i class="fas fa-file-word"></i> Ver plantilla</button></div></div>
+                <div class="caso-contenido" id="caso-archivo"><div class="antes-despues-grid"><div class="antes-card glass-premium"><div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div><h3><i class="fas fa-folder-open"></i> Archivo desorganizado</h3><ul class="problemas-lista"><li><i class="fas fa-times-circle"></i> 10min/búsqueda</li><li><i class="fas fa-times-circle"></i> Nombres inconsistentes</li><li><i class="fas fa-times-circle"></i> Sin backups</li></ul><div class="metricas-antes"><span class="numero-grande">10min</span><span class="etiqueta">búsqueda</span></div></div><div class="flecha-transformacion"><i class="fas fa-arrow-right"></i></div><div class="despues-card glass-premium"><div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div><h3><i class="fas fa-archive"></i> Arquitectura certificada</h3><ul class="soluciones-lista"><li><i class="fas fa-check-circle"></i> 120s → -80%</li><li><i class="fas fa-check-circle"></i> Nomenclatura ISO</li><li><i class="fas fa-check-circle"></i> Sistema QR</li></ul><div class="metricas-despues"><span class="numero-grande">-8min</span><span class="etiqueta">ahorro</span></div></div></div><div class="simulacion-boton"><button class="simular-btn glow-btn magnetic-btn" data-simulacion="archivo"><i class="fas fa-qrcode"></i> Ver sistema</button></div></div>
             </div>
         </section>
 
-        <!-- VÍDEO DEMO -->
-        <section class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-video"></i> VER PARA CREER</span>
-                <h2>Demo interactiva</h2>
-                <div class="video-demo glass-card" id="demoVideo">
-                    <div class="video-placeholder">
-                        <i class="fas fa-play-circle"></i>
-                        <p><i class="fas fa-chart-line"></i> Vídeo demostrativo · Antes/Después en automatización Excel</p>
-                        <small><i class="fas fa-mouse-pointer"></i> Haz clic para ver la simulación</small>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SISTEMAS ARCHIVO -->
+        <!-- ARCHIVO -->
         <section id="archivo" class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-folder-tree"></i> SISTEMAS DE CLASIFICACIÓN</span>
-                <h2>Arquitectura documental robusta</h2>
-                <div class="pilar-list">
-                    <div class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO</small></div>
-                    <div class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA <small>Multinivel</small></div>
-                    <div class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos</small></div>
-                    <div class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos</small></div>
-                    <div class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Purga</small></div>
-                </div>
-                <div class="archivo-fisico glass-card">
-                    <h3><i class="fas fa-box-archive"></i> GESTIÓN DE ARCHIVO FÍSICO</h3>
-                    <p>Recuperación documental en <strong>menos de 120 segundos</strong>.</p>
-                    <div class="qr-stats"><span><i class="fas fa-qrcode"></i> Catalogación QR</span><span><i class="fas fa-tint"></i> Anti-humedad</span><span><i class="fas fa-trash"></i> Expurgo semestral</span></div>
-                    <div class="timer glow-text">⏱️ 120s <small>TIEMPO MÁXIMO</small></div>
-                </div>
+                <h2 class="reveal-text">Arquitectura documental robusta</h2>
+                <div class="pilar-list"><div class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA <small>snake_case + ISO</small></div><div class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA <small>Multinivel</small></div><div class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO <small>Metadatos</small></div><div class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD <small>Permisos</small></div><div class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN <small>Purga</small></div></div>
+                <div class="archivo-fisico glass-premium"><h3><i class="fas fa-box-archive"></i> GESTIÓN DE ARCHIVO FÍSICO</h3><p>Recuperación en <strong>menos de 120 segundos</strong>.</p><div class="qr-stats"><span><i class="fas fa-qrcode"></i> Catalogación QR</span><span><i class="fas fa-tint"></i> Anti-humedad</span><span><i class="fas fa-trash"></i> Expurgo semestral</span></div><div class="timer glow-text">⏱️ 120s <small>TIEMPO MÁXIMO</small></div></div>
             </div>
         </section>
 
@@ -342,45 +213,27 @@
         <section id="ergonomia" class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-heartbeat"></i> SALUD LABORAL</span>
-                <h2>Buenas prácticas productivas</h2>
-                <div class="ergo-grid">
-                    <div class="ergo-card"><i class="fas fa-eye"></i><h4>Regla 20-20-20</h4><p>Descanso visual cada 20 minutos</p></div>
-                    <div class="ergo-card"><i class="fas fa-chair"></i><h4>Postura correcta</h4><p>Silla ergonómica + monitor altura ojos</p></div>
-                    <div class="ergo-card"><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div>
-                </div>
+                <h2 class="reveal-text">Buenas prácticas productivas</h2>
+                <div class="ergo-grid"><div class="ergo-card glass-premium"><i class="fas fa-eye"></i><h4>Regla 20-20-20</h4><p>Descanso visual cada 20 minutos</p></div><div class="ergo-card glass-premium"><i class="fas fa-chair"></i><h4>Postura correcta</h4><p>Silla ergonómica + monitor altura ojos</p></div><div class="ergo-card glass-premium"><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div></div>
             </div>
         </section>
 
-        <!-- METODOLOGÍA + MAPA -->
+        <!-- METODOLOGÍA -->
         <section id="metodologia" class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-certificate"></i> METODOLOGÍA CERTIFICADA</span>
-                <h2>5 fases · 100% trazable · ISO 9001</h2>
-                <div class="fases">
-                    <div class="fase-card"><span>01</span> <i class="fas fa-search"></i> Auditoría<small>Análisis</small></div>
-                    <div class="fase-card"><span>02</span> <i class="fas fa-drafting-compass"></i> Diseño<small>Modelado</small></div>
-                    <div class="fase-card"><span>03</span> <i class="fas fa-code"></i> Desarrollo<small>Construcción</small></div>
-                    <div class="fase-card"><span>04</span> <i class="fas fa-chalkboard-user"></i> Formación<small>Capacitación</small></div>
-                    <div class="fase-card"><span>05</span> <i class="fas fa-headset"></i> Soporte<small>Optimización</small></div>
-                </div>
-                <div class="map-container glass-card">
-                    <h3><i class="fas fa-map-marker-alt"></i> Nuestras oficinas</h3>
-                    <iframe src="https://maps.google.com/maps?q=Madrid&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe>
-                    <p><i class="fas fa-city"></i> Madrid · Barcelona · <i class="fas fa-globe"></i> Consultoría remota global</p>
-                </div>
+                <h2 class="reveal-text">5 fases · 100% trazable · ISO 9001</h2>
+                <div class="fases"><div class="fase-card glass-premium"><span>01</span> <i class="fas fa-search"></i> Auditoría<small>Análisis</small></div><div class="fase-card glass-premium"><span>02</span> <i class="fas fa-drafting-compass"></i> Diseño<small>Modelado</small></div><div class="fase-card glass-premium"><span>03</span> <i class="fas fa-code"></i> Desarrollo<small>Construcción</small></div><div class="fase-card glass-premium"><span>04</span> <i class="fas fa-chalkboard-user"></i> Formación<small>Capacitación</small></div><div class="fase-card glass-premium"><span>05</span> <i class="fas fa-headset"></i> Soporte<small>Optimización</small></div></div>
+                <div class="map-container glass-premium"><h3><i class="fas fa-map-marker-alt"></i> Nuestras oficinas</h3><iframe src="https://maps.google.com/maps?q=Madrid&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe><p><i class="fas fa-city"></i> Madrid · Barcelona · <i class="fas fa-globe"></i> Consultoría remota global</p></div>
             </div>
         </section>
 
-        <!-- PLANES CON BOTONES DE CONTRATAR -->
+        <!-- PLANES -->
         <section id="tarifas" class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-tags"></i> PLANES 2026</span>
-                <h2>Elige tu nivel de excelencia</h2>
-                <div class="pricing">
-                    <div class="plan glass-card"><i class="fas fa-box"></i><h3>BÁSICO</h3><div class="price">49€<small>único</small></div><ul><li><i class="fas fa-check"></i> Word hasta 10pág</li><li><i class="fas fa-chart-simple"></i> Excel estático</li><li><i class="fas fa-desktop"></i> Auditoría remota</li></ul><button class="contratar-btn glow-btn" data-plan="Básico"><i class="fas fa-shopping-cart"></i> Contratar</button></div>
-                    <div class="plan featured glass-card"><i class="fas fa-crown"></i><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li><i class="fas fa-check"></i> Word sin límite</li><li><i class="fas fa-chart-line"></i> Excel VBA</li><li><i class="fas fa-headset"></i> Soporte prioritario</li></ul><div class="recomendado"><i class="fas fa-star"></i> RECOMENDADO</div><button class="contratar-btn glow-btn" data-plan="Profesional"><i class="fas fa-shopping-cart"></i> Contratar</button></div>
-                    <div class="plan glass-card"><i class="fas fa-building"></i><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li><i class="fas fa-chart-line"></i> BI Avanzado</li><li><i class="fas fa-users"></i> Presencial</li><li><i class="fas fa-tools"></i> Mantenimiento</li></ul><button class="contratar-btn glow-btn" data-plan="Empresa"><i class="fas fa-envelope"></i> Contactar</button></div>
-                </div>
+                <h2 class="reveal-text">Elige tu nivel de excelencia</h2>
+                <div class="pricing"><div class="plan glass-premium"><i class="fas fa-box"></i><h3>BÁSICO</h3><div class="price">49€<small>único</small></div><ul><li><i class="fas fa-check"></i> Word hasta 10pág</li><li><i class="fas fa-chart-simple"></i> Excel estático</li><li><i class="fas fa-desktop"></i> Auditoría remota</li></ul><button class="contratar-btn glow-btn magnetic-btn" data-plan="Básico"><i class="fas fa-shopping-cart"></i> Contratar</button></div><div class="plan featured glass-premium"><i class="fas fa-crown"></i><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li><i class="fas fa-check"></i> Word sin límite</li><li><i class="fas fa-chart-line"></i> Excel VBA</li><li><i class="fas fa-headset"></i> Soporte prioritario</li></ul><div class="recomendado"><i class="fas fa-star"></i> RECOMENDADO</div><button class="contratar-btn glow-btn magnetic-btn" data-plan="Profesional"><i class="fas fa-shopping-cart"></i> Contratar</button></div><div class="plan glass-premium"><i class="fas fa-building"></i><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li><i class="fas fa-chart-line"></i> BI Avanzado</li><li><i class="fas fa-users"></i> Presencial</li><li><i class="fas fa-tools"></i> Mantenimiento</li></ul><button class="contratar-btn glow-btn magnetic-btn" data-plan="Empresa"><i class="fas fa-envelope"></i> Contactar</button></div></div>
             </div>
         </section>
 
@@ -388,60 +241,23 @@
         <section id="contacto" class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-comments"></i> ¿HABLAMOS?</span>
-                <h2>Cuéntanos tu proyecto</h2>
-                <div class="contact-wrapper">
-                    <div class="contact-form glass-card">
-                        <h3><i class="fas fa-pen-alt"></i> Formulario directo</h3>
-                        <form id="leadForm">
-                            <input type="text" placeholder="Nombre completo" id="nombre" required>
-                            <input type="email" placeholder="Email corporativo" id="email" required>
-                            <select id="interes"><option><i class="fas fa-chart-line"></i> Automatización Excel</option><option><i class="fas fa-file-word"></i> Maquetación Word</option><option><i class="fas fa-archive"></i> Gestión archivo</option><option><i class="fas fa-gem"></i> Consultoría completa</option></select>
-                            <textarea rows="2" placeholder="Cuéntanos tu reto..."></textarea>
-                            <button type="submit" class="glow-btn"><i class="fas fa-paper-plane"></i> Enviar consulta</button>
-                        </form>
-                        <div id="formMessage"></div>
-                        <button id="descargarPDF" class="glow-btn" style="margin-top:1rem; background:#2a5f8a;"><i class="fas fa-download"></i> Caso de éxito (PDF)</button>
-                    </div>
-                    <div class="contact-info glass-card">
-                        <h3><i class="fas fa-address-card"></i> Contacto directo</h3>
-                        <p><i class="fas fa-envelope"></i> contacto@docupro.es</p>
-                        <p><i class="fas fa-phone-alt"></i> +34 900 123 456</p>
-                        <p><i class="fab fa-whatsapp"></i> +34 644 789 012</p>
-                        <p><i class="fas fa-clock"></i> L-V 9h-19h</p>
-                    </div>
-                </div>
+                <h2 class="reveal-text">Cuéntanos tu proyecto</h2>
+                <div class="contact-wrapper"><div class="contact-form glass-premium"><h3><i class="fas fa-pen-alt"></i> Formulario directo</h3><form id="leadForm"><input type="text" placeholder="Nombre completo" id="nombre" required><input type="email" placeholder="Email corporativo" id="email" required><select id="interes"><option><i class="fas fa-chart-line"></i> Automatización Excel</option><option><i class="fas fa-file-word"></i> Maquetación Word</option><option><i class="fas fa-archive"></i> Gestión archivo</option><option><i class="fas fa-gem"></i> Consultoría completa</option></select><textarea rows="2" placeholder="Cuéntanos tu reto..."></textarea><button type="submit" class="glow-btn magnetic-btn"><i class="fas fa-paper-plane"></i> Enviar consulta</button></form><div id="formMessage"></div><button id="descargarPDF" class="glow-btn magnetic-btn" style="margin-top:1rem; background:#2a5f8a;"><i class="fas fa-download"></i> Caso de éxito (PDF)</button></div><div class="contact-info glass-premium"><h3><i class="fas fa-address-card"></i> Contacto directo</h3><p><i class="fas fa-envelope"></i> contacto@docupro.es</p><p><i class="fas fa-phone-alt"></i> +34 900 123 456</p><p><i class="fab fa-whatsapp"></i> +34 644 789 012</p><p><i class="fas fa-clock"></i> L-V 9h-19h</p></div></div>
             </div>
         </section>
     </main>
 
-    <!-- CHAT FLOTANTE -->
-    <div id="chatWidget" class="chat-widget glass-card">
-        <div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close"><i class="fas fa-times"></i></span></div>
-        <div class="chat-body"><div class="chat-message bot"><i class="fas fa-robot"></i> 👋 ¿En qué puedo ayudarte?</div><div class="chat-options"><button data-msg="Precios"><i class="fas fa-euro-sign"></i> Precios</button><button data-msg="Automatización Excel"><i class="fas fa-table"></i> Excel</button><button data-msg="Hablar con asesor"><i class="fas fa-headset"></i> Asesor</button></div></div>
-        <div class="chat-input-area"><input id="chatInput" placeholder="Escribe..."><button id="chatSend"><i class="fas fa-paper-plane"></i></button></div>
-    </div>
+    <!-- CHAT -->
+    <div id="chatWidget" class="chat-widget glass-premium"><div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close"><i class="fas fa-times"></i></span></div><div class="chat-body"><div class="chat-message bot"><i class="fas fa-robot"></i> 👋 ¿En qué puedo ayudarte?</div><div class="chat-options"><button data-msg="Precios"><i class="fas fa-euro-sign"></i> Precios</button><button data-msg="Automatización Excel"><i class="fas fa-table"></i> Excel</button><button data-msg="Hablar con asesor"><i class="fas fa-headset"></i> Asesor</button></div></div><div class="chat-input-area"><input id="chatInput" placeholder="Escribe..."><button id="chatSend"><i class="fas fa-paper-plane"></i></button></div></div>
     <button id="chatToggle" class="chat-toggle-btn glow-btn"><i class="fas fa-headset"></i></button>
 
-    <div class="session-timer" id="sessionTimer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
+    <!-- LOGRO LEGENDARIO -->
+    <div id="logroContainer" class="logro-container" style="display: none;"><div class="logro-card"><div class="logro-icon">🏆</div><div class="logro-texto"><div class="logro-titulo">¡LOGRO DESBLOQUEADO!</div><div class="logro-descripcion">"El que calló al profe"</div><div class="logro-sub">Has dominado la productividad ofimática nivel DIOS</div></div></div></div>
 
-    <footer>
-        <div class="container">
-            <p><i class="fas fa-chart-line"></i> DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</p>
-            <p id="visitorCounter"><i class="fas fa-globe"></i> Cargando visitas...</p>
-        </div>
-    </footer>
+    <div class="session-timer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
+
+    <footer><div class="container"><p><i class="fas fa-chart-line"></i> DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</p><p id="visitorCounter"><i class="fas fa-globe"></i> Cargando visitas...</p></div></footer>
 
     <script src="script.js"></script>
-        <!-- LOGRO LEGENDARIO (solo aparece una vez) -->
-    <div id="logroContainer" class="logro-container" style="display: none;">
-        <div class="logro-card">
-            <div class="logro-icon">🏆</div>
-            <div class="logro-texto">
-                <div class="logro-titulo">¡LOGRO DESBLOQUEADO!</div>
-                <div class="logro-descripcion">"El que calló al profe"</div>
-                <div class="logro-sub">Has dominado la productividad ofimática nivel DIOS</div>
-            </div>
-        </div>
-    </div>
 </body>
 </html>

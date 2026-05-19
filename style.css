@@ -24,65 +24,99 @@ body {
     pointer-events: none;
 }
 
-/* ========== CURSOR NATIVO CON GLOW AZUL ========== */
+/* ========== CURSOR PERSONALIZADO (anillo + punto) ========== */
 body {
-    cursor: auto; /* Cursor nativo de Windows */
+    cursor: none; /* Ocultamos el cursor nativo */
 }
 
-/* Glow azul alrededor del cursor nativo */
-* {
-    cursor: auto;
+/* Anillo exterior */
+.cursor {
+    width: 40px;
+    height: 40px;
+    border: 2px solid rgba(0, 195, 255, 0.9);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: 0.08s linear;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.6), 0 0 5px rgba(0, 195, 255, 0.8);
+    backdrop-filter: blur(1px);
 }
 
-/* Efecto visual: al pasar sobre elementos interactivos, el glow se intensifica */
-a, button, .card, .plan, .module, .feature-card, .nav-list a, 
-.glass-card, .chat-options button, .chat-toggle-btn, .btn-submit {
-    transition: filter 0.2s ease, text-shadow 0.2s ease;
+/* Punto central */
+.cursor-dot {
+    width: 6px;
+    height: 6px;
+    background: #00c3ff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10000;
+    transition: 0.05s linear;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px #00c3ff;
 }
 
-a:hover, button:hover, .card:hover, .plan:hover, .module:hover, 
-.feature-card:hover, .nav-list a:hover, .glass-card:hover,
-.chat-options button:hover, .chat-toggle-btn:hover, .btn-submit:hover {
-    filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.8))
-            drop-shadow(0 0 12px rgba(0, 195, 255, 0.5));
+/* Efecto hover en elementos interactivos (agranda el anillo) */
+a:hover ~ .cursor, 
+button:hover ~ .cursor, 
+.card:hover ~ .cursor, 
+.plan:hover ~ .cursor, 
+.module:hover ~ .cursor, 
+.feature-card:hover ~ .cursor,
+.nav-list a:hover ~ .cursor,
+.glass-card:hover ~ .cursor,
+.chat-options button:hover ~ .cursor,
+.chat-toggle-btn:hover ~ .cursor,
+.btn-submit:hover ~ .cursor {
+    transform: translate(-50%, -50%) scale(1.4);
+    border-color: rgba(0, 255, 200, 1);
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.9);
+    transition: 0.1s ease;
 }
 
-/* Efecto de anillo al hacer clic (ripple de cursor) */
+/* Pero como ~ no funciona siempre bien, hacemos también la clase directa */
+.cursor.hover {
+    transform: translate(-50%, -50%) scale(1.4);
+    border-color: rgba(0, 255, 200, 1);
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.9);
+}
+
+/* Ripple de clic (glare) - se mantiene */
 .ripple-effect {
     position: fixed;
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0,195,255,0.6) 0%, rgba(0,195,255,0) 70%);
+    background: radial-gradient(circle, rgba(0, 195, 255, 0.7) 0%, rgba(0, 195, 255, 0) 70%);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 10001;
     transform: translate(-50%, -50%);
-    animation: ripple 0.4s ease-out forwards;
+    animation: ripple 0.5s ease-out forwards;
 }
 
 @keyframes ripple {
     0% {
         width: 0px;
         height: 0px;
-        opacity: 0.8;
+        opacity: 0.9;
     }
     100% {
-        width: 60px;
-        height: 60px;
+        width: 70px;
+        height: 70px;
         opacity: 0;
     }
 }
 
-/* Cursor I-beam (texto) con glow */
-input:hover, textarea:hover, select:hover, [contenteditable="true"]:hover {
-    filter: drop-shadow(0 0 4px rgba(0, 195, 255, 0.6));
-}
-
-/* Focus visible también con glow */
-input:focus, textarea:focus, select:focus, button:focus, a:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 195, 255, 0.5), 0 0 0 4px rgba(0, 195, 255, 0.2);
-    border-radius: 8px;
+/* Ocultar cursor en móviles (por si acaso) */
+@media (max-width: 768px) {
+    .cursor, .cursor-dot {
+        display: none;
+    }
+    body {
+        cursor: auto;
+    }
 }
 
 /* ========== GLASSMORPHISM ========== */

@@ -19,11 +19,10 @@ body.light {
     color: #0a1428;
 }
 
-body.light .glass-premium,
+body.light .glass-card,
 body.light .main-nav {
-    background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(12px);
-    border-color: rgba(0, 195, 255, 0.3);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
 }
 
 /* ========== PARTÍCULAS ========== */
@@ -37,7 +36,7 @@ body.light .main-nav {
     pointer-events: none;
 }
 
-/* ========== CURSOR PREMIUM ========== */
+/* ========== CURSOR ========== */
 .cursor {
     width: 36px;
     height: 36px;
@@ -82,23 +81,19 @@ body.cursor-style-2 .cursor {
     background: #00c3ff;
     border: none;
 }
-
-body.cursor-style-2 .cursor-dot {
-    display: none;
-}
+body.cursor-style-2 .cursor-dot { display: none; }
 
 body.cursor-style-3 .cursor {
     width: 30px;
     height: 30px;
     border: 1px solid #00c3ff;
 }
-
 body.cursor-style-3 .cursor-dot {
     width: 10px;
     height: 10px;
 }
 
-/* ========== RIPPLE ========== */
+/* Ripple */
 .ripple-effect {
     position: fixed;
     border-radius: 50%;
@@ -107,7 +102,6 @@ body.cursor-style-3 .cursor-dot {
     z-index: 10001;
     animation: rippleAnim 0.45s ease-out forwards;
 }
-
 @keyframes rippleAnim {
     0% { width: 0; height: 0; opacity: 0.9; }
     100% { width: 65px; height: 65px; opacity: 0; }
@@ -122,7 +116,6 @@ body.cursor-style-3 .cursor-dot {
     display: flex;
     gap: 10px;
 }
-
 .control-btn {
     background: rgba(0, 195, 255, 0.2);
     backdrop-filter: blur(10px);
@@ -135,40 +128,21 @@ body.cursor-style-3 .cursor-dot {
     color: #00c3ff;
     font-size: 1.2rem;
 }
-
 .control-btn:hover {
     transform: scale(1.1);
     background: #00c3ff;
     color: #050a14;
 }
 
-/* ========== GLASS PREMIUM ========== */
-.glass-premium {
+/* ========== GLASS CARD ========== */
+.glass-card {
     background: rgba(10, 20, 40, 0.4);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(0, 195, 255, 0.3);
     border-radius: 24px;
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    position: relative;
-    overflow: hidden;
+    transition: all 0.3s ease;
 }
-
-.glass-premium::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-}
-
-.glass-premium:hover::before {
-    left: 100%;
-}
-
-.glass-premium:hover {
+.glass-card:hover {
     border-color: #00c3ff;
     transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(0, 195, 255, 0.2);
@@ -191,38 +165,32 @@ body.cursor-style-3 .cursor-dot {
     align-items: center;
     z-index: 2;
 }
-
 .hero-content {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
 }
-
 .logo {
     font-size: 4.5rem;
     font-weight: 900;
     letter-spacing: -3px;
 }
-
 .logo span {
     color: #00c3ff;
     text-shadow: 0 0 20px #00c3ff;
 }
-
 .tagline {
     font-size: 0.9rem;
     letter-spacing: 3px;
     font-weight: 300;
 }
-
 .hero-badge {
     margin-top: 2rem;
     border-left: 4px solid #00c3ff;
     padding-left: 1rem;
     font-weight: 600;
 }
-
 .hero-typing {
     font-size: 1.2rem;
     margin-top: 1rem;
@@ -230,7 +198,6 @@ body.cursor-style-3 .cursor-dot {
     font-weight: 600;
     min-height: 50px;
 }
-
 .scroll-down {
     position: absolute;
     bottom: 2rem;
@@ -241,9 +208,8 @@ body.cursor-style-3 .cursor-dot {
     cursor: pointer;
     font-size: 1.5rem;
 }
-
 @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
+    0%,100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(10px); }
 }
 
@@ -253,8 +219,9 @@ body.cursor-style-3 .cursor-dot {
     top: 0;
     z-index: 100;
     padding: 0.75rem 0;
+    background: rgba(5, 10, 20, 0.9);
+    backdrop-filter: blur(12px);
 }
-
 .nav-list {
     display: flex;
     gap: 1.8rem;
@@ -262,7 +229,6 @@ body.cursor-style-3 .cursor-dot {
     flex-wrap: wrap;
     list-style: none;
 }
-
 .nav-list a {
     color: white;
     text-decoration: none;
@@ -272,10 +238,7 @@ body.cursor-style-3 .cursor-dot {
     align-items: center;
     gap: 8px;
 }
-
-.nav-list a:hover {
-    color: #00c3ff;
-}
+.nav-list a:hover { color: #00c3ff; }
 
 /* ========== SECCIONES ========== */
 .section {
@@ -283,11 +246,9 @@ body.cursor-style-3 .cursor-dot {
     position: relative;
     z-index: 2;
 }
-
 .dark-bg {
     background: rgba(5, 10, 20, 0.5);
 }
-
 .section-tag {
     font-size: 0.75rem;
     text-transform: uppercase;
@@ -295,22 +256,10 @@ body.cursor-style-3 .cursor-dot {
     color: #00c3ff;
     font-weight: 600;
 }
-
 h2 {
     font-size: 2.5rem;
     margin: 0.8rem 0 2rem;
     font-weight: 800;
-}
-
-.reveal-text {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-.reveal-text.visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* ========== GRIDS ========== */
@@ -320,24 +269,20 @@ h2 {
     gap: 1.5rem;
     margin-top: 2rem;
 }
-
 .card, .counter-card, .feature-card, .module, .ergo-card, .plan {
     padding: 1.8rem;
     text-align: center;
 }
-
 .card-icon {
     font-size: 2.5rem;
     color: #00c3ff;
     margin-bottom: 1rem;
 }
-
 .counter {
     font-size: 3rem;
     font-weight: 800;
     color: #00c3ff;
 }
-
 .badge {
     display: inline-block;
     background: rgba(0, 195, 255, 0.2);
@@ -354,12 +299,10 @@ h2 {
     max-width: 500px;
     margin: 0 auto;
 }
-
 .calculator input {
     width: 100%;
     margin: 1rem 0;
 }
-
 .ahorro-numero {
     font-size: 3rem;
     font-weight: 800;
@@ -374,7 +317,6 @@ h2 {
     justify-content: space-between;
     margin: 2rem 0;
 }
-
 .timeline-item {
     flex: 1;
     text-align: center;
@@ -382,14 +324,14 @@ h2 {
     padding: 1rem;
     border-radius: 16px;
 }
-
 .timeline-year {
     font-size: 1.5rem;
     font-weight: 800;
     color: #00c3ff;
+    margin-bottom: 0.5rem;
 }
 
-/* ========== FORMULA BOX ========== */
+/* ========== FORMULA ========== */
 .formula-box {
     padding: 1.5rem;
     font-family: monospace;
@@ -397,7 +339,6 @@ h2 {
     font-weight: 700;
     text-align: center;
 }
-
 .formula-box span {
     display: block;
     font-size: 0.9rem;
@@ -410,7 +351,6 @@ h2 {
     text-align: center;
     margin-top: 2rem;
 }
-
 .chart-container {
     max-width: 500px;
     margin: 2rem auto;
@@ -424,20 +364,17 @@ h2 {
     padding: 1.5rem;
     margin: 2rem 0;
 }
-
 .testimonial img {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 .ranking-paises {
     padding: 1.5rem;
     margin-top: 2rem;
     text-align: center;
 }
-
 .country-list {
     display: flex;
     flex-wrap: wrap;
@@ -452,53 +389,39 @@ h2 {
     justify-content: center;
     gap: 1rem;
     margin-bottom: 2rem;
-    flex-wrap: wrap;
 }
-
 .tab-btn {
     background: rgba(10, 20, 35, 0.5);
     border: 1px solid #00c3ff;
-    padding: 0.8rem 2rem;
+    padding: 0.6rem 1.5rem;
     border-radius: 40px;
     cursor: pointer;
     color: white;
     transition: 0.3s;
 }
-
 .tab-btn.active {
     background: #00c3ff;
     color: #050a14;
 }
-
 .caso-contenido {
     display: none;
-    animation: fadeIn 0.5s ease;
 }
-
 .caso-contenido.active {
     display: block;
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
 .antes-despues-grid {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
     flex-wrap: wrap;
 }
-
 .antes-card, .despues-card {
     flex: 1;
-    min-width: 280px;
+    min-width: 260px;
     padding: 1.5rem;
     text-align: center;
 }
-
 .badge-antes, .badge-despues {
     display: inline-block;
     padding: 0.3rem 1rem;
@@ -506,58 +429,33 @@ h2 {
     font-size: 0.8rem;
     margin-bottom: 1rem;
 }
-
 .badge-antes {
     background: rgba(255, 80, 80, 0.2);
     border: 1px solid #ff5050;
     color: #ff8888;
 }
-
 .badge-despues {
     background: rgba(0, 255, 200, 0.2);
     border: 1px solid #00ffc8;
     color: #00ffc8;
 }
-
-.problemas-lista, .soluciones-lista {
+.antes-card ul, .despues-card ul {
     list-style: none;
     text-align: left;
     margin: 1rem 0;
 }
-
-.problemas-lista li, .soluciones-lista li {
-    padding: 0.4rem 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+.antes-card li, .despues-card li {
+    padding: 0.3rem 0;
 }
-
-.problemas-lista i { color: #ff5050; }
-.soluciones-lista i { color: #00ffc8; }
-
 .numero-grande {
     font-size: 2rem;
     font-weight: 800;
-    display: block;
-}
-
-.metricas-antes .numero-grande { color: #ff8888; }
-.metricas-despues .numero-grande { color: #00ffc8; }
-
-.flecha-transformacion {
-    font-size: 3rem;
-    color: #00c3ff;
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.2); opacity: 1; }
-}
-
-.simulacion-boton {
-    text-align: center;
     margin-top: 1rem;
+}
+.verde { color: #00ffc8; }
+.flecha {
+    font-size: 2.5rem;
+    color: #00c3ff;
 }
 
 /* ========== PILARES ========== */
@@ -568,24 +466,19 @@ h2 {
     justify-content: center;
     margin: 2rem 0;
 }
-
 .pilar-item {
     background: rgba(0, 195, 255, 0.1);
     padding: 0.6rem 1.2rem;
     border-radius: 40px;
     font-size: 0.8rem;
 }
-
-.pilar-item i {
-    margin-right: 6px;
-}
+.pilar-item i { margin-right: 6px; }
 
 /* ========== ARCHIVO ========== */
 .archivo-fisico {
     padding: 2rem;
     text-align: center;
 }
-
 .qr-stats {
     display: flex;
     justify-content: center;
@@ -593,14 +486,12 @@ h2 {
     margin: 1rem 0;
     flex-wrap: wrap;
 }
-
 .qr-stats span {
     background: rgba(0, 195, 255, 0.1);
     padding: 0.3rem 1rem;
     border-radius: 40px;
     font-size: 0.8rem;
 }
-
 .timer {
     font-size: 3rem;
     font-weight: 800;
@@ -615,13 +506,14 @@ h2 {
     gap: 1rem;
     margin: 2rem 0;
 }
-
 .fase-card {
     flex: 1;
     text-align: center;
     padding: 1rem;
+    background: rgba(10, 20, 35, 0.5);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 195, 255, 0.2);
 }
-
 .fase-card span {
     font-size: 2rem;
     font-weight: 800;
@@ -641,13 +533,11 @@ h2 {
     border: 2px solid #00c3ff;
     transform: scale(1.02);
 }
-
 .price {
     font-size: 2rem;
     font-weight: 800;
     margin: 1rem 0;
 }
-
 .recomendado {
     background: #00c3ff;
     color: #050a14;
@@ -657,20 +547,14 @@ h2 {
     font-size: 0.7rem;
     margin: 0.5rem 0;
 }
-
 .plan ul {
     list-style: none;
     text-align: left;
     margin: 1rem 0;
 }
-
 .plan li {
     padding: 0.3rem 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
 }
-
 .contratar-btn {
     margin-top: 1rem;
     width: 100%;
@@ -682,7 +566,6 @@ h2 {
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
 }
-
 .contact-form input, .contact-form select, .contact-form textarea {
     width: 100%;
     padding: 0.8rem;
@@ -692,7 +575,6 @@ h2 {
     border-radius: 12px;
     color: white;
 }
-
 .contact-info p {
     margin: 1rem 0;
     display: flex;
@@ -711,9 +593,7 @@ h2 {
     flex-direction: column;
     z-index: 1000;
 }
-
 .chat-widget.open { display: flex; }
-
 .chat-header {
     background: rgba(0, 195, 255, 0.2);
     padding: 0.8rem 1rem;
@@ -722,26 +602,22 @@ h2 {
     justify-content: space-between;
     cursor: pointer;
 }
-
 .chat-body {
     padding: 1rem;
     min-height: 300px;
     max-height: 350px;
     overflow-y: auto;
 }
-
 .chat-message {
     background: rgba(30, 40, 70, 0.6);
     padding: 0.6rem;
     border-radius: 12px;
     margin: 0.5rem 0;
 }
-
 .chat-message.bot {
     background: rgba(0, 195, 255, 0.15);
     border-left: 3px solid #00c3ff;
 }
-
 .chat-options {
     display: flex;
     flex-wrap: wrap;
@@ -749,7 +625,6 @@ h2 {
     margin: 0.8rem 0;
     justify-content: center;
 }
-
 .chat-options button {
     background: rgba(0, 195, 255, 0.15);
     border: 1px solid #00c3ff;
@@ -759,18 +634,15 @@ h2 {
     color: white;
     transition: 0.2s;
 }
-
 .chat-options button:hover {
     background: #00c3ff;
     color: #050a14;
 }
-
 .chat-input-area {
     display: flex;
     padding: 0.8rem;
     border-top: 1px solid rgba(0, 195, 255, 0.3);
 }
-
 .chat-input-area input {
     flex: 1;
     background: rgba(0, 0, 0, 0.5);
@@ -779,7 +651,6 @@ h2 {
     border-radius: 30px;
     color: white;
 }
-
 .chat-input-area button {
     background: #00c3ff;
     border: none;
@@ -788,7 +659,6 @@ h2 {
     border-radius: 30px;
     cursor: pointer;
 }
-
 .chat-toggle-btn {
     position: fixed;
     bottom: 20px;
@@ -804,23 +674,23 @@ h2 {
 }
 
 /* ========== BOTONES GLOBALES ========== */
-.glow-btn, .contratar-btn, .simular-btn, .chat-toggle-btn {
+.glow-btn, .contratar-btn, .chat-toggle-btn {
     background: linear-gradient(135deg, #00c3ff, #0088cc);
     border: none;
-    box-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
-    transition: all 0.3s ease;
+    padding: 12px 24px;
+    border-radius: 40px;
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.3s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
 }
-
-.glow-btn:hover, .contratar-btn:hover, .simular-btn:hover, .chat-toggle-btn:hover {
+.glow-btn:hover, .contratar-btn:hover, .chat-toggle-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
+    box-shadow: 0 0 20px rgba(0, 195, 255, 0.5);
 }
 
 /* ========== LOGRO ========== */
@@ -832,17 +702,14 @@ h2 {
     z-index: 10000;
     animation: logroEntrada 0.5s ease-out, logroSalida 0.5s ease-in 4.5s forwards;
 }
-
 @keyframes logroEntrada {
     from { opacity: 0; transform: translateX(-50%) translateY(-50px); }
     to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
-
 @keyframes logroSalida {
     from { opacity: 1; }
     to { opacity: 0; visibility: hidden; }
 }
-
 .logro-card {
     background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
     border: 2px solid gold;
@@ -853,22 +720,19 @@ h2 {
     gap: 1rem;
     box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
 }
-
 .logro-icon {
     font-size: 3rem;
     animation: logroIcono 0.8s infinite alternate;
 }
-
 @keyframes logroIcono {
     from { transform: scale(1); }
     to { transform: scale(1.2); text-shadow: 0 0 20px gold; }
 }
-
 .logro-titulo { font-size: 1.2rem; font-weight: bold; color: gold; }
 .logro-descripcion { font-size: 1rem; color: white; }
 .logro-sub { font-size: 0.7rem; opacity: 0.7; }
 
-/* ========== TIMER ========== */
+/* ========== TEMPORIZADOR ========== */
 .session-timer {
     position: fixed;
     bottom: 20px;

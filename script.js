@@ -371,29 +371,35 @@ setInterval(() => {
     if (timerSpan) timerSpan.innerText = segundos;
 }, 1000);
 
-// ========== CONTADOR GLOBAL (simulación + API real opcional) ==========
+// ========== CONTADOR GLOBAL CON CLOUDFLARE WORKER (REAL) ==========
 let visitCount = 0;
 async function loadVisitorCount() {
     const counterElement = document.getElementById('visitorCounter');
     if (!counterElement) return;
+    
     try {
-        // Intenta con la API real de Cloudflare (descomenta si tienes worker)
-        // const response = await fetch('https://tu-worker.workers.dev/api/counter');
-        // const data = await response.json();
-        // visitCount = data.visits;
-        // counterElement.innerHTML = `<i class="fas fa-globe"></i> ${visitCount.toLocaleString()} visitas globales`;
+        // Usamos TU Worker real
+        const response = await fetch('https://docupro-counter.marcos238gn.workers.dev/api/counter');
+        const data = await response.json();
         
-        // Simulación mientras configuras Cloudflare
-        let visits = localStorage.getItem('visits');
-        if (!visits) visits = Math.floor(Math.random() * 10000) + 1000;
-        visits = parseInt(visits) + 1;
-        localStorage.setItem('visits', visits);
-        counterElement.innerHTML = `<i class="fas fa-globe"></i> ${visits.toLocaleString()} visitas globales (demo)`;
+        if (data.ok && data.visits) {
+            visitCount = data.visits;
+            counterElement.innerHTML = `<i class="fas fa-globe"></i> 🌍 ${visitCount.toLocaleString()} visitas globales`;
+        } else {
+            throw new Error('Respuesta inválida del worker');
+        }
     } catch (error) {
-        console.error('Error al cargar contador:', error);
-        counterElement.innerHTML = `<i class="fas fa-globe"></i> 🌍 Contador activo próximamente`;
+        console.error('Error al conectar con Cloudflare Worker:', error);
+        // Fallback a simulación local si el worker no responde
+        let visits = localStorage.getItem('visits_fallback');
+        if (!visits) visits = Math.floor(Math.random() * 5000) + 1000;
+        visits = parseInt(visits) + 1;
+        localStorage.setItem('visits_fallback', visits);
+        counterElement.innerHTML = `<i class="fas fa-globe"></i> ${visits.toLocaleString()} visitas (offline)`;
     }
 }
+
+// Cargar el contador cuando se abre la página
 loadVisitorCount();
 
 // ========== MODO NAVIDAD OCULTO ==========

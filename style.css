@@ -22,43 +22,11 @@ body.light {
 body.light .glass-premium,
 body.light .main-nav {
     background: rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(12px) saturate(180%);
+    backdrop-filter: blur(12px);
     border-color: rgba(0, 195, 255, 0.3);
 }
 
-/* ========== GLASSMORPHISM 2.0 PREMIUM ========== */
-.glass-premium {
-    background: rgba(10, 20, 40, 0.3);
-    backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    border-radius: 24px;
-    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    position: relative;
-    overflow: hidden;
-}
-
-.glass-premium::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
-    transition: left 0.5s ease;
-}
-
-.glass-premium:hover::before {
-    left: 100%;
-}
-
-.glass-premium:hover {
-    border-color: rgba(0, 255, 255, 0.6);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0, 195, 255, 0.2), 0 0 30px rgba(0, 255, 255, 0.1);
-}
-
-/* ========== PARTICULAS FONDO ========== */
+/* ========== PARTÍCULAS ========== */
 #particlesCanvas {
     position: fixed;
     top: 0;
@@ -71,8 +39,8 @@ body.light .main-nav {
 
 /* ========== CURSOR PREMIUM ========== */
 .cursor {
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 2px solid #00c3ff;
     border-radius: 50%;
     position: fixed;
@@ -80,12 +48,12 @@ body.light .main-nav {
     z-index: 9999;
     transition: 0.08s linear;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 15px rgba(0, 195, 255, 0.8);
+    box-shadow: 0 0 12px rgba(0, 195, 255, 0.7);
 }
 
 .cursor-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     background: #00c3ff;
     border-radius: 50%;
     position: fixed;
@@ -93,63 +61,56 @@ body.light .main-nav {
     z-index: 10000;
     transition: 0.05s linear;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 10px #00c3ff;
+    box-shadow: 0 0 8px #00c3ff;
 }
 
 .cursor-trail {
     position: fixed;
-    width: 8px;
-    height: 8px;
-    background: rgba(0, 195, 255, 0.5);
-    border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
-    filter: blur(2px);
 }
 
 .cursor.hover {
-    transform: translate(-50%, -50%) scale(1.6);
+    transform: translate(-50%, -50%) scale(1.5);
     border-color: #00ffcc;
-    box-shadow: 0 0 30px rgba(0, 255, 204, 0.9);
+    box-shadow: 0 0 25px rgba(0, 255, 204, 0.8);
 }
 
-/* Modo cursor tipo 2 (punto grande) */
 body.cursor-style-2 .cursor {
     width: 20px;
     height: 20px;
     background: #00c3ff;
     border: none;
-    box-shadow: 0 0 20px #00c3ff;
 }
 
 body.cursor-style-2 .cursor-dot {
     display: none;
 }
 
-/* Modo cursor tipo 3 (anillo doble) */
 body.cursor-style-3 .cursor {
     width: 30px;
     height: 30px;
     border: 1px solid #00c3ff;
-    box-shadow: 0 0 10px #00c3ff;
 }
 
 body.cursor-style-3 .cursor-dot {
     width: 10px;
     height: 10px;
-    background: #00c3ff;
 }
 
-/* ========== CUBO 3D ========== */
-.three-container {
+/* ========== RIPPLE ========== */
+.ripple-effect {
     position: fixed;
-    bottom: 50px;
-    right: 50px;
-    width: 200px;
-    height: 200px;
-    z-index: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, #00c3ff 0%, rgba(0, 195, 255, 0) 80%);
     pointer-events: none;
-    opacity: 0.6;
+    z-index: 10001;
+    animation: rippleAnim 0.45s ease-out forwards;
+}
+
+@keyframes rippleAnim {
+    0% { width: 0; height: 0; opacity: 0.9; }
+    100% { width: 65px; height: 65px; opacity: 0; }
 }
 
 /* ========== CONTROLES ========== */
@@ -179,7 +140,38 @@ body.cursor-style-3 .cursor-dot {
     transform: scale(1.1);
     background: #00c3ff;
     color: #050a14;
-    box-shadow: 0 0 20px #00c3ff;
+}
+
+/* ========== GLASS PREMIUM ========== */
+.glass-premium {
+    background: rgba(10, 20, 40, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 195, 255, 0.3);
+    border-radius: 24px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.glass-premium:hover::before {
+    left: 100%;
+}
+
+.glass-premium:hover {
+    border-color: #00c3ff;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 195, 255, 0.2);
 }
 
 /* ========== CONTAINER ========== */
@@ -191,22 +183,13 @@ body.cursor-style-3 .cursor-dot {
     z-index: 2;
 }
 
-/* ========== HERO ASIMÉTRICO ========== */
-.asymmetrical-hero {
+/* ========== HERO ========== */
+.hero {
+    min-height: 90vh;
     position: relative;
-    overflow: hidden;
-}
-
-.asymmetrical-hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 45%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent, rgba(0, 195, 255, 0.05));
-    clip-path: polygon(25% 0, 100% 0, 100% 100%, 0% 100%);
-    z-index: 1;
+    display: flex;
+    align-items: center;
+    z-index: 2;
 }
 
 .hero-content {
@@ -214,34 +197,6 @@ body.cursor-style-3 .cursor-dot {
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 2rem;
-    position: relative;
-    z-index: 2;
-}
-
-/* ========== TÍTULO MARVEL ========== */
-.marvel-logo-container {
-    position: relative;
-    display: inline-block;
-}
-
-.marvel-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 10;
-}
-
-@keyframes marvelReveal {
-    0% { opacity: 0; transform: scale(0.8); letter-spacing: -10px; filter: blur(10px); }
-    50% { opacity: 1; transform: scale(1.1); letter-spacing: 5px; filter: blur(0px); }
-    100% { opacity: 1; transform: scale(1); letter-spacing: normal; }
-}
-
-.marvel-logo {
-    animation: marvelReveal 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
 }
 
 .logo {
@@ -255,40 +210,17 @@ body.cursor-style-3 .cursor-dot {
     text-shadow: 0 0 20px #00c3ff;
 }
 
-/* ========== BOTONES MAGNÉTICOS ========== */
-.magnetic-btn {
-    transition: transform 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-    display: inline-block;
+.tagline {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    font-weight: 300;
 }
 
-/* ========== GLOW BUTTON ========== */
-.glow-btn {
-    background: linear-gradient(135deg, #00c3ff, #0088cc);
-    border: none;
-    box-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
-    transition: all 0.3s ease;
-    padding: 12px 24px;
-    border-radius: 40px;
-    color: white;
-    font-weight: 700;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.glow-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
-}
-
-/* ========== HERO ========== */
-.hero {
-    min-height: 90vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    z-index: 2;
+.hero-badge {
+    margin-top: 2rem;
+    border-left: 4px solid #00c3ff;
+    padding-left: 1rem;
+    font-weight: 600;
 }
 
 .hero-typing {
@@ -321,8 +253,6 @@ body.cursor-style-3 .cursor-dot {
     top: 0;
     z-index: 100;
     padding: 0.75rem 0;
-    backdrop-filter: blur(12px);
-    background: rgba(5, 10, 20, 0.8);
 }
 
 .nav-list {
@@ -338,25 +268,13 @@ body.cursor-style-3 .cursor-dot {
     text-decoration: none;
     font-weight: 500;
     transition: 0.2s;
-    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 8px;
 }
 
-.nav-list a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: #00c3ff;
-    transition: width 0.3s;
-}
-
-.nav-list a:hover::after {
-    width: 100%;
+.nav-list a:hover {
+    color: #00c3ff;
 }
 
 /* ========== SECCIONES ========== */
@@ -367,7 +285,7 @@ body.cursor-style-3 .cursor-dot {
 }
 
 .dark-bg {
-    background: rgba(5, 10, 20, 0.7);
+    background: rgba(5, 10, 20, 0.5);
 }
 
 .section-tag {
@@ -384,7 +302,6 @@ h2 {
     font-weight: 800;
 }
 
-/* ========== REVEAL TEXT ========== */
 .reveal-text {
     opacity: 0;
     transform: translateY(30px);
@@ -400,14 +317,13 @@ h2 {
 .cards-grid, .counters-grid, .grid-4, .excel-modules, .ergo-grid, .pricing {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.8rem;
+    gap: 1.5rem;
     margin-top: 2rem;
 }
 
-.card, .feature-card, .module, .ergo-card, .plan, .counter-card {
+.card, .counter-card, .feature-card, .module, .ergo-card, .plan {
     padding: 1.8rem;
     text-align: center;
-    transition: all 0.3s;
 }
 
 .card-icon {
@@ -422,37 +338,21 @@ h2 {
     color: #00c3ff;
 }
 
-/* ========== TIMELINE ========== */
-.timeline {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 2rem 0;
-    gap: 1rem;
-}
-
-.timeline-item {
-    flex: 1;
-    text-align: center;
-}
-
-.timeline-year {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: #00c3ff;
-    margin-bottom: 0.5rem;
-}
-
-.timeline-content {
-    background: rgba(0, 195, 255, 0.1);
-    padding: 0.8rem;
-    border-radius: 12px;
+.badge {
+    display: inline-block;
+    background: rgba(0, 195, 255, 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
 }
 
 /* ========== CALCULADORA ========== */
 .calculator {
     padding: 2rem;
     text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 .calculator input {
@@ -464,6 +364,56 @@ h2 {
     font-size: 3rem;
     font-weight: 800;
     color: #00ffc3;
+}
+
+/* ========== TIMELINE ========== */
+.timeline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.timeline-item {
+    flex: 1;
+    text-align: center;
+    background: rgba(0, 195, 255, 0.1);
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.timeline-year {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #00c3ff;
+}
+
+/* ========== FORMULA BOX ========== */
+.formula-box {
+    padding: 1.5rem;
+    font-family: monospace;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.formula-box span {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* ========== PRODUCTIVIDAD ========== */
+.productividad-compare {
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.chart-container {
+    max-width: 500px;
+    margin: 2rem auto;
 }
 
 /* ========== TESTIMONIOS ========== */
@@ -484,8 +434,8 @@ h2 {
 
 .ranking-paises {
     padding: 1.5rem;
-    border-radius: 24px;
     margin-top: 2rem;
+    text-align: center;
 }
 
 .country-list {
@@ -507,21 +457,17 @@ h2 {
 
 .tab-btn {
     background: rgba(10, 20, 35, 0.5);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 195, 255, 0.3);
+    border: 1px solid #00c3ff;
     padding: 0.8rem 2rem;
     border-radius: 40px;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s;
     color: white;
+    transition: 0.3s;
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, #00c3ff, #0088cc);
-    border-color: #00c3ff;
-    box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+    background: #00c3ff;
+    color: #050a14;
 }
 
 .caso-contenido {
@@ -544,13 +490,12 @@ h2 {
     justify-content: center;
     gap: 2rem;
     flex-wrap: wrap;
-    margin-bottom: 2rem;
 }
 
 .antes-card, .despues-card {
     flex: 1;
     min-width: 280px;
-    padding: 1.8rem;
+    padding: 1.5rem;
     text-align: center;
 }
 
@@ -559,7 +504,6 @@ h2 {
     padding: 0.3rem 1rem;
     border-radius: 40px;
     font-size: 0.8rem;
-    font-weight: 700;
     margin-bottom: 1rem;
 }
 
@@ -578,21 +522,21 @@ h2 {
 .problemas-lista, .soluciones-lista {
     list-style: none;
     text-align: left;
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 .problemas-lista li, .soluciones-lista li {
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 .problemas-lista i { color: #ff5050; }
 .soluciones-lista i { color: #00ffc8; }
 
 .numero-grande {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     display: block;
 }
@@ -611,6 +555,11 @@ h2 {
     50% { transform: scale(1.2); opacity: 1; }
 }
 
+.simulacion-boton {
+    text-align: center;
+    margin-top: 1rem;
+}
+
 /* ========== PILARES ========== */
 .pilar-list {
     display: flex;
@@ -622,19 +571,41 @@ h2 {
 
 .pilar-item {
     background: rgba(0, 195, 255, 0.1);
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1.2rem;
     border-radius: 40px;
+    font-size: 0.8rem;
 }
 
+.pilar-item i {
+    margin-right: 6px;
+}
+
+/* ========== ARCHIVO ========== */
 .archivo-fisico {
     padding: 2rem;
     text-align: center;
+}
+
+.qr-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.qr-stats span {
+    background: rgba(0, 195, 255, 0.1);
+    padding: 0.3rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
 }
 
 .timer {
     font-size: 3rem;
     font-weight: 800;
     color: #00ffc3;
+    margin-top: 1rem;
 }
 
 /* ========== FASES ========== */
@@ -658,9 +629,11 @@ h2 {
     color: #00c3ff;
 }
 
+/* ========== MAPA ========== */
 .map-container {
     padding: 1.5rem;
     margin-top: 2rem;
+    text-align: center;
 }
 
 /* ========== PLANES ========== */
@@ -669,11 +642,10 @@ h2 {
     transform: scale(1.02);
 }
 
-.contratar-btn {
-    margin-top: 1rem;
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    width: 100%;
+.price {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 1rem 0;
 }
 
 .recomendado {
@@ -683,8 +655,25 @@ h2 {
     padding: 0.2rem 1rem;
     border-radius: 20px;
     font-size: 0.7rem;
-    font-weight: 700;
     margin: 0.5rem 0;
+}
+
+.plan ul {
+    list-style: none;
+    text-align: left;
+    margin: 1rem 0;
+}
+
+.plan li {
+    padding: 0.3rem 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.contratar-btn {
+    margin-top: 1rem;
+    width: 100%;
 }
 
 /* ========== CONTACTO ========== */
@@ -704,12 +693,19 @@ h2 {
     color: white;
 }
 
+.contact-info p {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 /* ========== CHAT ========== */
 .chat-widget {
     position: fixed;
     bottom: 80px;
     right: 20px;
-    width: 320px;
+    width: 350px;
     border-radius: 20px;
     display: none;
     flex-direction: column;
@@ -729,8 +725,8 @@ h2 {
 
 .chat-body {
     padding: 1rem;
-    min-height: 250px;
-    max-height: 300px;
+    min-height: 300px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
@@ -746,6 +742,53 @@ h2 {
     border-left: 3px solid #00c3ff;
 }
 
+.chat-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+    justify-content: center;
+}
+
+.chat-options button {
+    background: rgba(0, 195, 255, 0.15);
+    border: 1px solid #00c3ff;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}
+
+.chat-options button:hover {
+    background: #00c3ff;
+    color: #050a14;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 0.8rem;
+    border-top: 1px solid rgba(0, 195, 255, 0.3);
+}
+
+.chat-input-area input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    padding: 0.8rem;
+    border-radius: 30px;
+    color: white;
+}
+
+.chat-input-area button {
+    background: #00c3ff;
+    border: none;
+    margin-left: 0.8rem;
+    padding: 0 1rem;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
 .chat-toggle-btn {
     position: fixed;
     bottom: 20px;
@@ -755,18 +798,29 @@ h2 {
     border-radius: 50%;
     font-size: 1.5rem;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.session-timer {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 8px 15px;
-    border-radius: 30px;
-    font-size: 0.8rem;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
+/* ========== BOTONES GLOBALES ========== */
+.glow-btn, .contratar-btn, .simular-btn, .chat-toggle-btn {
+    background: linear-gradient(135deg, #00c3ff, #0088cc);
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+    transition: all 0.3s ease;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.glow-btn:hover, .contratar-btn:hover, .simular-btn:hover, .chat-toggle-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
 }
 
 /* ========== LOGRO ========== */
@@ -785,8 +839,8 @@ h2 {
 }
 
 @keyframes logroSalida {
-    from { opacity: 1; transform: translateX(-50%) translateY(0); }
-    to { opacity: 0; transform: translateX(-50%) translateY(-50px); display: none; }
+    from { opacity: 1; }
+    to { opacity: 0; visibility: hidden; }
 }
 
 .logro-card {
@@ -806,7 +860,7 @@ h2 {
 }
 
 @keyframes logroIcono {
-    from { transform: scale(1); text-shadow: 0 0 0px gold; }
+    from { transform: scale(1); }
     to { transform: scale(1.2); text-shadow: 0 0 20px gold; }
 }
 
@@ -814,11 +868,26 @@ h2 {
 .logro-descripcion { font-size: 1rem; color: white; }
 .logro-sub { font-size: 0.7rem; opacity: 0.7; }
 
+/* ========== TIMER ========== */
+.session-timer {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
 /* ========== FOOTER ========== */
 footer {
     text-align: center;
     padding: 2rem;
     background: rgba(3, 7, 15, 0.9);
+    position: relative;
+    z-index: 2;
 }
 
 /* ========== MODOS ========== */
@@ -834,52 +903,11 @@ body.presentation-mode .session-timer { display: none; }
 @media (max-width: 768px) {
     .contact-wrapper { grid-template-columns: 1fr; }
     h2 { font-size: 1.8rem; }
-    .logo { font-size: 2.8rem; }
+    .logo { font-size: 2.5rem; }
     .cursor, .cursor-dot, .cursor-trail { display: none; }
     body { cursor: auto; }
     .timeline { flex-direction: column; }
-    .three-container { display: none; }
-    .asymmetrical-hero::before { display: none; }
-}
-/* Botones rápidos del chat */
-.chat-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 12px 0;
-    justify-content: center;
-}
-
-.chat-options button {
-    background: rgba(0, 195, 255, 0.15);
-    border: 1px solid #00c3ff;
-    border-radius: 30px;
-    padding: 8px 16px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    color: white;
-    font-size: 0.8rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.chat-options button:hover {
-    background: #00c3ff;
-    transform: scale(1.02);
-    box-shadow: 0 0 12px rgba(0,195,255,0.5);
-}
-
-/* Indicador de escritura */
-.typing-dots span {
-    animation: blink 1.4s infinite;
-    animation-fill-mode: both;
-}
-
-.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
-.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes blink {
-    0%, 100% { opacity: 0; }
-    50% { opacity: 1; }
+    .controls-top { top: 10px; right: 10px; }
+    .control-btn { width: 35px; height: 35px; font-size: 0.9rem; }
+    .chat-widget { width: 300px; right: 10px; bottom: 70px; }
 }

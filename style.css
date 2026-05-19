@@ -246,3 +246,178 @@ footer {
     font-size: 0.8rem;
     background: #03070f;
 }
+/* GRÁFICO */
+.chart-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    background: #0f172a;
+    padding: 1rem;
+    border-radius: 24px;
+}
+
+/* FORMULARIO Y CONTACTO */
+.contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-form, .contact-info {
+    background: #111927;
+    padding: 2rem;
+    border-radius: 28px;
+    border: 1px solid #1e2f4b;
+}
+
+.contact-form input, .contact-form select, .contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    background: #0a0f1c;
+    border: 1px solid #2a3a5a;
+    border-radius: 12px;
+    color: white;
+    font-family: inherit;
+}
+
+.contact-form button {
+    width: 100%;
+    background: #00c3ff;
+    font-weight: 700;
+}
+
+.form-message {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.contact-info p {
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* CHAT WIDGET */
+.chat-widget {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 320px;
+    background: #0f172a;
+    border-radius: 20px;
+    border: 1px solid #00c3ff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: none;
+    flex-direction: column;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.chat-widget.open {
+    display: flex;
+}
+
+.chat-header {
+    background: #00c3ff;
+    padding: 0.8rem 1rem;
+    border-radius: 20px 20px 0 0;
+    font-weight: bold;
+    color: #0a0f1c;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.chat-close {
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.chat-body {
+    padding: 1rem;
+    min-height: 250px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    background: #1e2a4a;
+    padding: 0.6rem;
+    border-radius: 12px;
+    margin: 0.5rem 0;
+    font-size: 0.85rem;
+}
+
+.chat-message.bot {
+    background: #00c3ff20;
+    border-left: 3px solid #00c3ff;
+}
+
+.chat-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 0.8rem 0;
+}
+
+.chat-options button {
+    background: #1e2a4a;
+    border: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    color: white;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 0.5rem;
+    border-top: 1px solid #1e2f4b;
+}
+
+.chat-input-area input {
+    flex: 1;
+    background: #0a0f1c;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 20px;
+    color: white;
+}
+
+.chat-input-area button {
+    background: #00c3ff;
+    border: none;
+    margin-left: 0.5rem;
+    padding: 0 0.8rem;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chat-toggle-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #00c3ff;
+    border: none;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,195,255,0.4);
+    z-index: 1000;
+}
+
+@media (max-width: 768px) {
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+    .chat-widget {
+        width: 280px;
+        right: 10px;
+    }
+}

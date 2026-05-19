@@ -273,7 +273,7 @@ if (chartCanvas) {
 }
 
 // ========== FORMULARIO CON GITHUB ISSUES ==========
-const GITHUB_TOKEN = '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';  // <--- ¡PON AQUÍ TU TOKEN DE GITHUB!
+const GITHUB_TOKEN = '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';  // <--- ¡PON AQUÍ TU TOKEN DE GITHUB!
 const REPO_OWNER = 'tkpain';
 const REPO_NAME = 'Trabajo-Proyecto-Intermodular-Florencio';
 

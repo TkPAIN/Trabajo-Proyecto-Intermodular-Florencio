@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <meta name="description" content="DocuPro - Consultoría Ofimática de Élite. Automatización Excel, maquetación Word, gestión de archivo y formación para empresas.">
-    <meta name="keywords" content="consultoría ofimática, automatización excel, maquetación word, gestión documental">
-    <meta name="author" content="DocuPro">
     <title>DocuPro · Consultoría Ofimática de Élite 2026</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/a2c2b8e5d3.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (ICONOS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
 </head>
@@ -21,11 +19,13 @@
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
 
-    <!-- Controles superiores -->
-    <button id="themeToggle" class="control-btn" title="Modo claro/oscuro"><i class="fas fa-sun"></i></button>
-    <button id="presentationBtn" class="control-btn" title="Modo presentación (P)"><i class="fas fa-presentation"></i></button>
-    <button id="fullscreenBtn" class="control-btn" title="Pantalla completa (F)"><i class="fas fa-expand"></i></button>
-    <button id="emergencyBtn" class="control-btn" title="Emergencia (ESC)"><i class="fas fa-shield-alt"></i></button>
+    <!-- Botones de control -->
+    <div class="controls-top">
+        <button id="themeToggle" class="control-btn" title="Modo claro/oscuro"><i class="fas fa-sun"></i></button>
+        <button id="presentationBtn" class="control-btn" title="Modo presentación (P)"><i class="fas fa-chalkboard-user"></i></button>
+        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa (F)"><i class="fas fa-expand"></i></button>
+        <button id="emergencyBtn" class="control-btn" title="Emergencia (ESC)"><i class="fas fa-shield-alt"></i></button>
+    </div>
 
     <header class="hero">
         <div class="container hero-content">
@@ -64,24 +64,9 @@
                 <span class="section-tag"><i class="fas fa-gem"></i> 01 / Fundamentos</span>
                 <h2>Corazón del Negocio</h2>
                 <div class="cards-grid">
-                    <div class="card glass-card" data-feedback="vision">
-                        <i class="fas fa-eye"></i>
-                        <h3>Visión</h3>
-                        <p>Liderar el sector<br>Ser referencia en consultoría ofimática avanzada en España.</p>
-                        <div class="feedback-buttons"><button class="like-btn" data-section="vision"><i class="fas fa-thumbs-up"></i></button><button class="dislike-btn" data-section="vision"><i class="fas fa-thumbs-down"></i></button><span class="feedback-stats" id="feedback-vision">👍 0</span></div>
-                    </div>
-                    <div class="card glass-card" data-feedback="mision">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>Misión</h3>
-                        <p>Automatizar procesos<br>Transformamos la carga administrativa en procesos automatizados.</p>
-                        <div class="feedback-buttons"><button class="like-btn" data-section="mision"><i class="fas fa-thumbs-up"></i></button><button class="dislike-btn" data-section="mision"><i class="fas fa-thumbs-down"></i></button><span class="feedback-stats" id="feedback-mision">👍 0</span></div>
-                    </div>
-                    <div class="card glass-card" data-feedback="valores">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Valores</h3>
-                        <p>Rigor y confianza<br>Confidencialidad absoluta, precisión analítica.</p>
-                        <div class="feedback-buttons"><button class="like-btn" data-section="valores"><i class="fas fa-thumbs-up"></i></button><button class="dislike-btn" data-section="valores"><i class="fas fa-thumbs-down"></i></button><span class="feedback-stats" id="feedback-valores">👍 0</span></div>
-                    </div>
+                    <div class="card glass-card"><i class="fas fa-eye card-icon"></i><h3>Visión</h3><p>Liderar el sector.<br>Ser referencia en consultoría ofimática avanzada en España.</p></div>
+                    <div class="card glass-card"><i class="fas fa-bullseye card-icon"></i><h3>Misión</h3><p>Automatizar procesos.<br>Transformamos la carga administrativa en procesos automatizados.</p></div>
+                    <div class="card glass-card"><i class="fas fa-shield-alt card-icon"></i><h3>Valores</h3><p>Rigor y confianza.<br>Confidencialidad absoluta y mejora técnica continua.</p></div>
                 </div>
             </div>
         </section>
@@ -100,7 +85,7 @@
             </div>
         </section>
 
-        <!-- LÍNEA DE TIEMPO INTERACTIVA -->
+        <!-- LÍNEA DE TIEMPO -->
         <section class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-timeline"></i> NUESTRA EVOLUCIÓN</span>
@@ -141,8 +126,8 @@
                 <div class="grid-4">
                     <div class="feature-card"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
                     <div class="feature-card"><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
-                    <div class="feature-card"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices, tablas y control de cambios.</p></div>
-                    <div class="feature-card"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Selección de fuentes para máxima legibilidad.</p></div>
+                    <div class="feature-card"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices y control de cambios.</p></div>
+                    <div class="feature-card"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Fuentes para máxima legibilidad.</p></div>
                 </div>
             </div>
         </section>
@@ -166,7 +151,7 @@
             </div>
         </section>
 
-        <!-- TESTIMONIOS + RANKING PAÍSES -->
+        <!-- TESTIMONIOS + RANKING -->
         <section class="section">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-star"></i> CASOS DE ÉXITO</span>
@@ -251,7 +236,7 @@
             </div>
         </section>
 
-        <!-- PLANES -->
+        <!-- PLANES CON BOTONES DE CONTRATAR -->
         <section id="tarifas" class="section dark-bg">
             <div class="container">
                 <span class="section-tag"><i class="fas fa-tags"></i> PLANES 2026</span>
@@ -302,11 +287,8 @@
     </div>
     <button id="chatToggle" class="chat-toggle-btn glow-btn"><i class="fas fa-headset"></i></button>
 
-    <!-- FAB flotante + temporizador sesión -->
-    <a href="#contacto" class="fab-btn glow-btn"><i class="fas fa-comment-dots"></i></a>
-    <div id="sessionTimer" class="session-timer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
+    <div class="session-timer" id="sessionTimer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
 
-    <!-- Footer con contador real -->
     <footer>
         <div class="container">
             <p><i class="fas fa-chart-line"></i> DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</p>
@@ -315,10 +297,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script>
-        // Configuración del Worker de Cloudflare
-        const WORKER_URL = 'https://tu-worker.subdomain.workers.dev'; // CAMBIAR POR TU URL REAL
-        // Por ahora usamos simulación, al desplegar se conecta al Worker real
-    </script>
 </body>
 </html>

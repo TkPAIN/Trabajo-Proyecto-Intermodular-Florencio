@@ -24,29 +24,65 @@ body {
     pointer-events: none;
 }
 
-/* ========== CURSOR PERSONALIZADO ========== */
-.cursor {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #00c3ff;
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transition: 0.1s ease;
-    transform: translate(-50%, -50%);
+/* ========== CURSOR NATIVO CON GLOW AZUL ========== */
+body {
+    cursor: auto; /* Cursor nativo de Windows */
 }
 
-.cursor-dot {
-    width: 8px;
-    height: 8px;
-    background: #00c3ff;
-    border-radius: 50%;
+/* Glow azul alrededor del cursor nativo */
+* {
+    cursor: auto;
+}
+
+/* Efecto visual: al pasar sobre elementos interactivos, el glow se intensifica */
+a, button, .card, .plan, .module, .feature-card, .nav-list a, 
+.glass-card, .chat-options button, .chat-toggle-btn, .btn-submit {
+    transition: filter 0.2s ease, text-shadow 0.2s ease;
+}
+
+a:hover, button:hover, .card:hover, .plan:hover, .module:hover, 
+.feature-card:hover, .nav-list a:hover, .glass-card:hover,
+.chat-options button:hover, .chat-toggle-btn:hover, .btn-submit:hover {
+    filter: drop-shadow(0 0 6px rgba(0, 195, 255, 0.8))
+            drop-shadow(0 0 12px rgba(0, 195, 255, 0.5));
+}
+
+/* Efecto de anillo al hacer clic (ripple de cursor) */
+.ripple-effect {
     position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,195,255,0.6) 0%, rgba(0,195,255,0) 70%);
     pointer-events: none;
     z-index: 9999;
-    transition: 0.05s ease;
     transform: translate(-50%, -50%);
+    animation: ripple 0.4s ease-out forwards;
+}
+
+@keyframes ripple {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0.8;
+    }
+    100% {
+        width: 60px;
+        height: 60px;
+        opacity: 0;
+    }
+}
+
+/* Cursor I-beam (texto) con glow */
+input:hover, textarea:hover, select:hover, [contenteditable="true"]:hover {
+    filter: drop-shadow(0 0 4px rgba(0, 195, 255, 0.6));
+}
+
+/* Focus visible también con glow */
+input:focus, textarea:focus, select:focus, button:focus, a:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 195, 255, 0.5), 0 0 0 4px rgba(0, 195, 255, 0.2);
+    border-radius: 8px;
 }
 
 /* ========== GLASSMORPHISM ========== */

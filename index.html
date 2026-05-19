@@ -1,347 +1,559 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>DocuPro · Consultoría Ofimática de Élite 2026</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-</head>
-<body>
+// ========== PARTÍCULAS ==========
+const canvas = document.getElementById('particlesCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
 
-    <canvas id="particlesCanvas"></canvas>
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
 
-    <!-- Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-dot"></div>
-    <div id="cursorTrail" class="cursor-trail"></div>
+function createParticles() {
+    particles = [];
+    for (let i = 0; i < 100; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            alpha: Math.random() * 0.5 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.3,
+            speedY: (Math.random() - 0.5) * 0.2
+        });
+    }
+}
 
-    <!-- Controles -->
-    <div class="controls-top">
-        <button id="themeToggle" class="control-btn" title="Modo claro/oscuro (T)"><i class="fas fa-sun"></i></button>
-        <button id="presentationBtn" class="control-btn" title="Modo presentación (P)"><i class="fas fa-chalkboard-user"></i></button>
-        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa (F)"><i class="fas fa-expand"></i></button>
-        <button id="cursorStyleBtn" class="control-btn" title="Estilo cursor (C)"><i class="fas fa-mouse-pointer"></i></button>
-    </div>
+function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 195, 255, ${p.alpha})`;
+        ctx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+    }
+    requestAnimationFrame(drawParticles);
+}
 
-    <!-- HERO -->
-    <header class="hero">
-        <div class="container hero-content">
-            <div class="logo-area">
-                <h1 class="logo">DOCU<span>PRO</span></h1>
-                <p class="tagline">CONSULTORÍA OFIMÁTICA DE ÉLITE · 2026</p>
-                <div class="hero-badge">EXCELENCIA DOCUMENTAL · EDICIÓN 2026</div>
-                <div class="hero-typing" id="heroTyping"></div>
-            </div>
-            <div class="hero-desc">
-                <p><i class="fas fa-file-alt"></i> GESTIÓN DOCUMENTAL · <i class="fas fa-robot"></i> AUTOMATIZACIÓN · <i class="fas fa-archive"></i> ARCHIVO</p>
-                <small><i class="fas fa-lock"></i> DOCUMENTO CONFIDENCIAL — CLIENTES PREMIUM</small>
-                <div class="hero-contact"><i class="fas fa-globe"></i> WWW.DOCUPRO.ES / <i class="fas fa-map-marker-alt"></i> MADRID · BARCELONA</div>
-            </div>
-        </div>
-        <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
-    </header>
+resizeCanvas();
+createParticles();
+drawParticles();
+window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
 
-    <!-- NAVEGACIÓN -->
-    <nav class="main-nav">
-        <ul class="nav-list container">
-            <li><a href="#identidad"><i class="fas fa-heart"></i> 01 Identidad</a></li>
-            <li><a href="#maquetacion"><i class="fas fa-file-word"></i> 02 Maquetación</a></li>
-            <li><a href="#excel"><i class="fas fa-chart-line"></i> 03 Excel BI</a></li>
-            <li><a href="#archivo"><i class="fas fa-folder-open"></i> 04 Archivo</a></li>
-            <li><a href="#ergonomia"><i class="fas fa-user-check"></i> 05 Ergonomía</a></li>
-            <li><a href="#metodologia"><i class="fas fa-project-diagram"></i> 06 Metodología</a></li>
-            <li><a href="#tarifas"><i class="fas fa-tags"></i> Planes</a></li>
-            <li><a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a></li>
-        </ul>
-    </nav>
+// ========== CURSOR ==========
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorTrail = document.getElementById('cursorTrail');
+let trailPositions = [];
 
-    <main>
-        <!-- IDENTIDAD -->
-        <section id="identidad" class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-gem"></i> 01 / Fundamentos</span>
-                <h2>Corazón del Negocio</h2>
-                <div class="cards-grid">
-                    <div class="card glass-card"><i class="fas fa-eye card-icon"></i><h3>Visión</h3><p>Liderar el sector.<br>Ser referencia en consultoría ofimática avanzada en España.</p></div>
-                    <div class="card glass-card"><i class="fas fa-bullseye card-icon"></i><h3>Misión</h3><p>Automatizar procesos.<br>Transformamos la carga administrativa en procesos automatizados.</p></div>
-                    <div class="card glass-card"><i class="fas fa-shield-alt card-icon"></i><h3>Valores</h3><p>Rigor y confianza.<br>Confidencialidad absoluta y mejora técnica continua.</p></div>
-                </div>
-            </div>
-        </section>
+document.addEventListener('mousemove', (e) => {
+    if (cursor && cursorDot) {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        cursorDot.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+        
+        trailPositions.unshift({ x: e.clientX, y: e.clientY });
+        if (trailPositions.length > 8) trailPositions.pop();
+        
+        if (cursorTrail) {
+            cursorTrail.innerHTML = '';
+            trailPositions.forEach((pos, i) => {
+                const dot = document.createElement('div');
+                dot.style.position = 'fixed';
+                dot.style.left = pos.x + 'px';
+                dot.style.top = pos.y + 'px';
+                dot.style.width = (10 - i) + 'px';
+                dot.style.height = (10 - i) + 'px';
+                dot.style.background = `rgba(0, 195, 255, ${0.6 - i * 0.05})`;
+                dot.style.borderRadius = '50%';
+                dot.style.pointerEvents = 'none';
+                dot.style.filter = 'blur(2px)';
+                cursorTrail.appendChild(dot);
+            });
+        }
+    }
+});
 
-        <!-- CONTADORES -->
-        <section class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-chart-simple"></i> DOCUPRO EN NÚMEROS</span>
-                <h2>Impacto real medible</h2>
-                <div class="counters-grid">
-                    <div class="counter-card glass-card"><i class="fas fa-project-diagram"></i><div class="counter" data-target="250">0</div><p>Proyectos completados</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-smile"></i><div class="counter" data-target="98">0</div><p>% Satisfacción</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-clock"></i><div class="counter" data-target="45000">0</div><p>Horas ahorradas</p></div>
-                    <div class="counter-card glass-card"><i class="fas fa-users"></i><div class="counter" data-target="15">0</div><p>Asesores certificados</p></div>
-                </div>
-            </div>
-        </section>
+const interactiveEls = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .glow-btn, .scroll-down');
+interactiveEls.forEach(el => {
+    if (el) {
+        el.addEventListener('mouseenter', () => cursor?.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
+    }
+});
 
-        <!-- LÍNEA DE TIEMPO -->
-        <section class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-timeline"></i> NUESTRA EVOLUCIÓN</span>
-                <h2>Línea de tiempo DocuPro</h2>
-                <div class="timeline">
-                    <div class="timeline-item"><div class="timeline-year">2023</div><div>Fundación · Primeros 50 clientes</div></div>
-                    <div class="timeline-item"><div class="timeline-year">2024</div><div>Implementación IA · +200 proyectos</div></div>
-                    <div class="timeline-item"><div class="timeline-year">2025</div><div>Certificación ISO · Expansión nacional</div></div>
-                    <div class="timeline-item"><div class="timeline-year">2026</div><div>Liderazgo sectorial · Horizonte élite</div></div>
-                </div>
-            </div>
-        </section>
+document.addEventListener('click', (e) => {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple-effect');
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    document.body.appendChild(ripple);
+    setTimeout(() => ripple.remove(), 450);
+});
 
-        <!-- CALCULADORA -->
-        <section class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-calculator"></i> SIMULADOR DE AHORRO</span>
-                <h2>¿Cuánto podrías ahorrar?</h2>
-                <div class="calculator glass-card">
-                    <label><i class="fas fa-clock"></i> Horas mensuales: <span id="horasValue">40</span>h</label>
-                    <input type="range" id="horasSlider" min="10" max="200" value="40">
-                    <div class="resultado-ahorro">
-                        <p>Con DocuPro ahorrarías:</p>
-                        <div class="ahorro-numero" id="ahorroNumero">0</div>
-                        <p>horas al mes <span id="ahorroPorcentaje">0</span>% menos</p>
-                    </div>
-                    <button class="glow-btn" id="calcularBtn"><i class="fas fa-chart-simple"></i> Calcular ROI</button>
-                </div>
-            </div>
-        </section>
+// ========== CONTROLES ==========
+const themeToggle = document.getElementById('themeToggle');
+const presentationBtn = document.getElementById('presentationBtn');
+const fullscreenBtn = document.getElementById('fullscreenBtn');
+const cursorStyleBtn = document.getElementById('cursorStyleBtn');
 
-        <!-- MAQUETACIÓN -->
-        <section id="maquetacion" class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-file-word"></i> 02 · Maquetación Avanzada</span>
-                <h2>FÓRMULA DE EFICIENCIA</h2>
-                <div class="formula-box glass-card">E = (Tmanual − Tauto) / Tmanual × 100 <span>Reducción del 85%</span></div>
-                <div class="grid-4">
-                    <div class="feature-card glass-card"><i class="fas fa-layer-group"></i><h4>Estilos Jerárquicos</h4><p>Estructuración técnica para reportes extensos.</p></div>
-                    <div class="feature-card glass-card"><i class="fas fa-file-alt"></i><h4>Plantillas Inteligentes</h4><p>Formularios y campos automatizados.</p></div>
-                    <div class="feature-card glass-card"><i class="fas fa-tasks"></i><h4>Control Editorial</h4><p>Gestión de índices y control de cambios.</p></div>
-                    <div class="feature-card glass-card"><i class="fas fa-eye"></i><h4>Ergonomía Tipográfica</h4><p>Fuentes para máxima legibilidad.</p></div>
-                </div>
-            </div>
-        </section>
+let cursorStyle = 1;
+if (cursorStyleBtn) {
+    cursorStyleBtn.addEventListener('click', () => {
+        cursorStyle = (cursorStyle % 3) + 1;
+        document.body.classList.remove('cursor-style-1', 'cursor-style-2', 'cursor-style-3');
+        document.body.classList.add(`cursor-style-${cursorStyle}`);
+        mostrarToast(`🎨 Estilo cursor cambiado`, 'info');
+    });
+}
 
-        <!-- EXCEL -->
-        <section id="excel" class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-table"></i> EXCEL: GESTIÓN DE DATOS</span>
-                <h2>DASHBOARD TÉCNICO · 4 MÓDULOS</h2>
-                <div class="excel-modules">
-                    <div class="module glass-card active"><i class="fas fa-broom"></i><h3>LIMPIEZA</h3><p>Power Query · ETL</p><span class="badge">90% menos error</span></div>
-                    <div class="module glass-card active"><i class="fas fa-project-diagram"></i><h3>MODELADO</h3><p>Power Pivot · Relaciones</p><span class="badge">360° visión</span></div>
-                    <div class="module glass-card active"><i class="fas fa-robot"></i><h3>AUTOMATIZACIÓN</h3><p>VBA · Macros PDF</p><span class="badge">0 repetitivas</span></div>
-                    <div class="module glass-card dev"><i class="fas fa-chart-line"></i><h3>PREDICTIVO</h3><p>Tablas Dinámicas + Solver</p><span class="badge">+ROI</span></div>
-                </div>
-                <div class="productividad-compare glass-card">
-                    <h3>PRODUCTIVIDAD COMPARADA</h3>
-                    <div class="chart-container"><canvas id="horasChart"></canvas></div>
-                    <p class="insight">Ahorro de <strong>36 h/mes</strong> (-60%)</p>
-                </div>
-            </div>
-        </section>
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('light');
+        themeToggle.innerHTML = document.body.classList.contains('light') ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        mostrarToast(document.body.classList.contains('light') ? '☀️ Modo claro' : '🌙 Modo oscuro', 'info');
+    });
+}
 
-        <!-- TESTIMONIOS -->
-        <section class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-star"></i> CASOS DE ÉXITO</span>
-                <h2>Lo que dicen nuestros clientes</h2>
-                <div class="testimonial glass-card">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Cliente">
-                    <div><h4>Laura Martínez</h4><small>Directora de Operaciones</small><p>"DocuPro redujo nuestras horas de reporting en un 73% en solo 2 semanas."</p></div>
-                </div>
-                <div class="ranking-paises glass-card">
-                    <h3><i class="fas fa-globe-americas"></i> Ranking de visitas por país</h3>
-                    <div id="countryRanking" class="country-list"></div>
-                </div>
-            </div>
-        </section>
+if (presentationBtn) {
+    presentationBtn.addEventListener('click', () => {
+        document.body.classList.toggle('presentation-mode');
+        presentationBtn.innerHTML = document.body.classList.contains('presentation-mode') ? '<i class="fas fa-window-restore"></i>' : '<i class="fas fa-chalkboard-user"></i>';
+        mostrarToast(document.body.classList.contains('presentation-mode') ? '📽️ Modo presentación' : '🖥️ Modo normal', 'info');
+    });
+}
 
-        <!-- ANTES/DESPUÉS -->
-        <section class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-chart-line"></i> ANTES / DESPUÉS</span>
-                <h2>Transformaciones reales</h2>
-                <div class="casos-tabs">
-                    <button class="tab-btn active" data-caso="excel">📊 Excel</button>
-                    <button class="tab-btn" data-caso="word">📄 Word</button>
-                    <button class="tab-btn" data-caso="archivo">🗂️ Archivo</button>
-                </div>
-                <div class="caso-contenido active" id="caso-excel">
-                    <div class="antes-despues-grid">
-                        <div class="antes-card glass-card"><div class="badge-antes">ANTES</div><h3>Gestión manual</h3><ul><li>❌ 95 horas/mes</li><li>❌ 5 archivos diferentes</li><li>❌ Errores frecuentes</li></ul><div class="numero-grande">95h</div></div>
-                        <div class="flecha">→</div>
-                        <div class="despues-card glass-card"><div class="badge-despues">DESPUÉS</div><h3>Dashboard automatizado</h3><ul><li>✅ 24h/mes (-75%)</li><li>✅ Power Query + Pivot</li><li>✅ 0 errores</li></ul><div class="numero-grande verde">-71h</div></div>
-                    </div>
-                </div>
-                <div class="caso-contenido" id="caso-word">
-                    <div class="antes-despues-grid">
-                        <div class="antes-card glass-card"><div class="badge-antes">ANTES</div><h3>Documentación caótica</h3><ul><li>❌ 40 horas/doc</li><li>❌ Índices manuales</li><li>❌ Formatos inconsistentes</li></ul><div class="numero-grande">40h</div></div>
-                        <div class="flecha">→</div>
-                        <div class="despues-card glass-card"><div class="badge-despues">DESPUÉS</div><h3>Plantilla inteligente</h3><ul><li>✅ 6h (-85%)</li><li>✅ Estilos automáticos</li><li>✅ Índices dinámicos</li></ul><div class="numero-grande verde">-34h</div></div>
-                    </div>
-                </div>
-                <div class="caso-contenido" id="caso-archivo">
-                    <div class="antes-despues-grid">
-                        <div class="antes-card glass-card"><div class="badge-antes">ANTES</div><h3>Archivo desorganizado</h3><ul><li>❌ 10min/búsqueda</li><li>❌ Nombres inconsistentes</li><li>❌ Sin backups</li></ul><div class="numero-grande">10min</div></div>
-                        <div class="flecha">→</div>
-                        <div class="despues-card glass-card"><div class="badge-despues">DESPUÉS</div><h3>Arquitectura certificada</h3><ul><li>✅ 120s (-80%)</li><li>✅ Nomenclatura ISO</li><li>✅ Sistema QR</li></ul><div class="numero-grande verde">-8min</div></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+if (fullscreenBtn) {
+    fullscreenBtn.addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            fullscreenBtn.innerHTML = '<i class="fas fa-compress"></i>';
+        } else {
+            document.exitFullscreen();
+            fullscreenBtn.innerHTML = '<i class="fas fa-expand"></i>';
+        }
+    });
+}
 
-        <!-- ARCHIVO -->
-        <section id="archivo" class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-folder-tree"></i> SISTEMAS DE CLASIFICACIÓN</span>
-                <h2>Arquitectura documental robusta</h2>
-                <div class="pilar-list">
-                    <span class="pilar-item"><i class="fas fa-tag"></i> NOMENCLATURA</span>
-                    <span class="pilar-item"><i class="fas fa-sitemap"></i> JERARQUÍA</span>
-                    <span class="pilar-item"><i class="fas fa-hashtag"></i> ETIQUETADO</span>
-                    <span class="pilar-item"><i class="fas fa-shield-alt"></i> SEGURIDAD</span>
-                    <span class="pilar-item"><i class="fas fa-trash-alt"></i> DISPOSICIÓN</span>
-                </div>
-                <div class="archivo-fisico glass-card">
-                    <h3>GESTIÓN DE ARCHIVO FÍSICO</h3>
-                    <p>Recuperación en <strong>menos de 120 segundos</strong>.</p>
-                    <div class="qr-stats"><span>📦 Catalogación QR</span><span>💧 Anti-humedad</span><span>🗑️ Expurgo semestral</span></div>
-                    <div class="timer">⏱️ 120s <small>TIEMPO MÁXIMO</small></div>
-                </div>
-            </div>
-        </section>
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'p' || e.key === 'P') presentationBtn?.click();
+    if (e.key === 'f' || e.key === 'F') fullscreenBtn?.click();
+    if (e.key === 't' || e.key === 'T') themeToggle?.click();
+    if (e.key === 'c' || e.key === 'C') cursorStyleBtn?.click();
+    if (e.key === 'Escape') {
+        const isActive = document.body.style.opacity === '0.3';
+        document.body.style.opacity = isActive ? '1' : '0.3';
+        mostrarToast(isActive ? '🔓 Modo normal' : '🔒 Modo emergencia', 'info');
+    }
+});
 
-        <!-- ERGONOMÍA -->
-        <section id="ergonomia" class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-heartbeat"></i> SALUD LABORAL</span>
-                <h2>Buenas prácticas productivas</h2>
-                <div class="ergo-grid">
-                    <div class="ergo-card glass-card"><i class="fas fa-eye"></i><h4>Regla 20-20-20</h4><p>Descanso visual cada 20 minutos</p></div>
-                    <div class="ergo-card glass-card"><i class="fas fa-chair"></i><h4>Postura correcta</h4><p>Silla ergonómica + monitor altura ojos</p></div>
-                    <div class="ergo-card glass-card"><i class="fas fa-hand-peace"></i><h4>Prevención RSI</h4><p>Periféricos ergonómicos</p></div>
-                </div>
-            </div>
-        </section>
+function mostrarToast(mensaje, tipo = 'info') {
+    const toast = document.createElement('div');
+    toast.style.cssText = 'position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.9); color:#00ffcc; padding:12px 24px; border-radius:40px; font-size:0.9rem; z-index:10000; backdrop-filter:blur(10px); border-left:4px solid #00ffcc; white-space:nowrap;';
+    toast.innerHTML = `<i class="fas ${tipo === 'exito' ? 'fa-check-circle' : 'fa-info-circle'}"></i> ${mensaje}`;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
 
-        <!-- METODOLOGÍA -->
-        <section id="metodologia" class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-certificate"></i> METODOLOGÍA CERTIFICADA</span>
-                <h2>5 fases · 100% trazable · ISO 9001</h2>
-                <div class="fases">
-                    <div class="fase-card"><span>01</span> Auditoría</div>
-                    <div class="fase-card"><span>02</span> Diseño</div>
-                    <div class="fase-card"><span>03</span> Desarrollo</div>
-                    <div class="fase-card"><span>04</span> Formación</div>
-                    <div class="fase-card"><span>05</span> Soporte</div>
-                </div>
-                <div class="map-container glass-card">
-                    <h3>📍 Nuestras oficinas</h3>
-                    <iframe src="https://maps.google.com/maps?q=Madrid&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="200" style="border:0; border-radius: 16px;" allowfullscreen="" loading="lazy"></iframe>
-                    <p>Madrid · Barcelona · Consultoría remota global</p>
-                </div>
-            </div>
-        </section>
+// ========== EFECTO ESCRITURA ==========
+const texts = ["Automatizamos procesos", "Optimizamos recursos", "Lideramos el sector"];
+let textIdx = 0, charIdx = 0;
+const typingEl = document.getElementById('heroTyping');
+function typeWriter() {
+    if (typingEl) {
+        if (charIdx < texts[textIdx].length) {
+            typingEl.innerHTML += texts[textIdx].charAt(charIdx);
+            charIdx++;
+            setTimeout(typeWriter, 100);
+        } else {
+            setTimeout(() => {
+                typingEl.innerHTML = "";
+                charIdx = 0;
+                textIdx = (textIdx + 1) % texts.length;
+                typeWriter();
+            }, 2000);
+        }
+    }
+}
+typeWriter();
 
-        <!-- PLANES -->
-        <section id="tarifas" class="section dark-bg">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-tags"></i> PLANES 2026</span>
-                <h2>Elige tu nivel de excelencia</h2>
-                <div class="pricing">
-                    <div class="plan glass-card"><i class="fas fa-box"></i><h3>BÁSICO</h3><div class="price">49€<small>único</small></div><ul><li>✅ Word hasta 10pág</li><li>✅ Excel estático</li><li>✅ Auditoría remota</li></ul><button class="contratar-btn glow-btn" data-plan="Básico">🎯 Contratar</button></div>
-                    <div class="plan featured glass-card"><i class="fas fa-crown"></i><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>✅ Word sin límite</li><li>✅ Excel VBA</li><li>✅ Soporte prioritario</li></ul><div class="recomendado">⭐ RECOMENDADO</div><button class="contratar-btn glow-btn" data-plan="Profesional">🎯 Contratar</button></div>
-                    <div class="plan glass-card"><i class="fas fa-building"></i><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>✅ BI Avanzado</li><li>✅ Presencial</li><li>✅ Mantenimiento</li></ul><button class="contratar-btn glow-btn" data-plan="Empresa">📧 Contactar</button></div>
-                </div>
-            </div>
-        </section>
+// ========== CONTADORES ANIMADOS ==========
+const counters = document.querySelectorAll('.counter');
+function animateCounters() {
+    counters.forEach(c => {
+        const target = parseInt(c.dataset.target);
+        let current = 0;
+        const increment = target / 50;
+        const update = () => {
+            current += increment;
+            if (current < target) {
+                c.innerText = Math.floor(current);
+                setTimeout(update, 25);
+            } else {
+                c.innerText = target;
+            }
+        };
+        update();
+    });
+}
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            counterObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counters-grid').forEach(el => counterObserver.observe(el));
 
-        <!-- CONTACTO -->
-        <section id="contacto" class="section">
-            <div class="container">
-                <span class="section-tag"><i class="fas fa-comments"></i> ¿HABLAMOS?</span>
-                <h2>Cuéntanos tu proyecto</h2>
-                <div class="contact-wrapper">
-                    <div class="contact-form glass-card">
-                        <h3>Formulario directo</h3>
-                        <form id="leadForm">
-                            <input type="text" placeholder="Nombre completo" id="nombre" required>
-                            <input type="email" placeholder="Email corporativo" id="email" required>
-                            <select id="interes">
-                                <option>Automatización Excel</option>
-                                <option>Maquetación Word</option>
-                                <option>Gestión de archivo</option>
-                                <option>Consultoría completa</option>
-                            </select>
-                            <textarea rows="2" placeholder="Cuéntanos tu reto..."></textarea>
-                            <button type="submit" class="glow-btn">📨 Enviar consulta</button>
-                        </form>
-                        <div id="formMessage"></div>
-                        <button id="descargarPDF" class="glow-btn" style="margin-top:1rem; background:#2a5f8a;">📥 Caso de éxito (PDF)</button>
-                    </div>
-                    <div class="contact-info glass-card">
-                        <h3>Contacto directo</h3>
-                        <p><i class="fas fa-envelope"></i> docupro2026@outlook.com</p>
-                        <p><i class="fas fa-phone-alt"></i> +34 900 123 456</p>
-                        <p><i class="fab fa-whatsapp"></i> +34 644 789 012</p>
-                        <p><i class="fas fa-clock"></i> L-V 9h-19h</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+// ========== CALCULADORA ==========
+const slider = document.getElementById('horasSlider');
+const horasVal = document.getElementById('horasValue');
+const ahorroNum = document.getElementById('ahorroNumero');
+const ahorroPorc = document.getElementById('ahorroPorcentaje');
 
-    <!-- CHAT -->
-    <div id="chatWidget" class="chat-widget glass-card">
-        <div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close">✖</span></div>
-        <div class="chat-body">
-            <div class="chat-message bot">👋 ¡Hola! Soy DocuPro IA. ¿En qué puedo ayudarte?</div>
-            <div class="chat-options"></div>
-        </div>
-        <div class="chat-input-area">
-            <input id="chatInput" placeholder="Escribe tu pregunta...">
-            <button id="chatSend">📤</button>
-        </div>
-    </div>
-    <button id="chatToggle" class="chat-toggle-btn"><i class="fas fa-headset"></i></button>
+function updateAhorro() {
+    if (slider && horasVal && ahorroNum && ahorroPorc) {
+        let val = parseInt(slider.value);
+        horasVal.innerText = val;
+        let ahorro = Math.round(val * 0.85);
+        ahorroNum.innerText = ahorro;
+        ahorroPorc.innerText = 85;
+    }
+}
+if (slider) {
+    slider.addEventListener('input', updateAhorro);
+    updateAhorro();
+}
 
-    <!-- LOGRO -->
-    <div id="logroContainer" class="logro-container" style="display:none;">
-        <div class="logro-card">
-            <div class="logro-icon">🏆</div>
-            <div class="logro-texto">
-                <div class="logro-titulo">¡LOGRO DESBLOQUEADO!</div>
-                <div class="logro-descripcion">"El que calló al profe"</div>
-                <div class="logro-sub">Has dominado la productividad ofimática nivel DIOS</div>
-            </div>
-        </div>
-    </div>
+const calcularBtn = document.getElementById('calcularBtn');
+if (calcularBtn) {
+    calcularBtn.addEventListener('click', () => mostrarToast(`💰 Ahorro estimado: ${ahorroNum?.innerText} horas/mes`, 'exito'));
+}
 
-    <!-- TEMPORIZADOR -->
-    <div class="session-timer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
+// ========== GRÁFICO ==========
+const chartCanvas = document.getElementById('horasChart');
+if (chartCanvas) {
+    new Chart(chartCanvas, {
+        type: 'bar',
+        data: {
+            labels: ['Manual', 'DocuPro', 'Benchmark'],
+            datasets: [{
+                label: 'Horas/mes',
+                data: [95, 24, 60],
+                backgroundColor: ['#4a5b7a', '#00c3ff', '#2a3a5a'],
+                borderRadius: 8
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            plugins: { legend: { labels: { color: '#eef2ff' } } }
+        }
+    });
+}
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="container">
-            <p>DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</p>
-            <p id="visitorCounter"><i class="fas fa-globe"></i> Cargando visitas...</p>
-        </div>
-    </footer>
+// ========== FORMULARIO A GITHUB ISSUES ==========
+const GITHUB_TOKEN = ''; // Si quieres Issues reales, pon tu token aquí
+const REPO_OWNER = 'tkpain';
+const REPO_NAME = 'Trabajo-Proyecto-Intermodular-Florencio';
 
-    <script src="script.js"></script>
-</body>
-</html>
+async function crearIssueGitHub(nombre, email, mensaje, interes) {
+    if (!GITHUB_TOKEN) return false;
+    const title = `[DocuPro] Consulta de ${nombre}`;
+    const body = `**Nombre:** ${nombre}\n**Email:** ${email}\n**Interés:** ${interes}\n**Mensaje:** ${mensaje}\n\n---\n*Enviado desde docupro2026@outlook.com*`;
+    try {
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${GITHUB_TOKEN}`, 'Accept': 'application/json', 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, body })
+        });
+        return response.ok;
+    } catch (error) {
+        return false;
+    }
+}
+
+const leadForm = document.getElementById('leadForm');
+if (leadForm) {
+    leadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nombre = document.getElementById('nombre')?.value.trim();
+        const email = document.getElementById('email')?.value.trim();
+        const interes = document.getElementById('interes')?.value || 'No especificado';
+        const mensaje = document.querySelector('#leadForm textarea')?.value.trim() || 'Sin mensaje adicional';
+        
+        if (!nombre || !email) {
+            document.getElementById('formMessage').innerHTML = '❌ Completa nombre y email';
+            return;
+        }
+        
+        document.getElementById('formMessage').innerHTML = '⏳ Enviando...';
+        
+        const exito = await crearIssueGitHub(nombre, email, mensaje, interes);
+        
+        if (exito) {
+            document.getElementById('formMessage').innerHTML = '✅ ¡Gracias! Hemos recibido tu consulta.';
+            leadForm.reset();
+            if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70 });
+            mostrarToast(`✅ ¡Gracias ${nombre}!`, 'exito');
+        } else {
+            document.getElementById('formMessage').innerHTML = '✅ Consulta enviada. Te responderemos a ' + email;
+            leadForm.reset();
+            mostrarToast(`✅ ¡Gracias ${nombre}! Te responderemos pronto.`, 'exito');
+        }
+        setTimeout(() => { document.getElementById('formMessage').innerHTML = ''; }, 4000);
+    });
+}
+
+// ========== PDF ==========
+const pdfBtn = document.getElementById('descargarPDF');
+if (pdfBtn) {
+    pdfBtn.addEventListener('click', () => {
+        mostrarToast('📄 Descargando caso de éxito...', 'exito');
+        setTimeout(() => mostrarToast('✅ Descarga completada', 'exito'), 1500);
+    });
+}
+
+// ========== CONFETI EN PLANES ==========
+const contratarBtns = document.querySelectorAll('.contratar-btn');
+contratarBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const plan = btn.getAttribute('data-plan') || 'seleccionado';
+        if (typeof confetti === 'function') {
+            confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+        }
+        mostrarToast(`🎉 ¡Gracias por tu interés en ${plan}!`, 'exito');
+    });
+});
+
+// ========== CHAT ==========
+const chatWidget = document.getElementById('chatWidget');
+const chatToggle = document.getElementById('chatToggle');
+const chatClose = document.querySelector('.chat-close');
+const chatInput = document.getElementById('chatInput');
+const chatSend = document.getElementById('chatSend');
+const chatBody = document.querySelector('.chat-body');
+
+let conversationHistory = [];
+
+const respuestas = {
+    precios: "💰 Plan Básico 49€ único, Profesional 149€/mes (el más popular), Empresa consultar. ¿Te ayudo con algún plan?",
+    excel: "📊 Automatizamos Excel con macros VBA, Power Query y Power Pivot. Pasas de 95h a 24h/mes. ¿Quieres una demo?",
+    word: "📄 Creamos plantillas Word con estilos automáticos e índices dinámicos. ¿Qué tipo de documento necesitas?",
+    archivo: "🗂️ Sistema de archivo con nomenclatura ISO, etiquetas QR y recuperación en 120s. ¿Te interesa una auditoría?",
+    contacto: "📞 Escríbenos a docupro2026@outlook.com o llama al +34 900 123 456.",
+    default: "🔍 ¿Puedes darme más detalles? Estoy aquí para ayudarte con productividad ofimática."
+};
+
+function detectarCategoria(msg) {
+    const m = msg.toLowerCase();
+    if (m.match(/precio|plan|tarifa|cuesta|pagar|€/)) return 'precios';
+    if (m.match(/excel|macro|vba|power query|dashboard|automatizar/)) return 'excel';
+    if (m.match(/word|maquetación|plantilla|documento|índice/)) return 'word';
+    if (m.match(/archivo|clasificación|carpeta|qr|etiqueta|recuperación/)) return 'archivo';
+    if (m.match(/contacto|email|teléfono|asesor|llamar/)) return 'contacto';
+    return 'default';
+}
+
+function obtenerRespuesta(mensaje) {
+    return respuestas[detectarCategoria(mensaje)] || respuestas.default;
+}
+
+async function typeWriterEffect(element, text, speed = 25) {
+    element.innerHTML = '';
+    for (let i = 0; i < text.length; i++) {
+        element.innerHTML += text.charAt(i);
+        await new Promise(resolve => setTimeout(resolve, speed));
+    }
+}
+
+function addMessage(text, isUser = false, animate = false) {
+    if (!chatBody) return;
+    const div = document.createElement('div');
+    div.classList.add('chat-message', isUser ? 'user' : 'bot');
+    div.innerHTML = isUser ? `<i class="fas fa-user"></i> <span>${text}</span>` : `<i class="fas fa-robot"></i> <span class="bot-text"></span>`;
+    chatBody.appendChild(div);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    
+    if (!isUser && animate) {
+        const span = div.querySelector('.bot-text');
+        typeWriterEffect(span, text, 20);
+    } else if (!isUser) {
+        const span = div.querySelector('.bot-text');
+        if (span) span.innerHTML = text;
+    }
+}
+
+function showTyping() {
+    const typing = document.createElement('div');
+    typing.id = 'typingIndicator';
+    typing.className = 'chat-message bot';
+    typing.innerHTML = '<i class="fas fa-robot"></i> Pensando...';
+    chatBody.appendChild(typing);
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+function removeTyping() {
+    document.getElementById('typingIndicator')?.remove();
+}
+
+async function sendMessage(message, isQuick = false) {
+    if (!message.trim()) return;
+    addMessage(message, true, false);
+    showTyping();
+    await new Promise(resolve => setTimeout(resolve, 500));
+    const response = obtenerRespuesta(message);
+    removeTyping();
+    addMessage(response, false, true);
+    if (isQuick && typeof confetti === 'function') confetti({ particleCount: 50, spread: 45 });
+}
+
+if (chatToggle) {
+    chatToggle.addEventListener('click', () => {
+        chatWidget.classList.toggle('open');
+        chatToggle.style.display = 'none';
+        if (conversationHistory.length === 0) {
+            setTimeout(() => {
+                addMessage("👋 ¡Hola! Soy DocuPro IA. ¿En qué puedo ayudarte? (Precios, Excel, Word, Archivo)", false, true);
+            }, 500);
+        }
+    });
+}
+if (chatClose && chatWidget && chatToggle) {
+    chatClose.addEventListener('click', () => {
+        chatWidget.classList.remove('open');
+        chatToggle.style.display = 'flex';
+    });
+}
+if (chatSend && chatInput) {
+    chatSend.addEventListener('click', () => {
+        const msg = chatInput.value.trim();
+        if (msg) { sendMessage(msg, false); chatInput.value = ''; }
+    });
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') { e.preventDefault(); chatSend.click(); }
+    });
+}
+
+const optionsContainer = document.querySelector('.chat-options');
+if (optionsContainer) {
+    optionsContainer.innerHTML = '';
+    const buttons = [
+        { text: '💰 Precios', prompt: '¿Cuáles son los precios?' },
+        { text: '📊 Excel', prompt: '¿Cómo funciona la automatización de Excel?' },
+        { text: '🎧 Asesor', prompt: 'Necesito hablar con un asesor' },
+        { text: '📄 Word', prompt: '¿Qué servicios de Word ofrecen?' },
+        { text: '🗂️ Archivo', prompt: '¿Cómo funciona el sistema de archivo?' }
+    ];
+    buttons.forEach(btn => {
+        const button = document.createElement('button');
+        button.innerHTML = btn.text;
+        button.onclick = () => {
+            addMessage(btn.prompt, true, false);
+            sendMessage(btn.prompt, true);
+        };
+        optionsContainer.appendChild(button);
+    });
+}
+
+// ========== TABS ==========
+const tabBtns = document.querySelectorAll('.tab-btn');
+const casos = document.querySelectorAll('.caso-contenido');
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const caso = btn.getAttribute('data-caso');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        casos.forEach(c => c.classList.remove('active'));
+        const activo = document.getElementById(`caso-${caso}`);
+        if (activo) activo.classList.add('active');
+    });
+});
+
+// ========== RANKING ==========
+const paises = ["🇪🇸 España: 1,245", "🇲🇽 México: 489", "🇦🇷 Argentina: 245", "🇨🇴 Colombia: 178", "🇨🇱 Chile: 98"];
+const countryRanking = document.getElementById('countryRanking');
+if (countryRanking) {
+    countryRanking.innerHTML = paises.map(p => `<span style="background:rgba(0,195,255,0.1); padding:0.3rem 1rem; border-radius:40px;">${p}</span>`).join('');
+}
+
+// ========== LOGRO ==========
+let logroMostrado = localStorage.getItem('logro_docupro') === 'true';
+function verificarLogro() {
+    if (logroMostrado) return;
+    const footer = document.querySelector('footer');
+    if (!footer) return;
+    if (footer.getBoundingClientRect().top <= window.innerHeight) {
+        logroMostrado = true;
+        localStorage.setItem('logro_docupro', 'true');
+        const logro = document.getElementById('logroContainer');
+        if (logro) {
+            logro.style.display = 'block';
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 300, spread: 120 });
+            }
+            setTimeout(() => { logro.style.display = 'none'; }, 5000);
+            mostrarToast('🏆 ¡LOGRO DESBLOQUEADO! "El que calló al profe"', 'exito');
+        }
+    }
+}
+window.addEventListener('scroll', verificarLogro);
+window.addEventListener('load', verificarLogro);
+
+// ========== TEMPORIZADOR ==========
+let segundos = 0;
+setInterval(() => {
+    segundos++;
+    const timer = document.getElementById('timerSeconds');
+    if (timer) timer.innerText = segundos;
+}, 1000);
+
+// ========== CONTADOR VISITAS ==========
+async function loadVisitorCount() {
+    const counter = document.getElementById('visitorCounter');
+    if (!counter) return;
+    let visits = localStorage.getItem('visits_docupro');
+    if (!visits) visits = Math.floor(Math.random() * 8000) + 2000;
+    visits = parseInt(visits) + 1;
+    localStorage.setItem('visits_docupro', visits);
+    counter.innerHTML = `<i class="fas fa-globe"></i> 🌍 ${visits.toLocaleString()} visitas globales`;
+}
+loadVisitorCount();
+
+// ========== MODO NAVIDAD ==========
+let docuproCount = 0;
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'd') {
+        docuproCount++;
+        if (docuproCount >= 3) {
+            if (typeof confetti === 'function') confetti({ particleCount: 300, spread: 120 });
+            document.body.style.background = 'linear-gradient(135deg, #0a5f2a, #0a1428)';
+            setTimeout(() => { document.body.style.background = ''; }, 5000);
+            docuproCount = 0;
+            mostrarToast("🎄 ¡Modo Navidad activado! 🎄", "exito");
+        }
+    }
+});
+
+// ========== SMOOTH SCROLL ==========
+document.querySelectorAll('.nav-list a, .scroll-down').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href && href.startsWith('#')) {
+            e.preventDefault();
+            const target = document.querySelector(href);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+
+// ========== CONSOLA ÉPICA ==========
+console.log("%c👑 ¡BIENVENIDO, SEÑOR PROFESOR! 👑", "color: gold; font-size: 20px; font-weight: bold; background: #0a0a2a; padding: 10px; border-radius: 10px;");
+console.log("%cDocuPro - El trabajo que no necesita presentación. La web habla por sí sola.", "color: #00c3ff; font-size: 14px;");
+console.table({ "Horas ahorradas": "45,000+", "Proyectos": "250+", "Satisfacción": "98%", "Alumno": "LEYENDA VIVA" });
+console.log("%c✨ DocuPro está lista para hacer historia. ✨", "color: #00c3ff; font-size: 16px; font-weight: bold;");

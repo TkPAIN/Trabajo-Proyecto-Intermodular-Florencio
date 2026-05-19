@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
@@ -20,24 +19,22 @@
     <!-- Cursor personalizado premium -->
     <div class="cursor"></div>
     <div class="cursor-dot"></div>
-    <div class="cursor-trail" id="cursorTrail"></div>
-
-    <!-- Cubo 3D (Three.js) -->
-    <div id="threeContainer" class="three-container"></div>
+    <div id="cursorTrail" class="cursor-trail"></div>
 
     <!-- Controles flotantes -->
     <div class="controls-top">
-        <button id="themeToggle" class="control-btn" title="Modo claro/oscuro"><i class="fas fa-sun"></i></button>
-        <button id="presentationBtn" class="control-btn" title="Modo presentación"><i class="fas fa-chalkboard-user"></i></button>
-        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa"><i class="fas fa-expand"></i></button>
-        <button id="cursorStyleBtn" class="control-btn" title="Cambiar estilo cursor"><i class="fas fa-mouse-pointer"></i></button>
+        <button id="themeToggle" class="control-btn" title="Modo claro/oscuro (T)"><i class="fas fa-sun"></i></button>
+        <button id="presentationBtn" class="control-btn" title="Modo presentación (P)"><i class="fas fa-chalkboard-user"></i></button>
+        <button id="fullscreenBtn" class="control-btn" title="Pantalla completa (F)"><i class="fas fa-expand"></i></button>
+        <button id="cursorStyleBtn" class="control-btn" title="Estilo cursor (C)"><i class="fas fa-mouse-pointer"></i></button>
     </div>
 
-    <header class="hero asymmetrical-hero">
+    <!-- HERO -->
+    <header class="hero">
         <div class="container hero-content">
             <div class="logo-area">
                 <div class="marvel-logo-container">
-                    <h1 class="logo marvel-logo glow-text">DOCU<span>PRO</span></h1>
+                    <h1 class="logo marvel-logo">DOCU<span>PRO</span></h1>
                     <canvas id="marvelCanvas" class="marvel-canvas"></canvas>
                 </div>
                 <p class="tagline">CONSULTORÍA OFIMÁTICA DE ÉLITE · 2026</p>
@@ -53,6 +50,7 @@
         <div class="scroll-down"><i class="fas fa-chevron-down"></i></div>
     </header>
 
+    <!-- NAVEGACIÓN -->
     <nav class="main-nav glass-premium">
         <ul class="nav-list container">
             <li><a href="#identidad"><i class="fas fa-heart"></i> 01 Identidad</a></li>
@@ -247,15 +245,21 @@
         </section>
     </main>
 
-    <!-- CHAT -->
-    <div id="chatWidget" class="chat-widget glass-premium"><div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close"><i class="fas fa-times"></i></span></div><div class="chat-body"><div class="chat-message bot"><i class="fas fa-robot"></i> 👋 ¿En qué puedo ayudarte?</div><div class="chat-options"><button data-msg="Precios"><i class="fas fa-euro-sign"></i> Precios</button><button data-msg="Automatización Excel"><i class="fas fa-table"></i> Excel</button><button data-msg="Hablar con asesor"><i class="fas fa-headset"></i> Asesor</button></div></div><div class="chat-input-area"><input id="chatInput" placeholder="Escribe..."><button id="chatSend"><i class="fas fa-paper-plane"></i></button></div></div>
+    <!-- CHAT IA -->
+    <div id="chatWidget" class="chat-widget glass-premium">
+        <div class="chat-header"><i class="fas fa-comment-dots"></i> Asistente DocuPro <span class="chat-close"><i class="fas fa-times"></i></span></div>
+        <div class="chat-body"><div class="chat-message bot"><i class="fas fa-robot"></i> <span class="bot-text">👋 ¡Hola! Soy DocuPro IA. ¿En qué puedo ayudarte?</span></div><div class="chat-options"></div></div>
+        <div class="chat-input-area"><input id="chatInput" placeholder="Escribe tu pregunta..."><button id="chatSend"><i class="fas fa-paper-plane"></i></button></div>
+    </div>
     <button id="chatToggle" class="chat-toggle-btn glow-btn"><i class="fas fa-headset"></i></button>
 
     <!-- LOGRO LEGENDARIO -->
     <div id="logroContainer" class="logro-container" style="display: none;"><div class="logro-card"><div class="logro-icon">🏆</div><div class="logro-texto"><div class="logro-titulo">¡LOGRO DESBLOQUEADO!</div><div class="logro-descripcion">"El que calló al profe"</div><div class="logro-sub">Has dominado la productividad ofimática nivel DIOS</div></div></div></div>
 
+    <!-- TEMPORIZADOR -->
     <div class="session-timer"><i class="fas fa-hourglass-half"></i> <span id="timerSeconds">0</span>s navegando</div>
 
+    <!-- FOOTER -->
     <footer><div class="container"><p><i class="fas fa-chart-line"></i> DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</p><p id="visitorCounter"><i class="fas fa-globe"></i> Cargando visitas...</p></div></footer>
 
     <script src="script.js"></script>

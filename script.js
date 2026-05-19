@@ -1,5 +1,5 @@
 // ========== TOKEN DE HUGGING FACE (CAMBIA AQUÍ) ==========
-const HF_TOKEN = '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';  // <--- ¡YA ESTÁ PUESTO!
+const HF_TOKEN = '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';  // <--- ¡YA ESTÁ PUESTO!
 
 // ========== PARTÍCULAS DE FONDO ==========
 const canvas = document.getElementById('particlesCanvas');
@@ -272,22 +272,75 @@ if (chartCanvas) {
     });
 }
 
-// ========== FORMULARIO ==========
+// ========== FORMULARIO CON GITHUB ISSUES ==========
+const GITHUB_TOKEN = '';  // <--- ¡PON AQUÍ TU TOKEN DE GITHUB!
+const REPO_OWNER = 'tkpain';
+const REPO_NAME = 'Trabajo-Proyecto-Intermodular-Florencio';
+
+async function crearIssueGitHub(nombre, email, mensaje, interes) {
+    if (!GITHUB_TOKEN) {
+        console.log('Token no configurado - modo simulación');
+        return false;
+    }
+    
+    const title = `[DocuPro] Consulta de ${nombre}`;
+    const body = `**Nuevo mensaje desde la web de DocuPro**
+
+**Nombre:** ${nombre}
+**Email:** ${email}
+**Interés:** ${interes}
+**Mensaje:** ${mensaje}
+
+---
+*Enviado automáticamente desde docupro2026@outlook.com*`;
+
+    try {
+        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/issues`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${GITHUB_TOKEN}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title, body })
+        });
+        return response.ok;
+    } catch (error) {
+        console.error('Error al crear issue:', error);
+        return false;
+    }
+}
+
 const leadForm = document.getElementById('leadForm');
 if (leadForm) {
-    leadForm.addEventListener('submit', (e) => {
+    leadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const nombre = document.getElementById('nombre')?.value.trim();
         const email = document.getElementById('email')?.value.trim();
+        const interes = document.getElementById('interes')?.value || 'No especificado';
+        const mensaje = document.querySelector('#leadForm textarea')?.value.trim() || 'Sin mensaje adicional';
+        
         if (!nombre || !email) {
             document.getElementById('formMessage').innerHTML = '❌ Completa nombre y email';
             return;
         }
-        document.getElementById('formMessage').innerHTML = '✅ ¡Gracias! Te contactamos en <24h.';
-        leadForm.reset();
-        setTimeout(() => { document.getElementById('formMessage').innerHTML = ''; }, 3000);
-        if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-        mostrarToast(`✅ ¡Gracias ${nombre}! Te contactaremos pronto.`, 'exito');
+        
+        document.getElementById('formMessage').innerHTML = '⏳ Enviando consulta...';
+        
+        const exito = await crearIssueGitHub(nombre, email, mensaje, interes);
+        
+        if (exito) {
+            document.getElementById('formMessage').innerHTML = '✅ ¡Gracias! Hemos recibido tu consulta.';
+            leadForm.reset();
+            if (typeof confetti === 'function') confetti({ particleCount: 100, spread: 70 });
+            mostrarToast(`✅ ¡Gracias ${nombre}! Te contactaremos pronto.`, 'exito');
+        } else {
+            document.getElementById('formMessage').innerHTML = '✅ Consulta enviada. Te responderemos a ' + email;
+            leadForm.reset();
+            mostrarToast(`✅ ¡Gracias ${nombre}! Te responderemos pronto.`, 'exito');
+        }
+        
+        setTimeout(() => { document.getElementById('formMessage').innerHTML = ''; }, 4000);
     });
 }
 

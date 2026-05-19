@@ -821,3 +821,149 @@ body.presentation-mode .session-timer {
         font-size: 0.9rem;
     }
 }
+/* ========== 1. TÍTULO MARVEL ========== */
+.marvel-logo-container {
+    position: relative;
+    display: inline-block;
+}
+
+.marvel-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes marvelReveal {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+        letter-spacing: -10px;
+        filter: blur(10px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1);
+        letter-spacing: 5px;
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        letter-spacing: normal;
+    }
+}
+
+.marvel-logo {
+    animation: marvelReveal 1.2s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+/* ========== 3. LOGRO LEGENDARIO ========== */
+.logro-container {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+    animation: logroEntrada 0.5s ease-out, logroSalida 0.5s ease-in 4.5s forwards;
+}
+
+@keyframes logroEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+@keyframes logroSalida {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+        display: none;
+    }
+}
+
+.logro-card {
+    background: linear-gradient(135deg, #1a1a2e, #0f0f1a);
+    border: 2px solid gold;
+    border-radius: 16px;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.logro-icon {
+    font-size: 3rem;
+    animation: logroIcono 0.8s infinite alternate;
+}
+
+@keyframes logroIcono {
+    from { transform: scale(1); text-shadow: 0 0 0px gold; }
+    to { transform: scale(1.2); text-shadow: 0 0 20px gold; }
+}
+
+.logro-titulo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: gold;
+}
+
+.logro-descripcion {
+    font-size: 1rem;
+    color: white;
+}
+
+.logro-sub {
+    font-size: 0.7rem;
+    opacity: 0.7;
+}
+
+/* ========== 4. BOTONES CON ACCIÓN REAL ========== */
+.boton-accion {
+    transition: all 0.3s ease;
+}
+
+.boton-accion:active {
+    transform: scale(0.95);
+}
+
+.toast-notificacion {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #00ffcc;
+    padding: 12px 24px;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    z-index: 10000;
+    backdrop-filter: blur(10px);
+    border-left: 4px solid #00ffcc;
+    animation: toastAparecer 0.3s ease, toastDesaparecer 0.3s ease 2.7s forwards;
+    pointer-events: none;
+}
+
+@keyframes toastAparecer {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes toastDesaparecer {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

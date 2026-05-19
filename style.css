@@ -775,3 +775,18 @@ body.presentation-mode .session-timer { display: none; }
     .control-btn { width: 35px; height: 35px; font-size: 0.9rem; }
     .chat-widget { width: 300px; right: 10px; bottom: 70px; }
 }
+/* Copyright animado */
+.animated-copyright {
+    display: inline-block;
+    animation: pulse 1.5s infinite;
+    margin-left: 12px;
+    font-size: 0.7rem;
+    background: rgba(0, 195, 255, 0.2);
+    padding: 3px 10px;
+    border-radius: 40px;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 5px #00c3ff; }
+}

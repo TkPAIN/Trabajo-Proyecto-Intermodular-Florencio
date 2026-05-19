@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a2c2b8e5d3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
@@ -36,6 +37,7 @@
             <li><a href="#ergonomia">05 Ergonomía</a></li>
             <li><a href="#metodologia">06 Metodología</a></li>
             <li><a href="#tarifas">Planes</a></li>
+            <li><a href="#contacto">Contacto</a></li>
         </ul>
     </nav>
 
@@ -68,7 +70,7 @@
             </div>
         </section>
 
-        <!-- EXCEL POWER -->
+        <!-- EXCEL POWER CON GRÁFICO -->
         <section id="excel" class="section">
             <div class="container">
                 <span class="section-tag">EXCEL: GESTIÓN DE DATOS · MÓDULO 01</span>
@@ -81,17 +83,15 @@
                 </div>
                 <div class="productividad-compare">
                     <h3>PRODUCTIVIDAD COMPARADA 2026</h3>
-                    <div class="bars">
-                        <div><span>Procesos Manuales</span><div class="bar" style="width:95%">95 h/mes</div></div>
-                        <div><span>Consultoría DocuPro</span><div class="bar accent" style="width:24%">24 h/mes</div></div>
-                        <div><span>Benchmark Sector</span><div class="bar" style="width:60%">60 h/mes</div></div>
+                    <div class="chart-container">
+                        <canvas id="horasChart" width="400" height="300"></canvas>
                     </div>
                     <p class="insight">🔹 Ahorro de <strong>36 h/mes</strong> frente al benchmark sector (−60%). Datos auditados · BI RRHH</p>
                 </div>
             </div>
         </section>
 
-        <!-- PORTAFOLIO + ARCHIVO (se mezcla para integrar) -->
+        <!-- PORTAFOLIO + ARCHIVO -->
         <section id="archivo" class="section dark-bg">
             <div class="container">
                 <span class="section-tag">SISTEMAS DE CLASIFICACIÓN</span>
@@ -155,13 +155,67 @@
                     <div class="plan featured"><h3>PROFESIONAL ★</h3><div class="price">149€<small>/mes</small></div><ul><li>Maquetación Word sin límite</li><li>Excel Dinámico (VBA)</li><li>Auditoría remota avanzada</li></ul><div class="recomendado">RECOMENDADO</div></div>
                     <div class="plan"><h3>EMPRESA</h3><div class="price">Consultar</div><ul><li>Prioridad total</li><li>BI Avanzado</li><li>Presencial + mantenimiento</li></ul></div>
                 </div>
-                <div class="contacto-final">
-                    <p>📧 contacto@docupro.es | 🌐 www.docupro.es | Madrid · Barcelona © 2026 DocuPro</p>
-                    <button id="demoBtn">📅 Solicita una demo gratuita</button>
+            </div>
+        </section>
+
+        <!-- CONTACTO + FORMULARIO + CHAT -->
+        <section id="contacto" class="section">
+            <div class="container">
+                <span class="section-tag">ASISTENCIA PREMIUM</span>
+                <h2>¿Hablamos de tu proyecto?</h2>
+                <div class="contact-wrapper">
+                    <div class="contact-form">
+                        <h3>Formulario directo</h3>
+                        <form id="leadForm">
+                            <input type="text" placeholder="Nombre completo" id="nombre" required>
+                            <input type="email" placeholder="Email corporativo" id="email" required>
+                            <input type="tel" placeholder="Teléfono (opcional)">
+                            <select id="interes">
+                                <option value="">¿Qué servicio necesitas?</option>
+                                <option>Automatización Excel</option>
+                                <option>Maquetación Word</option>
+                                <option>Gestión de archivo</option>
+                                <option>Consultoría completa</option>
+                            </select>
+                            <textarea rows="3" placeholder="Cuéntanos tu reto..."></textarea>
+                            <button type="submit" class="btn-submit">📨 Enviar consulta</button>
+                        </form>
+                        <div id="formMessage" class="form-message"></div>
+                    </div>
+                    <div class="contact-info">
+                        <h3>Contacto directo</h3>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> contacto@docupro.es</p>
+                        <p><i class="fas fa-phone-alt"></i> <strong>Teléfono:</strong> +34 900 123 456</p>
+                        <p><i class="fab fa-whatsapp"></i> <strong>WhatsApp:</strong> +34 644 789 012</p>
+                        <p><i class="fas fa-clock"></i> <strong>Horario:</strong> L-V 9h-19h (respuesta < 2h)</p>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <!-- CHAT FLOTANTE SIMULADO -->
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header" id="chatHeader">
+            <i class="fas fa-comment-dots"></i> Asistente DocuPro
+            <span class="chat-close" id="chatClose">×</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">👋 ¡Hola! Soy tu asesor ofimático. ¿En qué puedo ayudarte?</div>
+            <div class="chat-options" id="chatOptions">
+                <button data-msg="Quiero saber precios">💰 Precios</button>
+                <button data-msg="Necesito automatizar Excel">📊 Automatización</button>
+                <button data-msg="Hablar con un asesor">🎧 Hablar con asesor</button>
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chatInput" placeholder="Escribe tu consulta...">
+            <button id="chatSend">➤</button>
+        </div>
+    </div>
+    <button id="chatToggle" class="chat-toggle-btn">
+        <i class="fas fa-headset"></i>
+    </button>
 
     <footer>
         <div class="container">DOCUPRO — Consultoría Ofimática de Élite · Estándar 2026</div>

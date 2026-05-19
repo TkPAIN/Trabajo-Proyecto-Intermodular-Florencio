@@ -7,7 +7,7 @@ const chatSend = document.getElementById('chatSend');
 const chatBody = document.querySelector('.chat-body');
 
 // ⚠️ IMPORTANTE: CAMBIA ESTO POR TU TOKEN DE HUGGING FACE ⚠️
-const HF_TOKEN = 'hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'; // <--- PON AQUÍ TU TOKEN
+const HF_TOKEN = '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'; // <--- PON AQUÍ TU TOKEN
 
 // Modelo a usar (puedes cambiar por google/flan-t5-base o HuggingFaceH4/zephyr-7b-beta)
 const MODELO = 'microsoft/DialoGPT-medium';

@@ -57,28 +57,30 @@ window.addEventListener('resize', () => {
     createParticles();
 });
 
-// ========== CURSOR PERSONALIZADO ==========
-const cursor = document.querySelector('.cursor');
-const cursorDot = document.querySelector('.cursor-dot');
-
-document.addEventListener('mousemove', (e) => {
-    if (cursor && cursorDot) {
-        cursor.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
-        cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
-    }
+// ========== EFECTO RIPPLE AL HACER CLIC (glow azul) ==========
+document.addEventListener('click', (e) => {
+    const ripple = document.createElement('div');
+    ripple.classList.add('ripple-effect');
+    ripple.style.left = e.clientX + 'px';
+    ripple.style.top = e.clientY + 'px';
+    document.body.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 400);
 });
 
-// Efecto hover en elementos interactivos
-const interactiveElements = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card');
-interactiveElements.forEach(el => {
+// ========== CAMBIO DE GROSOR DE GLOW EN ELEMENTOS INTERACTIVOS ==========
+const interactive = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit');
+
+interactive.forEach(el => {
     el.addEventListener('mouseenter', () => {
-        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+        document.body.style.cursor = 'pointer';
     });
     el.addEventListener('mouseleave', () => {
-        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+        document.body.style.cursor = 'auto';
     });
 });
-
 // ========== GRÁFICO CON CHART.JS ==========
 document.addEventListener('DOMContentLoaded', () => {
     const ctx = document.getElementById('horasChart')?.getContext('2d');

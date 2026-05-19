@@ -167,6 +167,142 @@
             </div>
         </section>
 
+                <!-- ANTES / DESPUÉS - CASOS DE ÉXITO INTERACTIVOS -->
+        <section class="section dark-bg">
+            <div class="container">
+                <span class="section-tag"><i class="fas fa-chart-line"></i> ANTES / DESPUÉS</span>
+                <h2>Transformaciones reales <i class="fas fa-magic"></i></h2>
+                
+                <!-- Pestañas de casos -->
+                <div class="casos-tabs">
+                    <button class="tab-btn active" data-caso="excel"><i class="fas fa-table"></i> Excel</button>
+                    <button class="tab-btn" data-caso="word"><i class="fas fa-file-word"></i> Word</button>
+                    <button class="tab-btn" data-caso="archivo"><i class="fas fa-folder-open"></i> Archivo</button>
+                </div>
+
+                <!-- Caso EXCEL -->
+                <div class="caso-contenido active" id="caso-excel">
+                    <div class="antes-despues-grid">
+                        <div class="antes-card glass-card">
+                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
+                            <h3><i class="fas fa-file-excel"></i> Gestión manual</h3>
+                            <ul class="problemas-lista">
+                                <li><i class="fas fa-times-circle"></i> 95 horas/mes en reportes</li>
+                                <li><i class="fas fa-times-circle"></i> Datos en 5 archivos diferentes</li>
+                                <li><i class="fas fa-times-circle"></i> Errores manuales frecuentes</li>
+                                <li><i class="fas fa-times-circle"></i> 0 automatización</li>
+                            </ul>
+                            <div class="metricas-antes">
+                                <span class="numero-grande">95h</span>
+                                <span class="etiqueta">/mes invertidas</span>
+                            </div>
+                        </div>
+                        <div class="flecha-transformacion">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>→</span>
+                        </div>
+                        <div class="despues-card glass-card">
+                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
+                            <h3><i class="fas fa-chart-line"></i> Dashboard automatizado</h3>
+                            <ul class="soluciones-lista">
+                                <li><i class="fas fa-check-circle"></i> 24 horas/mes → <strong>-75%</strong></li>
+                                <li><i class="fas fa-check-circle"></i> Power Query + Power Pivot</li>
+                                <li><i class="fas fa-check-circle"></i> 0 errores · Validación automática</li>
+                                <li><i class="fas fa-check-circle"></i> Macros VBA para PDFs</li>
+                            </ul>
+                            <div class="metricas-despues">
+                                <span class="numero-grande">-71h</span>
+                                <span class="etiqueta">ahorro mensual</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulacion-boton">
+                        <button class="simular-btn glow-btn" data-simulacion="excel"><i class="fas fa-chart-simple"></i> Ver simulación del dashboard</button>
+                    </div>
+                </div>
+
+                <!-- Caso WORD -->
+                <div class="caso-contenido" id="caso-word">
+                    <div class="antes-despues-grid">
+                        <div class="antes-card glass-card">
+                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
+                            <h3><i class="fas fa-file-alt"></i> Documentación caótica</h3>
+                            <ul class="problemas-lista">
+                                <li><i class="fas fa-times-circle"></i> 40 horas en maquetación</li>
+                                <li><i class="fas fa-times-circle"></i> Índices manuales rotos</li>
+                                <li><i class="fas fa-times-circle"></i> Formatos inconsistentes</li>
+                                <li><i class="fas fa-times-circle"></i> Control de cambios desordenado</li>
+                            </ul>
+                            <div class="metricas-antes">
+                                <span class="numero-grande">40h</span>
+                                <span class="etiqueta">/documento largo</span>
+                            </div>
+                        </div>
+                        <div class="flecha-transformacion">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="despues-card glass-card">
+                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
+                            <h3><i class="fas fa-magic"></i> Plantilla inteligente</h3>
+                            <ul class="soluciones-lista">
+                                <li><i class="fas fa-check-circle"></i> 6 horas/documento → <strong>-85%</strong></li>
+                                <li><i class="fas fa-check-circle"></i> Estilos jerárquicos automáticos</li>
+                                <li><i class="fas fa-check-circle"></i> Tablas e índices automatizados</li>
+                                <li><i class="fas fa-check-circle"></i> Campos y formularios dinámicos</li>
+                            </ul>
+                            <div class="metricas-despues">
+                                <span class="numero-grande">-34h</span>
+                                <span class="etiqueta">ahorro por documento</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulacion-boton">
+                        <button class="simular-btn glow-btn" data-simulacion="word"><i class="fas fa-file-word"></i> Ver plantilla inteligente</button>
+                    </div>
+                </div>
+
+                <!-- Caso ARCHIVO -->
+                <div class="caso-contenido" id="caso-archivo">
+                    <div class="antes-despues-grid">
+                        <div class="antes-card glass-card">
+                            <div class="badge-antes"><i class="fas fa-frown"></i> ANTES</div>
+                            <h3><i class="fas fa-folder-open"></i> Archivo desorganizado</h3>
+                            <ul class="problemas-lista">
+                                <li><i class="fas fa-times-circle"></i> 10 minutos/búsqueda</li>
+                                <li><i class="fas fa-times-circle"></i> Nombres inconsistentes</li>
+                                <li><i class="fas fa-times-circle"></i> Sin copias de seguridad</li>
+                                <li><i class="fas fa-times-circle"></i> Espacio físico desaprovechado</li>
+                            </ul>
+                            <div class="metricas-antes">
+                                <span class="numero-grande">10min</span>
+                                <span class="etiqueta">para encontrar un documento</span>
+                            </div>
+                        </div>
+                        <div class="flecha-transformacion">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="despues-card glass-card">
+                            <div class="badge-despues"><i class="fas fa-smile"></i> DESPUÉS</div>
+                            <h3><i class="fas fa-archive"></i> Arquitectura certificada</h3>
+                            <ul class="soluciones-lista">
+                                <li><i class="fas fa-check-circle"></i> 120 segundos máximo → <strong>-80%</strong></li>
+                                <li><i class="fas fa-check-circle"></i> Nomenclatura ISO 8601</li>
+                                <li><i class="fas fa-check-circle"></i> Sistema QR + metadatos</li>
+                                <li><i class="fas fa-check-circle"></i> Backup y purga semestral</li>
+                            </ul>
+                            <div class="metricas-despues">
+                                <span class="numero-grande">-8min</span>
+                                <span class="etiqueta">por búsqueda</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="simulacion-boton">
+                        <button class="simular-btn glow-btn" data-simulacion="archivo"><i class="fas fa-qrcode"></i> Ver sistema de clasificación</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- VÍDEO DEMO -->
         <section class="section dark-bg">
             <div class="container">

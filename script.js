@@ -1,4 +1,4 @@
-// ========== CANVAS DE PARTÍCULAS (estilo Kara Clan) ==========
+// ========== CANVAS DE PARTÍCULAS ==========
 const canvas = document.getElementById('particlesCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -33,11 +33,9 @@ function drawParticles() {
         ctx.fillStyle = `rgba(0, 195, 255, ${p.alpha})`;
         ctx.fill();
         
-        // Movimiento
         p.x += p.speedX;
         p.y += p.speedY;
         
-        // Rebote en bordes
         if (p.x < 0) p.x = canvas.width;
         if (p.x > canvas.width) p.x = 0;
         if (p.y < 0) p.y = canvas.height;
@@ -47,7 +45,6 @@ function drawParticles() {
     requestAnimationFrame(drawParticles);
 }
 
-// Inicializar canvas
 resizeCanvas();
 createParticles();
 drawParticles();
@@ -57,7 +54,7 @@ window.addEventListener('resize', () => {
     createParticles();
 });
 
-// ========== CURSOR KARA CLAN (punto azul + anillo azul) ==========
+// ========== CURSOR KARA CLAN (punto + anillo azules) ==========
 const cursor = document.querySelector('.cursor');
 const cursorDot = document.querySelector('.cursor-dot');
 
@@ -70,7 +67,6 @@ function updateCursor(e) {
 
 document.addEventListener('mousemove', updateCursor);
 
-// Hover: agranda el anillo
 const interactive = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit, .scroll-down, input, select, textarea');
 
 interactive.forEach(el => {
@@ -78,7 +74,7 @@ interactive.forEach(el => {
     el.addEventListener('mouseleave', () => cursor?.classList.remove('hover'));
 });
 
-// Ripple de clic (glare)
+// ========== RIPPLE / GLARE AL HACER CLIC ==========
 document.addEventListener('click', (e) => {
     const ripple = document.createElement('div');
     ripple.classList.add('ripple-effect');
@@ -88,7 +84,6 @@ document.addEventListener('click', (e) => {
     setTimeout(() => ripple.remove(), 450);
 });
 
-// Ocultar cursor al salir de la ventana
 document.addEventListener('mouseleave', () => {
     if (cursor) cursor.style.opacity = '0';
     if (cursorDot) cursorDot.style.opacity = '0';
@@ -99,22 +94,11 @@ document.addEventListener('mouseenter', () => {
     if (cursorDot) cursorDot.style.opacity = '1';
 });
 
-// ========== CAMBIO DE GROSOR DE GLOW EN ELEMENTOS INTERACTIVOS ==========
-const interactive = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card, .nav-list a, .glass-card, .chat-options button, .chat-toggle-btn, .btn-submit');
-
-interactive.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-        document.body.style.cursor = 'pointer';
-    });
-    el.addEventListener('mouseleave', () => {
-        document.body.style.cursor = 'auto';
-    });
-});
 // ========== GRÁFICO CON CHART.JS ==========
 document.addEventListener('DOMContentLoaded', () => {
-    const ctx = document.getElementById('horasChart')?.getContext('2d');
-    if(ctx) {
-        new Chart(ctx, {
+    const ctxChart = document.getElementById('horasChart')?.getContext('2d');
+    if(ctxChart) {
+        new Chart(ctxChart, {
             type: 'bar',
             data: {
                 labels: ['Procesos Manuales', 'Consultoría DocuPro', 'Benchmark Sector'],
@@ -141,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ========== FORMULARIO DE CONTACTO ==========
+    // ========== FORMULARIO ==========
     const form = document.getElementById('leadForm');
     const formMsg = document.getElementById('formMessage');
     
@@ -164,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ========== CHAT INTERACTIVO ==========
+    // ========== CHAT ==========
     const chatWidget = document.getElementById('chatWidget');
     const chatToggle = document.getElementById('chatToggle');
     const chatClose = document.getElementById('chatClose');
@@ -244,7 +228,7 @@ document.querySelectorAll('.nav-list a, .scroll-down').forEach(anchor => {
     });
 });
 
-// ========== REVEAL ANIMATIONS ON SCROLL ==========
+// ========== REVEAL ANIMATIONS ==========
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if(entry.isIntersecting) {

@@ -1,3 +1,84 @@
+// ========== CANVAS DE PARTÍCULAS (estilo Kara Clan) ==========
+const canvas = document.getElementById('particlesCanvas');
+const ctx = canvas.getContext('2d');
+
+let particles = [];
+const PARTICLE_COUNT = 80;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+function createParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            radius: Math.random() * 2 + 1,
+            alpha: Math.random() * 0.5 + 0.2,
+            speedX: (Math.random() - 0.5) * 0.3,
+            speedY: (Math.random() - 0.5) * 0.2
+        });
+    }
+}
+
+function drawParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    for (let p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 195, 255, ${p.alpha})`;
+        ctx.fill();
+        
+        // Movimiento
+        p.x += p.speedX;
+        p.y += p.speedY;
+        
+        // Rebote en bordes
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+    }
+    
+    requestAnimationFrame(drawParticles);
+}
+
+// Inicializar canvas
+resizeCanvas();
+createParticles();
+drawParticles();
+
+window.addEventListener('resize', () => {
+    resizeCanvas();
+    createParticles();
+});
+
+// ========== CURSOR PERSONALIZADO ==========
+const cursor = document.querySelector('.cursor');
+const cursorDot = document.querySelector('.cursor-dot');
+
+document.addEventListener('mousemove', (e) => {
+    if (cursor && cursorDot) {
+        cursor.style.transform = `translate(${e.clientX - 20}px, ${e.clientY - 20}px)`;
+        cursorDot.style.transform = `translate(${e.clientX - 4}px, ${e.clientY - 4}px)`;
+    }
+});
+
+// Efecto hover en elementos interactivos
+const interactiveElements = document.querySelectorAll('a, button, .card, .plan, .module, .feature-card');
+interactiveElements.forEach(el => {
+    el.addEventListener('mouseenter', () => {
+        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+    el.addEventListener('mouseleave', () => {
+        if (cursor) cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+});
+
 // ========== GRÁFICO CON CHART.JS ==========
 document.addEventListener('DOMContentLoaded', () => {
     const ctx = document.getElementById('horasChart')?.getContext('2d');
@@ -29,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ========== FORMULARIO DE CONTACTO FUNCIONAL ==========
+    // ========== FORMULARIO DE CONTACTO ==========
     const form = document.getElementById('leadForm');
     const formMsg = document.getElementById('formMessage');
     
@@ -45,7 +126,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             
-            // Simulación envío (aquí iría fetch a backend)
             formMsg.innerHTML = '✅ ¡Gracias! Un asesor DocuPro te contactará en < 24h.';
             formMsg.style.color = '#88ffaa';
             form.reset();
@@ -53,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ========== CHAT INTERACTIVO SIMULADO ==========
+    // ========== CHAT INTERACTIVO ==========
     const chatWidget = document.getElementById('chatWidget');
     const chatToggle = document.getElementById('chatToggle');
     const chatClose = document.getElementById('chatClose');
@@ -83,9 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             addMessage('Gracias por tu consulta. Un asesor revisará tu caso. Mientras, ¿te interesan nuestros planes de maquetación Word?');
         }
-        // regenerar opciones rápidas
-        const optsDiv = document.getElementById('chatOptions');
-        if(optsDiv) optsDiv.style.display = 'flex';
     }
 
     function sendUserMessage() {
@@ -96,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => botResponse(text), 600);
     }
 
-    // Eventos chat
     chatToggle?.addEventListener('click', () => {
         chatWidget.classList.toggle('open');
         chatToggle.style.display = 'none';
@@ -114,7 +190,6 @@ document.addEventListener('DOMContentLoaded', () => {
     chatSend?.addEventListener('click', sendUserMessage);
     chatInput?.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendUserMessage(); });
     
-    // Respuesta desde botones rápidos
     document.querySelectorAll('.chat-options button').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const msg = btn.getAttribute('data-msg');
@@ -138,14 +213,19 @@ document.querySelectorAll('.nav-list a, .scroll-down').forEach(anchor => {
     });
 });
 
-// ========== ANIMACIONES AL SCROLL ==========
+// ========== REVEAL ANIMATIONS ON SCROLL ==========
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.style.opacity = "1";
+        if(entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+        }
     });
 }, { threshold: 0.1 });
-document.querySelectorAll('.section').forEach(s => {
-    s.style.opacity = "0";
-    s.style.transition = "opacity 0.6s ease-out";
-    observer.observe(s);
+
+document.querySelectorAll('.section, .card, .glass-card, .feature-card').forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+    observer.observe(el);
 });

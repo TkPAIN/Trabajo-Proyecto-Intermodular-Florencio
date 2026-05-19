@@ -24,30 +24,29 @@ body {
     pointer-events: none;
 }
 
-/* ========== CURSOR PERSONALIZADO (anillo + punto) ========== */
+/* ========== CURSOR PERSONALIZADO KARA CLAN (punto + anillo, ambos azules) ========== */
 body {
-    cursor: none; /* Ocultamos el cursor nativo */
+    cursor: none;
 }
 
-/* Anillo exterior */
+/* Anillo exterior azul */
 .cursor {
-    width: 40px;
-    height: 40px;
-    border: 2px solid rgba(0, 195, 255, 0.9);
+    width: 36px;
+    height: 36px;
+    border: 2px solid #00c3ff;
     border-radius: 50%;
     position: fixed;
     pointer-events: none;
     z-index: 9999;
     transition: 0.08s linear;
     transform: translate(-50%, -50%);
-    box-shadow: 0 0 15px rgba(0, 195, 255, 0.6), 0 0 5px rgba(0, 195, 255, 0.8);
-    backdrop-filter: blur(1px);
+    box-shadow: 0 0 12px rgba(0, 195, 255, 0.7);
 }
 
-/* Punto central */
+/* Punto central azul (más pequeño) */
 .cursor-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     background: #00c3ff;
     border-radius: 50%;
     position: fixed;
@@ -58,42 +57,24 @@ body {
     box-shadow: 0 0 8px #00c3ff;
 }
 
-/* Efecto hover en elementos interactivos (agranda el anillo) */
-a:hover ~ .cursor, 
-button:hover ~ .cursor, 
-.card:hover ~ .cursor, 
-.plan:hover ~ .cursor, 
-.module:hover ~ .cursor, 
-.feature-card:hover ~ .cursor,
-.nav-list a:hover ~ .cursor,
-.glass-card:hover ~ .cursor,
-.chat-options button:hover ~ .cursor,
-.chat-toggle-btn:hover ~ .cursor,
-.btn-submit:hover ~ .cursor {
-    transform: translate(-50%, -50%) scale(1.4);
-    border-color: rgba(0, 255, 200, 1);
-    box-shadow: 0 0 25px rgba(0, 195, 255, 0.9);
-    transition: 0.1s ease;
-}
-
-/* Pero como ~ no funciona siempre bien, hacemos también la clase directa */
+/* Al hacer hover sobre elementos interactivos: anillo más grande + más glow */
 .cursor.hover {
-    transform: translate(-50%, -50%) scale(1.4);
-    border-color: rgba(0, 255, 200, 1);
+    transform: translate(-50%, -50%) scale(1.5);
+    border-color: #00e5ff;
     box-shadow: 0 0 25px rgba(0, 195, 255, 0.9);
 }
 
-/* Ripple de clic (glare) - se mantiene */
+/* Ripple de clic (glare azul) */
 .ripple-effect {
     position: fixed;
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 195, 255, 0.7) 0%, rgba(0, 195, 255, 0) 70%);
+    background: radial-gradient(circle, #00c3ff 0%, rgba(0, 195, 255, 0) 80%);
     pointer-events: none;
     z-index: 10001;
     transform: translate(-50%, -50%);
-    animation: ripple 0.5s ease-out forwards;
+    animation: ripple 0.45s ease-out forwards;
 }
 
 @keyframes ripple {
@@ -103,13 +84,13 @@ button:hover ~ .cursor,
         opacity: 0.9;
     }
     100% {
-        width: 70px;
-        height: 70px;
+        width: 65px;
+        height: 65px;
         opacity: 0;
     }
 }
 
-/* Ocultar cursor en móviles (por si acaso) */
+/* Móviles: cursor normal */
 @media (max-width: 768px) {
     .cursor, .cursor-dot {
         display: none;
@@ -118,7 +99,6 @@ button:hover ~ .cursor,
         cursor: auto;
     }
 }
-
 /* ========== GLASSMORPHISM ========== */
 .glass, .glass-card, .glass-btn {
     background: rgba(15, 25, 45, 0.4);

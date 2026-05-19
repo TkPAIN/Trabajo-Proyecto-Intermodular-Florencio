@@ -6,25 +6,116 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #0a0f1c;
+    background: #050a14;
     color: #eef2ff;
     line-height: 1.4;
+    overflow-x: hidden;
+    cursor: none;
 }
 
+/* ========== CANVAS DE PARTÍCULAS ========== */
+#particlesCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ========== CURSOR PERSONALIZADO ========== */
+.cursor {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #00c3ff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: 0.1s ease;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background: #00c3ff;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: 0.05s ease;
+    transform: translate(-50%, -50%);
+}
+
+/* ========== GLASSMORPHISM ========== */
+.glass, .glass-card, .glass-btn {
+    background: rgba(15, 25, 45, 0.4);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 195, 255, 0.2);
+}
+
+.glass-card {
+    background: rgba(10, 20, 35, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(0, 195, 255, 0.6);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 195, 255, 0.1);
+}
+
+/* ========== GLOW EFFECTS ========== */
+.glow-text {
+    text-shadow: 0 0 10px rgba(0, 195, 255, 0.5), 0 0 20px rgba(0, 195, 255, 0.3);
+}
+
+.glow-btn {
+    background: linear-gradient(135deg, #00c3ff, #0088cc);
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+    transition: all 0.3s ease;
+}
+
+.glow-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 195, 255, 0.6);
+}
+
+/* ========== REVEAL TEXT ANIMATION ========== */
+.reveal-text {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: revealText 0.8s ease forwards;
+}
+
+@keyframes revealText {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========== CONTAINER ========== */
 .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 2;
 }
 
-/* Hero */
+/* ========== HERO ========== */
 .hero {
     min-height: 90vh;
-    background: linear-gradient(135deg, #03070f 0%, #0a1428 100%);
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
-    border-bottom: 2px solid #00c3ff;
+    z-index: 2;
 }
 
 .hero-content {
@@ -35,16 +126,19 @@ body {
 }
 
 .logo {
-    font-size: 4rem;
-    font-weight: 800;
-    letter-spacing: -2px;
+    font-size: 4.5rem;
+    font-weight: 900;
+    letter-spacing: -3px;
 }
 
-.logo span { color: #00c3ff; }
+.logo span { 
+    color: #00c3ff;
+    text-shadow: 0 0 20px #00c3ff;
+}
 
 .tagline {
     font-size: 0.9rem;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     font-weight: 300;
 }
 
@@ -59,19 +153,27 @@ body {
     position: absolute;
     bottom: 2rem;
     left: 50%;
+    transform: translateX(-50%);
     animation: bounce 2s infinite;
     color: #00c3ff;
+    cursor: pointer;
+    z-index: 2;
 }
 
-/* Navegación */
+@keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(10px); }
+}
+
+/* ========== NAVEGACIÓN ========== */
 .main-nav {
-    background: #0f172ad9;
-    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
     padding: 0.75rem 0;
-    border-bottom: 1px solid #1e2a4a;
+    border-bottom: 1px solid rgba(0, 195, 255, 0.3);
+    backdrop-filter: blur(12px);
+    background: rgba(5, 10, 20, 0.8);
 }
 
 .nav-list {
@@ -88,35 +190,48 @@ body {
     font-weight: 500;
     transition: 0.2s;
     font-size: 0.9rem;
+    position: relative;
+}
+
+.nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #00c3ff;
+    transition: width 0.3s ease;
+}
+
+.nav-list a:hover::after {
+    width: 100%;
 }
 
 .nav-list a:hover { color: #00c3ff; }
 
-/* Secciones */
+/* ========== SECCIONES ========== */
 .section {
     padding: 5rem 0;
-    border-bottom: 1px solid #1e2a4a;
-}
-
-.dark-bg {
-    background-color: #050a16;
+    position: relative;
+    z-index: 2;
 }
 
 .section-tag {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 3px;
+    letter-spacing: 4px;
     color: #00c3ff;
     font-weight: 600;
 }
 
 h2 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     margin: 0.8rem 0 2rem 0;
-    font-weight: 700;
+    font-weight: 800;
 }
 
-/* Cards */
+/* ========== CARDS ========== */
 .cards-grid {
     display: flex;
     gap: 2rem;
@@ -124,24 +239,34 @@ h2 {
 }
 
 .card {
-    background: #111927;
-    padding: 1.8rem;
-    border-radius: 24px;
+    padding: 2rem;
     flex: 1;
-    border: 1px solid #1e2f4b;
+    transition: all 0.3s ease;
 }
 
-/* Fórmula */
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* ========== FÓRMULA ========== */
 .formula-box {
-    background: #00c3ff10;
-    border-left: 6px solid #00c3ff;
     padding: 1.5rem;
     font-family: monospace;
     font-size: 1.6rem;
     font-weight: 700;
     margin-bottom: 2rem;
+    border-left: 4px solid #00c3ff;
 }
 
+.formula-box span {
+    display: block;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
+    color: #88aaff;
+    margin-top: 0.5rem;
+}
+
+/* ========== GRIDS ========== */
 .grid-4, .excel-modules, .ergo-grid, .pricing {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -149,26 +274,58 @@ h2 {
     margin-top: 2rem;
 }
 
-.module {
-    background: #0e1624;
+.feature-card, .module, .ergo-card, .plan {
+    background: rgba(10, 20, 35, 0.5);
+    backdrop-filter: blur(10px);
     padding: 1.5rem;
     border-radius: 20px;
-    border: 1px solid #2a3a5a;
+    border: 1px solid rgba(0, 195, 255, 0.2);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.feature-card:hover, .module:hover, .ergo-card:hover, .plan:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 195, 255, 0.6);
+}
+
+.feature-card i, .module i, .ergo-card i {
+    font-size: 2rem;
+    color: #00c3ff;
+    margin-bottom: 1rem;
 }
 
 .module.active { border-left: 4px solid #00ffb3; }
 .module.dev { opacity: 0.8; }
 
-.bar {
-    background: #2a3a5a;
-    padding: 0.4rem 1rem;
-    border-radius: 30px;
-    margin-top: 0.3rem;
-    font-weight: 600;
+.badge {
+    display: inline-block;
+    background: rgba(0, 195, 255, 0.2);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    margin-top: 0.5rem;
 }
 
-.bar.accent { background: #00c3ff; color: #000; }
+/* ========== GRÁFICO ========== */
+.productividad-compare {
+    padding: 2rem;
+    margin-top: 2rem;
+    text-align: center;
+}
 
+.chart-container {
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.insight {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #88aaff;
+}
+
+/* ========== PILARES ========== */
 .pilar-list {
     display: flex;
     flex-wrap: wrap;
@@ -177,11 +334,38 @@ h2 {
     margin: 2rem 0;
 }
 
+.pilar-item {
+    background: rgba(0, 195, 255, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.pilar-item i {
+    margin-right: 0.5rem;
+    color: #00c3ff;
+}
+
+/* ========== ARCHIVO FÍSICO ========== */
 .archivo-fisico {
-    background: #0b1120;
     padding: 2rem;
-    border-radius: 32px;
     text-align: center;
+}
+
+.qr-stats {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+}
+
+.qr-stats span {
+    background: rgba(0, 195, 255, 0.15);
+    padding: 0.4rem 1rem;
+    border-radius: 40px;
+    font-size: 0.8rem;
 }
 
 .timer {
@@ -191,6 +375,7 @@ h2 {
     margin-top: 1rem;
 }
 
+/* ========== FASES ========== */
 .fases {
     display: flex;
     flex-wrap: wrap;
@@ -198,64 +383,85 @@ h2 {
     gap: 1rem;
     margin: 2rem 0;
 }
-.fases div {
-    background: #0f172a;
-    padding: 1rem;
+
+.fase-card {
+    background: rgba(10, 20, 35, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1.2rem;
     border-radius: 20px;
     flex: 1;
     text-align: center;
+    border: 1px solid rgba(0, 195, 255, 0.2);
+    transition: all 0.3s ease;
 }
-.fases span {
+
+.fase-card:hover {
+    transform: translateY(-3px);
+    border-color: #00c3ff;
+}
+
+.fase-card span {
     font-size: 2rem;
     font-weight: 800;
     display: block;
     color: #00c3ff;
 }
 
-.plan {
-    background: #111927;
-    padding: 1.8rem;
-    border-radius: 24px;
+.iso {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.proyeccion {
+    padding: 1.5rem;
     text-align: center;
+    margin-top: 2rem;
 }
+
+.trend {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+/* ========== PLANES ========== */
 .plan.featured {
-    border: 1px solid #00c3ff;
+    border: 2px solid #00c3ff;
     transform: scale(1.02);
-    box-shadow: 0 0 20px #00c3ff30;
+    box-shadow: 0 0 30px rgba(0, 195, 255, 0.2);
 }
+
 .price {
     font-size: 2rem;
     font-weight: 800;
     margin: 1rem 0;
 }
-button {
+
+.recomendado {
     background: #00c3ff;
-    border: none;
-    padding: 1rem 2rem;
+    color: #050a14;
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+    font-size: 0.7rem;
     font-weight: 700;
-    border-radius: 40px;
-    margin-top: 2rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-button:hover { background: #00a3d4; }
-
-footer {
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.8rem;
-    background: #03070f;
-}
-/* GRÁFICO */
-.chart-container {
-    max-width: 500px;
-    margin: 2rem auto;
-    background: #0f172a;
-    padding: 1rem;
-    border-radius: 24px;
+    margin-top: 1rem;
 }
 
-/* FORMULARIO Y CONTACTO */
+.plan ul {
+    list-style: none;
+    text-align: left;
+    margin-top: 1rem;
+}
+
+.plan li {
+    padding: 0.3rem 0;
+    font-size: 0.85rem;
+}
+
+/* ========== CONTACTO ========== */
 .contact-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -264,27 +470,32 @@ footer {
 }
 
 .contact-form, .contact-info {
-    background: #111927;
     padding: 2rem;
-    border-radius: 28px;
-    border: 1px solid #1e2f4b;
 }
 
 .contact-form input, .contact-form select, .contact-form textarea {
     width: 100%;
     padding: 0.8rem;
     margin: 0.5rem 0;
-    background: #0a0f1c;
-    border: 1px solid #2a3a5a;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 195, 255, 0.3);
     border-radius: 12px;
     color: white;
     font-family: inherit;
 }
 
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus {
+    outline: none;
+    border-color: #00c3ff;
+}
+
 .contact-form button {
     width: 100%;
-    background: #00c3ff;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    border-radius: 40px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .form-message {
@@ -300,20 +511,16 @@ footer {
     gap: 0.8rem;
 }
 
-/* CHAT WIDGET */
+/* ========== CHAT WIDGET ========== */
 .chat-widget {
     position: fixed;
     bottom: 80px;
     right: 20px;
     width: 320px;
-    background: #0f172a;
     border-radius: 20px;
-    border: 1px solid #00c3ff;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     display: none;
     flex-direction: column;
     z-index: 1000;
-    backdrop-filter: blur(10px);
 }
 
 .chat-widget.open {
@@ -321,11 +528,10 @@ footer {
 }
 
 .chat-header {
-    background: #00c3ff;
+    background: rgba(0, 195, 255, 0.2);
     padding: 0.8rem 1rem;
     border-radius: 20px 20px 0 0;
     font-weight: bold;
-    color: #0a0f1c;
     display: flex;
     justify-content: space-between;
     cursor: pointer;
@@ -344,7 +550,7 @@ footer {
 }
 
 .chat-message {
-    background: #1e2a4a;
+    background: rgba(30, 40, 70, 0.6);
     padding: 0.6rem;
     border-radius: 12px;
     margin: 0.5rem 0;
@@ -352,7 +558,7 @@ footer {
 }
 
 .chat-message.bot {
-    background: #00c3ff20;
+    background: rgba(0, 195, 255, 0.15);
     border-left: 3px solid #00c3ff;
 }
 
@@ -364,28 +570,37 @@ footer {
 }
 
 .chat-options button {
-    background: #1e2a4a;
-    border: none;
+    background: rgba(30, 40, 70, 0.6);
+    border: 1px solid rgba(0, 195, 255, 0.3);
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
     font-size: 0.7rem;
     cursor: pointer;
     color: white;
+    transition: all 0.2s ease;
+}
+
+.chat-options button:hover {
+    background: rgba(0, 195, 255, 0.3);
 }
 
 .chat-input-area {
     display: flex;
     padding: 0.5rem;
-    border-top: 1px solid #1e2f4b;
+    border-top: 1px solid rgba(0, 195, 255, 0.3);
 }
 
 .chat-input-area input {
     flex: 1;
-    background: #0a0f1c;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     padding: 0.5rem;
     border-radius: 20px;
     color: white;
+}
+
+.chat-input-area input:focus {
+    outline: none;
 }
 
 .chat-input-area button {
@@ -401,17 +616,28 @@ footer {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: #00c3ff;
-    border: none;
     width: 55px;
     height: 55px;
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,195,255,0.4);
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* ========== FOOTER ========== */
+footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    background: rgba(3, 7, 15, 0.9);
+    position: relative;
+    z-index: 2;
+}
+
+/* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .contact-wrapper {
         grid-template-columns: 1fr;
@@ -419,5 +645,17 @@ footer {
     .chat-widget {
         width: 280px;
         right: 10px;
+    }
+    h2 {
+        font-size: 1.8rem;
+    }
+    .logo {
+        font-size: 2.8rem;
+    }
+    .cursor, .cursor-dot {
+        display: none;
+    }
+    body {
+        cursor: auto;
     }
 }

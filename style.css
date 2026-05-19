@@ -8,7 +8,11 @@ body.light .glass-card,body.light .glass,body.light .main-nav{background:rgba(25
 .cursor.hover{transform:translate(-50%,-50%) scale(1.5);border-color:#00e5ff;box-shadow:0 0 25px rgba(0,195,255,0.9)}
 .ripple-effect{position:fixed;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,#00c3ff 0%,rgba(0,195,255,0) 80%);pointer-events:none;z-index:10001;transform:translate(-50%,-50%);animation:ripple 0.45s ease-out forwards}
 @keyframes ripple{0%{width:0;height:0;opacity:0.9}100%{width:65px;height:65px;opacity:0}}
-.theme-toggle{position:fixed;top:20px;right:20px;z-index:1001;background:#00c3ff;border:none;border-radius:50%;width:45px;height:45px;cursor:pointer;box-shadow:0 0 15px rgba(0,195,255,0.5)}
+.control-btn{position:fixed;top:20px;right:80px;z-index:1001;background:#00c3ff;border:none;border-radius:50%;width:45px;height:45px;cursor:pointer;box-shadow:0 0 15px rgba(0,195,255,0.5);transition:all 0.3s;color:#050a14}
+.control-btn:nth-child(2){right:135px}
+.control-btn:nth-child(3){right:190px}
+.control-btn:nth-child(4){right:245px}
+.control-btn:hover{transform:scale(1.1)}
 .container{max-width:1280px;margin:0 auto;padding:0 2rem;position:relative;z-index:2}
 .glass,.glass-card{background:rgba(10,20,35,0.5);backdrop-filter:blur(10px);border:1px solid rgba(0,195,255,0.2);border-radius:24px;transition:all 0.3s ease}
 .glass-card:hover{border-color:rgba(0,195,255,0.6);transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,195,255,0.1)}
@@ -20,7 +24,7 @@ body.light .glass-card,body.light .glass,body.light .main-nav{background:rgba(25
 .logo{font-size:4.5rem;font-weight:900;letter-spacing:-3px}
 .logo span{color:#00c3ff;text-shadow:0 0 20px #00c3ff}
 .hero-typing{font-size:1.2rem;margin-top:1rem;color:#00c3ff;font-weight:600;min-height:50px}
-.scroll-down{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;color:#00c3ff;cursor:pointer}
+.scroll-down{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s infinite;color:#00c3ff;cursor:pointer;font-size:1.5rem}
 @keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(10px)}}
 .main-nav{position:sticky;top:0;z-index:100;padding:0.75rem 0;backdrop-filter:blur(12px);background:rgba(5,10,20,0.8)}
 .nav-list{display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;list-style:none}
@@ -34,12 +38,20 @@ h2{font-size:2.5rem;margin:0.8rem 0 2rem;font-weight:800}
 .card,.feature-card,.module,.ergo-card,.plan,.counter-card{padding:1.5rem;text-align:center;background:rgba(10,20,35,0.5);backdrop-filter:blur(10px);border-radius:20px;border:1px solid rgba(0,195,255,0.2);transition:all 0.3s}
 .counter-card i{font-size:2rem;color:#00c3ff}
 .counter{font-size:3rem;font-weight:800;color:#00c3ff}
+.feedback-buttons{margin-top:1rem;display:flex;justify-content:center;gap:0.5rem}
+.feedback-buttons button{background:rgba(0,195,255,0.2);border:none;border-radius:30px;padding:5px 10px;cursor:pointer;transition:0.2s}
+.feedback-buttons button:hover{transform:scale(1.1)}
 .calculator{padding:2rem;text-align:center}
 .calculator input{width:100%;margin:1rem 0}
 .ahorro-numero{font-size:3rem;font-weight:800;color:#00ffc3}
+.timeline{display:flex;flex-wrap:wrap;justify-content:space-between;margin:2rem 0;gap:1rem}
+.timeline-item{flex:1;text-align:center;position:relative}
+.timeline-year{font-size:1.5rem;font-weight:800;color:#00c3ff;margin-bottom:0.5rem}
+.timeline-content{background:rgba(0,195,255,0.1);padding:0.8rem;border-radius:12px}
+.ranking-paises{background:rgba(0,195,255,0.1);padding:1.5rem;border-radius:24px;margin-top:2rem}
+.country-list{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:1rem}
 .testimonial{display:flex;gap:1.5rem;align-items:center;padding:1.5rem;margin:2rem 0}
 .testimonial img{width:70px;height:70px;border-radius:50%;object-fit:cover}
-.client-logos{display:flex;flex-wrap:wrap;justify-content:center;gap:2rem;margin:2rem 0;opacity:0.7}
 .video-demo .video-placeholder{background:linear-gradient(135deg,#0a1428,#1a2a4a);padding:3rem;text-align:center;border-radius:24px;cursor:pointer}
 .video-placeholder i{font-size:4rem;color:#00c3ff}
 .pilar-list{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin:2rem 0}
@@ -50,9 +62,8 @@ h2{font-size:2.5rem;margin:0.8rem 0 2rem;font-weight:800}
 .fase-card{flex:1;text-align:center;padding:1rem;background:rgba(10,20,35,0.5);border-radius:20px;border:1px solid rgba(0,195,255,0.2)}
 .fase-card span{font-size:2rem;font-weight:800;display:block;color:#00c3ff}
 .map-container{padding:1.5rem;margin-top:2rem}
-.ranking-item{padding:0.8rem;background:rgba(0,195,255,0.1);margin:0.5rem 0;border-radius:12px}
-.certificados{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-top:2rem}
 .plan.featured{border:2px solid #00c3ff;transform:scale(1.02)}
+.contratar-btn{margin-top:1rem;padding:8px 16px;font-size:0.8rem}
 .contact-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
 .contact-form input,.contact-form select,.contact-form textarea{width:100%;padding:0.8rem;margin:0.5rem 0;background:rgba(0,0,0,0.5);border:1px solid rgba(0,195,255,0.3);border-radius:12px;color:white}
 .chat-widget{position:fixed;bottom:80px;right:20px;width:320px;border-radius:20px;display:none;flex-direction:column;z-index:1000}
@@ -63,5 +74,12 @@ h2{font-size:2.5rem;margin:0.8rem 0 2rem;font-weight:800}
 .chat-message.bot{background:rgba(0,195,255,0.15);border-left:3px solid #00c3ff}
 .chat-toggle-btn{position:fixed;bottom:20px;right:20px;width:55px;height:55px;border-radius:50%;font-size:1.5rem;z-index:1000}
 .fab-btn{position:fixed;bottom:90px;right:90px;width:50px;height:50px;border-radius:50%;background:#00c3ff;display:flex;align-items:center;justify-content:center;color:white;text-decoration:none;z-index:999;box-shadow:0 0 15px #00c3ff}
+.session-timer{position:fixed;bottom:20px;left:20px;background:rgba(0,0,0,0.7);padding:8px 15px;border-radius:30px;font-size:0.8rem;z-index:1000;backdrop-filter:blur(5px)}
 footer{text-align:center;padding:2rem;background:rgba(3,7,15,0.9)}
-@media(max-width:768px){.contact-wrapper{grid-template-columns:1fr}h2{font-size:1.8rem}.logo{font-size:2.8rem}.cursor,.cursor-dot{display:none}body{cursor:auto}}
+body.presentation-mode .main-nav{display:none}
+body.presentation-mode .section{padding:3rem 0}
+body.presentation-mode .hero{min-height:50vh}
+body.presentation-mode .control-btn{display:none}
+body.presentation-mode .chat-widget,body.presentation-mode .chat-toggle-btn{display:none}
+body.presentation-mode .fab-btn{display:none}
+@media(max-width:768px){.contact-wrapper{grid-template-columns:1fr}h2{font-size:1.8rem}.logo{font-size:2.8rem}.cursor,.cursor-dot{display:none}body{cursor:auto}.timeline{flex-direction:column}.control-btn{display:none}}
